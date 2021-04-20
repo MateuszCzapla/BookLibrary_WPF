@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookLibrary.Other;
 
 namespace BookLibrary
 {
@@ -23,7 +24,10 @@ namespace BookLibrary
         public MainWindow()
         {
             InitializeComponent();
+            DatabaseOperations.CheckDatabase();
+
             Test test = new Test();
+            //Test.CreateFile("baza.db");
         }
     }
 }

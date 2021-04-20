@@ -85,6 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Other\DatabaseOperations.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Page Include="MainWindow.xaml">
