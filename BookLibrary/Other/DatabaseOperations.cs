@@ -30,16 +30,34 @@ namespace BookLibrary.Other
                 var command = connection.CreateCommand();
                 command.CommandText =
                 @"
-                    CREATE TABLE author (name varchar(20));
-                    CREATE TABLE book (name varchar(20), year int);
+                    CREATE TABLE author (id INTEGER PRIMARY KEY, name TEXT, timestamp INTEGER);
+                    CREATE TABLE book (id INTEGER PRIMARY KEY, name TEXT, year INTEGER, timestamp INTEGER);
                 ";
                 command.ExecuteNonQuery();
             }
+
+            DatabaseOperations.FillSampleData();
         }
 
         public static void DatabaseSync()
         {
 
+        }
+
+        private static void FillSampleData()
+        {
+            using (var connection = new SqliteConnection("Data Source=" + dbName))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                /*command.CommandText =
+                @"
+                    CREATE TABLE author (name varchar(20));
+                    
+                ";
+                command.ExecuteNonQuery();*/
+            }
         }
     }
 }
