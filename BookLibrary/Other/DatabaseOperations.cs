@@ -31,7 +31,7 @@ namespace BookLibrary.Other
                 command.CommandText =
                 @"
                     CREATE TABLE author (id INTEGER PRIMARY KEY, name TEXT, timestamp INTEGER);
-                    CREATE TABLE book (id INTEGER PRIMARY KEY, name TEXT, year INTEGER, timestamp INTEGER);
+                    CREATE TABLE book (id INTEGER PRIMARY KEY, title TEXT, year INTEGER, timestamp INTEGER);
                     CREATE TABLE author_has_book (author_id INTEGER, book_id INTEGER);
                 ";
                 command.ExecuteNonQuery();

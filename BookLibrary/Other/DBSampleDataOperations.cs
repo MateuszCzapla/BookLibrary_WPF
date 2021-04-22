@@ -36,10 +36,10 @@ namespace BookLibrary.Other
         public static void FillBookSampleData(int sleepTime)
         {
             List<string> insertsList = new List<string>();
-            insertsList.Add(@"INSERT INTO book(name, year, timestamp) VALUES('XAML i MVVM w Visual Studio 2015', '2016', $timeStamp);");
-            insertsList.Add(@"INSERT INTO book(name, year, timestamp) VALUES('GitHub. Przyjazny przewodnik', '2015', $timeStamp);");
-            insertsList.Add(@"INSERT INTO book(name, year, timestamp) VALUES('Git. Rozproszony system kontroli wersji', '2016', $timeStamp);");
-            insertsList.Add(@"INSERT INTO book(name, year, timestamp) VALUES('Programowanie obiektowe ITA-105', '2009', $timeStamp);");
+            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('XAML i MVVM w Visual Studio 2015', '2016', $timeStamp);");
+            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('GitHub. Przyjazny przewodnik', '2015', $timeStamp);");
+            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('Git. Rozproszony system kontroli wersji', '2016', $timeStamp);");
+            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('Programowanie obiektowe ITA-105', '2009', $timeStamp);");
 
             using (var connection = new SqliteConnection("Data Source=" + dbName))
             {
