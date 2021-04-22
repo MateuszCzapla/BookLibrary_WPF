@@ -25,6 +25,10 @@ namespace BookLibrary.Models
             }
         }
 
+        /// <summary>
+        /// Creates a Author object.
+        /// </summary>
+        /// <param name="name">Name of author</param>
         public Author(string name)
         {
             this.name = name;
