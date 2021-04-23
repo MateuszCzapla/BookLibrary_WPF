@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using Microsoft.Data.Sqlite;
+using BookLibrary.Models;
+using System.Collections.ObjectModel;
 
 namespace BookLibrary.Other
 {
@@ -42,9 +44,39 @@ namespace BookLibrary.Other
             DBSampleDataOperations.FillAuthorHasBookSampleData();
         }
 
-        public static void DatabaseSync()
+        public static ObservableCollection<Book> ReadDatabase()
         {
+            ObservableCollection<Book> books = new ObservableCollection<Book>();
 
+            using (var connection = new SqliteConnection("Data Source=" + dbName))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                /*command.CommandText =
+                @"
+                    SELECT name
+                    FROM user
+                    WHERE id = $id
+                ";
+                command.Parameters.AddWithValue("$id", id);*/
+
+                command.CommandText =
+                @"
+                    SELECT id, title, year, timestamp
+                    FROM book
+                ";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        books.Add(new Book(reader.GetString(1), 1111));
+                    }
+                }
+            }
+
+            return books;
         }
     }
 }
