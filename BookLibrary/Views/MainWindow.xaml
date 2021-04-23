@@ -9,25 +9,22 @@
         Title="Book Library" Height="450" Width="800">
     
     <Window.Resources>
-        <vm:LibraryGridViewModel x:Key="libraryGridViewModel" />
+        <vm:LibraryGridViewModel x:Key="LibraryGridViewModel" />
     </Window.Resources>
 
-    <Grid DataContext="{StaticResource libraryGridViewModel}">
+    <Grid DataContext="{StaticResource LibraryGridViewModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <DataGrid x:Name="LibararyGrid"
                   AlternatingRowBackground="Gray"
                   Grid.Column="0"
+                  VerticalAlignment="Stretch"
                   ItemsSource="{Binding Path=LibraryGrid}"
         />
         

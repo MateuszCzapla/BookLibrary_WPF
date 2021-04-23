@@ -40,7 +40,7 @@ namespace BookLibrary.Other
             }
 
             DBSampleDataOperations.FillAuthorSampleData(1000);
-            DBSampleDataOperations.FillBookSampleData(1000);
+            DBSampleDataOperations.FillBookSampleData(1);
             DBSampleDataOperations.FillAuthorHasBookSampleData();
         }
 
@@ -48,18 +48,14 @@ namespace BookLibrary.Other
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
 
+            if (!File.Exists(dbName)) return books;
+
             using (var connection = new SqliteConnection("Data Source=" + dbName))
             {
                 connection.Open();
 
                 var command = connection.CreateCommand();
-                /*command.CommandText =
-                @"
-                    SELECT name
-                    FROM user
-                    WHERE id = $id
-                ";
-                command.Parameters.AddWithValue("$id", id);*/
+
 
                 command.CommandText =
                 @"
@@ -71,7 +67,7 @@ namespace BookLibrary.Other
                 {
                     while (reader.Read())
                     {
-                        books.Add(new Book(reader.GetString(1), 1111));
+                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
                     }
                 }
             }

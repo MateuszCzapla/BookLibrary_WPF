@@ -7,6 +7,15 @@ namespace BookLibrary.Models
     /// </summary>
     public class Book
     {
+        private int nr;
+        public int Nr
+        {
+            get
+            {
+                return nr;
+            }
+        }
+
         private string title;
         public string Title
         {
@@ -33,8 +42,9 @@ namespace BookLibrary.Models
             }
         }
 
-        public Book(string title, short year)
+        public Book(int nr, string title, short year)
         {
+            this.nr = nr;
             this.title = title;
             this.year = year;
             this.timestamp = DateTime.Now;

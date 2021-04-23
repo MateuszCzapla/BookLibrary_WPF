@@ -32,10 +32,6 @@ namespace BookLibrary.ViewModels
 
         public LibraryGridViewModel()
         {
-            //libraryGrid = new ObservableCollection<Book>();
-            //libraryGrid.Add(new Book("rrr", 3333));
-            //libraryGrid.Add(new Book("www", 4444));
-
             libraryGrid = DatabaseOperations.ReadDatabase();
         }
 

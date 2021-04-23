@@ -12,7 +12,6 @@ namespace BookLibrary.Views
         {
             InitializeComponent();
             DatabaseOperations.CheckDatabase();
-            DatabaseOperations.ReadDatabase();
         }
     }
 }
