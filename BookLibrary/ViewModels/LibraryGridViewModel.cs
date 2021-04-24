@@ -39,7 +39,11 @@ namespace BookLibrary.ViewModels
         public ObservableCollection<Book> LibraryGrid
         {
             get { return libraryGrid; }
-            set { libraryGrid = value; }
+            set
+            {
+                libraryGrid = value;
+                OnPropertyChanged("LibraryGrid");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -49,15 +53,23 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                if (selectCommand == null) selectCommand = new SelectCommand();
+                if (selectCommand == null)
+                {
+                    selectCommand = new RelayCommand(
+                        argument =>
+                        {
+                            LibraryGrid = DatabaseOperations.ReadDatabase(this.totalRowsCount, ref this.totalRowsCount);
+                        },
+                        argument => true);
+                }
                 return selectCommand;
             }
         }
 
         public LibraryGridViewModel()
         {
-            this.totalRowsCount = 10;
-            libraryGrid = DatabaseOperations.ReadDatabase(this.totalRowsCount, ref this.totalRowsCount);
+            this.totalRowsCount = 5;
+            LibraryGrid = DatabaseOperations.ReadDatabase(this.totalRowsCount, ref this.totalRowsCount);
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)
