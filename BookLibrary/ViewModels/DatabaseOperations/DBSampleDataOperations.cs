@@ -43,7 +43,7 @@ namespace BookLibrary.Other
             
             for (int i = 0; i <= 100; i++)
             {
-                insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('Programowanie obiektowe ITA-105', '2009', $timeStamp);");
+                insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('Programowanie obiektowe ITA-105 tom"+i+"', '1111', $timeStamp);");
             }
 
             using (var connection = new SqliteConnection("Data Source=" + dbName))

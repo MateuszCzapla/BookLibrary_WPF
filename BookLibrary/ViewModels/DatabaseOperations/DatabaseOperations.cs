@@ -44,7 +44,7 @@ namespace BookLibrary.Other
             DBSampleDataOperations.FillAuthorHasBookSampleData();
         }
 
-        public static ObservableCollection<Book> ReadDatabase()
+        public static ObservableCollection<Book> ReadDatabase(int rowsCount, ref int totalRowsCount)
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
 
@@ -60,8 +60,9 @@ namespace BookLibrary.Other
                 command.CommandText =
                 @"
                     SELECT id, title, year, timestamp
-                    FROM book
+                    FROM book LIMIT $rowsCount
                 ";
+                command.Parameters.AddWithValue("$rowsCount", rowsCount);
 
                 using (var reader = command.ExecuteReader())
                 {

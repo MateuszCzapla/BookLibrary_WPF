@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using BookLibrary.Models;
 using BookLibrary.Other;
+using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
 {
@@ -21,6 +22,19 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        private int totalRowsCount;
+        public string TotalRowsCount
+        {
+            get
+            {
+                return totalRowsCount.ToString();
+            }
+            set
+            {
+                totalRowsCount = int.Parse(value);
+            }
+        }
+
         private ObservableCollection<Book> libraryGrid;
         public ObservableCollection<Book> LibraryGrid
         {
@@ -30,9 +44,20 @@ namespace BookLibrary.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private ICommand selectCommand;
+        public ICommand Select
+        {
+            get
+            {
+                if (selectCommand == null) selectCommand = new SelectCommand();
+                return selectCommand;
+            }
+        }
+
         public LibraryGridViewModel()
         {
-            libraryGrid = DatabaseOperations.ReadDatabase();
+            this.totalRowsCount = 10;
+            libraryGrid = DatabaseOperations.ReadDatabase(this.totalRowsCount, ref this.totalRowsCount);
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)
