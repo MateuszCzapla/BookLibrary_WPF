@@ -87,10 +87,10 @@ namespace BookLibrary.ViewModels
                     nextPageCommand = new RelayCommand(
                         argument =>
                         {
-                            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
                             firstRow += rowsCount;
+                            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
                         },
-                        argument => (firstRow + rowsCount) <= totalRowsCount);
+                        argument => (firstRow + rowsCount) < totalRowsCount);
                 }
                 return nextPageCommand;
             }
@@ -106,11 +106,10 @@ namespace BookLibrary.ViewModels
                     previousPageCommand = new RelayCommand(
                         argument =>
                         {
-                            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
                             firstRow -= rowsCount;
-                            //argument => firstRow > rowsCount);
+                            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
                         },
-                        argument => true);
+                        argument => firstRow >= rowsCount);
                 }
                 return previousPageCommand;
             }
@@ -123,7 +122,7 @@ namespace BookLibrary.ViewModels
             totalRowsCount = 25;
             
             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
-            firstRow += rowsCount;
+            //firstRow += rowsCount;
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)
