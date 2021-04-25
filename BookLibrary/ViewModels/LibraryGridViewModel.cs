@@ -78,7 +78,7 @@ namespace BookLibrary.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private ICommand nextPageCommand;
-        public ICommand NextPage
+        public ICommand NextPageCommand
         {
             get
             {
@@ -90,17 +90,40 @@ namespace BookLibrary.ViewModels
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
                             firstRow += rowsCount;
                         },
-                        argument => true);
+                        argument => (firstRow + rowsCount) <= totalRowsCount);
                 }
                 return nextPageCommand;
             }
         }
 
+        private ICommand previousPageCommand;
+        public ICommand PreviousPageCommand
+        {
+            get
+            {
+                if (previousPageCommand == null)
+                {
+                    previousPageCommand = new RelayCommand(
+                        argument =>
+                        {
+                            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                            firstRow -= rowsCount;
+                            //argument => firstRow > rowsCount);
+                        },
+                        argument => true);
+                }
+                return previousPageCommand;
+            }
+        }
+
         public LibraryGridViewModel()
         {
-            this.firstRow = 0;
-            this.rowsCount = 5;
-            LibraryGrid = DatabaseOperations.ReadDatabase(this.firstRow, this.rowsCount, ref this.totalRowsCount);
+            firstRow = 0;
+            rowsCount = 5;
+            totalRowsCount = 25;
+            
+            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+            firstRow += rowsCount;
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)

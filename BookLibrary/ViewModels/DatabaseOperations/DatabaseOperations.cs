@@ -56,6 +56,13 @@ namespace BookLibrary.Other
 
                 var command = connection.CreateCommand();
 
+                int tmp;
+                command.CommandText =@"SELECT COUNT(*) FROM book;";
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    totalRowsCount = reader.GetInt32(0);
+                }
 
                 command.CommandText =
                 @"
