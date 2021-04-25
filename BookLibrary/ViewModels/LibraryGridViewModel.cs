@@ -87,7 +87,8 @@ namespace BookLibrary.ViewModels
                     nextPageCommand = new RelayCommand(
                         argument =>
                         {
-                            LibraryGrid = DatabaseOperations.ReadDatabase(this.rowsCount, ref this.totalRowsCount);
+                            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                            firstRow += rowsCount;
                         },
                         argument => true);
                 }
@@ -97,8 +98,9 @@ namespace BookLibrary.ViewModels
 
         public LibraryGridViewModel()
         {
+            this.firstRow = 0;
             this.rowsCount = 5;
-            LibraryGrid = DatabaseOperations.ReadDatabase(this.rowsCount, ref this.totalRowsCount);
+            LibraryGrid = DatabaseOperations.ReadDatabase(this.firstRow, this.rowsCount, ref this.totalRowsCount);
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)
