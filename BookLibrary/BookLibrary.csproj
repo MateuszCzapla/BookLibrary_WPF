@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\LibraryGridViewModel.cs" />
     <Compile Include="ViewModels\ObservedObject.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
+    <Compile Include="ViewModels\StatusViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>

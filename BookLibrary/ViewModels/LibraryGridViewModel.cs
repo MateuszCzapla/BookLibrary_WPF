@@ -64,6 +64,20 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        private string pageDisplay;
+        public string PageDisplay
+        {
+            get
+            {
+                return pageDisplay;
+            }
+            set
+            {
+                pageDisplay = value;
+                OnPropertyChanged("PageDisplay");
+            }
+        }
+
         private ObservableCollection<Book> libraryGrid;
         public ObservableCollection<Book> LibraryGrid
         {
@@ -89,6 +103,7 @@ namespace BookLibrary.ViewModels
                         {
                             firstRow += rowsCount;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
                         },
                         argument => (firstRow + rowsCount) < totalRowsCount);
                 }
@@ -108,6 +123,7 @@ namespace BookLibrary.ViewModels
                         {
                             firstRow -= rowsCount;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
                         },
                         argument => firstRow >= rowsCount);
                 }
@@ -125,8 +141,9 @@ namespace BookLibrary.ViewModels
                     firstPageCommand = new RelayCommand(
                         argument =>
                         {
-                            firstRow += rowsCount;
+                            firstRow = 0;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
                         },
                         argument => firstRow >= rowsCount);
                 }
@@ -144,10 +161,11 @@ namespace BookLibrary.ViewModels
                     lastPageCommand = new RelayCommand(
                         argument =>
                         {
-                            firstRow += rowsCount;
+                            firstRow = totalRowsCount - rowsCount;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
                         },
-                        argument => (firstRow + rowsCount) < totalRowsCount);
+                        argument => (firstRow + rowsCount) < totalRowsCount && totalRowsCount > rowsCount);
                 }
                 return lastPageCommand;
             }
@@ -157,9 +175,9 @@ namespace BookLibrary.ViewModels
         {
             firstRow = 0;
             rowsCount = 5;
-            totalRowsCount = 25;
-            
+            totalRowsCount = 0;
             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)
