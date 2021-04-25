@@ -22,6 +22,34 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        private int firstRow;
+        public int FirstRow
+        {
+            get
+            {
+                return firstRow;
+            }
+            set
+            {
+                firstRow = value;
+                OnPropertyChanged("FirstRow");
+            }
+        }
+
+        private int rowsCount;
+        public int RowsCount
+        {
+            get
+            {
+                return rowsCount;
+            }
+            set
+            {
+                rowsCount = value;
+                OnPropertyChanged("RowsCount");
+            }
+        }
+
         private int totalRowsCount;
         public string TotalRowsCount
         {
@@ -32,6 +60,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 totalRowsCount = int.Parse(value);
+                OnPropertyChanged("TotalRowsCount");
             }
         }
 
@@ -48,28 +77,28 @@ namespace BookLibrary.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ICommand selectCommand;
-        public ICommand Select
+        private ICommand nextPageCommand;
+        public ICommand NextPage
         {
             get
             {
-                if (selectCommand == null)
+                if (nextPageCommand == null)
                 {
-                    selectCommand = new RelayCommand(
+                    nextPageCommand = new RelayCommand(
                         argument =>
                         {
-                            LibraryGrid = DatabaseOperations.ReadDatabase(this.totalRowsCount, ref this.totalRowsCount);
+                            LibraryGrid = DatabaseOperations.ReadDatabase(this.rowsCount, ref this.totalRowsCount);
                         },
                         argument => true);
                 }
-                return selectCommand;
+                return nextPageCommand;
             }
         }
 
         public LibraryGridViewModel()
         {
-            this.totalRowsCount = 5;
-            LibraryGrid = DatabaseOperations.ReadDatabase(this.totalRowsCount, ref this.totalRowsCount);
+            this.rowsCount = 5;
+            LibraryGrid = DatabaseOperations.ReadDatabase(this.rowsCount, ref this.totalRowsCount);
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)

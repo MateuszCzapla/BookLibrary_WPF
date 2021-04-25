@@ -60,7 +60,7 @@ namespace BookLibrary.Other
                 command.CommandText =
                 @"
                     SELECT id, title, year, timestamp
-                    FROM book LIMIT $rowsCount
+                    FROM book LIMIT 1, $rowsCount
                 ";
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
 
