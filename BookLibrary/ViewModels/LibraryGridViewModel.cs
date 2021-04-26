@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using BookLibrary.Models;
 using BookLibrary.Other;
 using System.Windows.Input;
+using System;
 
 namespace BookLibrary.ViewModels
 {
@@ -47,6 +48,10 @@ namespace BookLibrary.ViewModels
             {
                 rowsCount = value;
                 OnPropertyChanged("RowsCount");
+                
+                firstRow = 0;
+                LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
             }
         }
 
@@ -103,7 +108,7 @@ namespace BookLibrary.ViewModels
                         {
                             firstRow += rowsCount;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
-                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
                         },
                         argument => (firstRow + rowsCount) < totalRowsCount);
                 }
@@ -123,7 +128,7 @@ namespace BookLibrary.ViewModels
                         {
                             firstRow -= rowsCount;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
-                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
                         },
                         argument => firstRow >= rowsCount);
                 }
@@ -143,7 +148,7 @@ namespace BookLibrary.ViewModels
                         {
                             firstRow = 0;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
-                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
                         },
                         argument => firstRow >= rowsCount);
                 }
@@ -163,7 +168,7 @@ namespace BookLibrary.ViewModels
                         {
                             firstRow = totalRowsCount - rowsCount;
                             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
-                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
+                            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
                         },
                         argument => (firstRow + rowsCount) < totalRowsCount && totalRowsCount > rowsCount);
                 }
@@ -177,7 +182,7 @@ namespace BookLibrary.ViewModels
             rowsCount = 5;
             totalRowsCount = 0;
             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
-            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
+            PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
 
         protected void OnPropertyChanged(params string[] propertyNames)
