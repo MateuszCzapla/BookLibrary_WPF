@@ -21,6 +21,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Menu x:Name="mainMenu" Grid.Row="0" Grid.ColumnSpan="2">
@@ -56,17 +57,19 @@
                 <Label Grid.Column="2" Grid.Row="1" Content="{Binding PageDisplay}" />
                 <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding NextPageCommand}" CommandParameter="{StaticResource libraryGridViewModel}" />
                 <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding LastPageCommand}" CommandParameter="{StaticResource libraryGridViewModel}" />
-                
+
                 <TextBox Grid.Column="0" Grid.Row="2" Text="{Binding Path=RowsCount}"/>
             </Grid>
         </GroupBox>
 
-        
-
-        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1">
-            <CheckBox Content="CheckBox" IsChecked="{Binding Path=EditMode}" />
+        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
+            <!--<CheckBox Content="CheckBox" IsChecked="{Binding Path=EditMode}" />-->
         </GroupBox>
-        <StatusBar Grid.ColumnSpan="2" Grid.Row="2">
+
+        <GroupBox Header="Add" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
+        </GroupBox>
+
+        <StatusBar Grid.ColumnSpan="2" Grid.Row="3">
             <StatusBarItem>
                 <Label Content="test" />
             </StatusBarItem>

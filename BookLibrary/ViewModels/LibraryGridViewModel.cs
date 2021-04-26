@@ -175,7 +175,7 @@ namespace BookLibrary.ViewModels
         public LibraryGridViewModel()
         {
             firstRow = 0;
-            rowsCount = 5;
+            rowsCount = 10;
             totalRowsCount = 0;
             RefreshLibraryGrid();
         }
