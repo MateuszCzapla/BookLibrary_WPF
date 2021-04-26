@@ -9,10 +9,10 @@
         Title="Book Library" Height="450" Width="800">
     
     <Window.Resources>
-        <vm:LibraryGridViewModel x:Key="libraryGridViewModel" />
+        <vm:ResultViewModel x:Key="resultViewModel" />
     </Window.Resources>
 
-    <Grid DataContext="{StaticResource libraryGridViewModel}">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition />
@@ -36,7 +36,7 @@
             <MenuItem Header="_Help" />
         </Menu>
 
-        <GroupBox Header="Result" Margin="10" Padding="10" Grid.Column="0" Grid.Row="1">
+        <GroupBox Header="Result" Margin="10" Padding="10" Grid.Column="0" Grid.Row="1" DataContext="{StaticResource resultViewModel}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -52,11 +52,11 @@
                 </Grid.RowDefinitions>
 
                 <DataGrid AlternatingRowBackground="Gray" VerticalAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="5" ItemsSource="{Binding Path=LibraryGrid}" />
-                <Button Content="First" Grid.Column="0" Grid.Row="1" Command="{Binding FirstPageCommand}" CommandParameter="{StaticResource libraryGridViewModel}" />
-                <Button Content="Previous" Grid.Column="1" Grid.Row="1" Command="{Binding PreviousPageCommand}" CommandParameter="{StaticResource libraryGridViewModel}" />
+                <Button Content="First" Grid.Column="0" Grid.Row="1" Command="{Binding FirstPageCommand}" CommandParameter="{StaticResource resultViewModel}" />
+                <Button Content="Previous" Grid.Column="1" Grid.Row="1" Command="{Binding PreviousPageCommand}" CommandParameter="{StaticResource resultViewModel}" />
                 <Label Grid.Column="2" Grid.Row="1" Content="{Binding PageDisplay}" />
-                <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding NextPageCommand}" CommandParameter="{StaticResource libraryGridViewModel}" />
-                <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding LastPageCommand}" CommandParameter="{StaticResource libraryGridViewModel}" />
+                <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding NextPageCommand}" CommandParameter="{StaticResource resultViewModel}" />
+                <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding LastPageCommand}" CommandParameter="{StaticResource resultViewModel}" />
 
                 <TextBox Grid.Column="0" Grid.Row="2" Text="{Binding Path=RowsCount}"/>
             </Grid>

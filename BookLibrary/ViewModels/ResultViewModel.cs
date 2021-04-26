@@ -7,7 +7,7 @@ using System;
 
 namespace BookLibrary.ViewModels
 {
-    public class LibraryGridViewModel : INotifyPropertyChanged
+    public class ResultViewModel : INotifyPropertyChanged
     {
         private bool editMode = false;
         public bool EditMode
@@ -172,10 +172,10 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        public LibraryGridViewModel()
+        public ResultViewModel()
         {
             firstRow = 0;
-            rowsCount = 10;
+            rowsCount = 15;
             totalRowsCount = 0;
             RefreshLibraryGrid();
         }
