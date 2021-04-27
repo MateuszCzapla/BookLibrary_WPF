@@ -33,6 +33,9 @@
                 <MenuItem Command="ApplicationCommands.Cut"/>
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
+            <MenuItem Header="_Mode">
+                <MenuItem />
+            </MenuItem>
             <MenuItem Header="_Help" />
         </Menu>
 
