@@ -86,6 +86,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Readers.cs" />
+    <Compile Include="ViewModels\AddViewModel.cs" />
+    <Compile Include="ViewModels\BookViewModels\BookViewModel.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DatabaseOperations.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DBSampleDataOperations.cs" />
     <Compile Include="ViewModels\QueryViewModel.cs" />
@@ -135,7 +137,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\BookViewModels\" />
     <Folder Include="Views\Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
