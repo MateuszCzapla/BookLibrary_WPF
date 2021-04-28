@@ -9,20 +9,6 @@ namespace BookLibrary.ViewModels
 {
     public class ResultViewModel : INotifyPropertyChanged
     {
-        private bool editMode = false;
-        public bool EditMode
-        {
-            get
-            {
-                return editMode;
-            }
-            set
-            {
-                editMode = value;
-                OnPropertyChanged("EditMode");
-            }
-        }
-
         private int firstRow;
         public int FirstRow
         {

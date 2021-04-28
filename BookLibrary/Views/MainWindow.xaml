@@ -7,9 +7,11 @@
         xmlns:vm="clr-namespace:BookLibrary.ViewModels"
         mc:Ignorable="d"
         Title="Book Library" Height="450" Width="800">
-    
+
+
     <Window.Resources>
         <vm:ResultViewModel x:Key="resultViewModel" />
+        <vm:QueryViewModel x:Key="queryViewModel" />
     </Window.Resources>
 
     <Grid>
@@ -65,8 +67,8 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
-            <!--<CheckBox Content="CheckBox" IsChecked="{Binding Path=EditMode}" />-->
+        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource queryViewModel}">
+            <CheckBox Content="CheckBox" IsChecked="{Binding Path=EditMode}" />
         </GroupBox>
 
         <GroupBox Header="Add" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
