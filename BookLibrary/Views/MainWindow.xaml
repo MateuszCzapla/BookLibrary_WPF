@@ -26,7 +26,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Menu x:Name="mainMenu" Grid.Row="0" Grid.ColumnSpan="2">
+        <Menu x:Name="mainMenu" Grid.Row="0" Grid.ColumnSpan="2" IsMainMenu="true" DataContext="{StaticResource resultViewModel}">
             <MenuItem Header="_File">
                 <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
@@ -36,9 +36,13 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
             <MenuItem Header="_Mode">
-                <MenuItem />
+                <MenuItem Header="_Author"/>
+                <MenuItem Header="_Book" Command="{Binding NextPageCommand}"/>
+                <MenuItem Header="_Reader"/>
             </MenuItem>
-            <MenuItem Header="_Help" />
+            <MenuItem Header="_Help">
+                <MenuItem Header="About"/>
+            </MenuItem>
         </Menu>
 
         <GroupBox Header="Result" Margin="10" Padding="10" Grid.Column="0" Grid.Row="1" DataContext="{StaticResource resultViewModel}">
