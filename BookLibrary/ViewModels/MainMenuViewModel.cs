@@ -1,11 +1,12 @@
 ﻿using System.Windows.Input;
+using System.ComponentModel;
 
 namespace BookLibrary.ViewModels
 {
-    public class MainMenuViewModel : BaseViewModel
+    public class MainMenuViewModel : INotifyPropertyChanged
     {
-        //private ICommand lastPageCommand;
-        /*public ICommand LastPageCommand
+        private ICommand lastPageCommand;
+        public ICommand LastPageCommand
         {
             get
             {
@@ -14,13 +15,15 @@ namespace BookLibrary.ViewModels
                     lastPageCommand = new RelayCommand(
                         argument =>
                         {
-                            firstRow = totalRowsCount - rowsCount;
+                            //firstRow = totalRowsCount - rowsCount;
                         },
                         argument => true);
                 }
                 return lastPageCommand;
             }
-        }*/
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public MainMenuViewModel()
         {
