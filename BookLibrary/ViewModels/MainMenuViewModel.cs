@@ -1,29 +1,37 @@
 ﻿using System.Windows.Input;
-using System.ComponentModel;
 
 namespace BookLibrary.ViewModels
 {
-    public class MainMenuViewModel : INotifyPropertyChanged
+    public class MainMenuViewModel : BaseViewModel
     {
-        private ICommand lastPageCommand;
-        public ICommand LastPageCommand
+        private ICommand modeCommand;
+        public ICommand ModeCommand
         {
             get
             {
-                if (lastPageCommand == null)
+                if (modeCommand == null)
                 {
-                    lastPageCommand = new RelayCommand(
+                    modeCommand = new RelayCommand(
                         argument =>
                         {
-                            //firstRow = totalRowsCount - rowsCount;
+                            switch (argument)
+                            {
+                                case "author":
+                                    base.mode = Mode.Author;
+                                    break;
+                                case "book":
+                                    base.mode = Mode.Book;
+                                    break;
+                                case "reader":
+                                    base.mode = Mode.Reader;
+                                    break;
+                            }
                         },
                         argument => true);
                 }
-                return lastPageCommand;
+                return modeCommand;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public MainMenuViewModel()
         {

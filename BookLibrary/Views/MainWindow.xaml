@@ -12,6 +12,8 @@
     <Window.Resources>
         <vm:ResultViewModel x:Key="resultViewModel" />
         <vm:QueryViewModel x:Key="queryViewModel" />
+        <vm:MainMenuViewModel x:Key="mainMenuViewModel" />
+        <vm:StatusViewModel x:Key="statusViewModel" />
     </Window.Resources>
 
     <Grid>
@@ -26,7 +28,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Menu x:Name="mainMenu" Grid.Row="0" Grid.ColumnSpan="2" IsMainMenu="true" DataContext="{StaticResource resultViewModel}">
+        <Menu x:Name="mainMenu" Grid.Row="0" Grid.ColumnSpan="2" IsMainMenu="true" DataContext="{StaticResource mainMenuViewModel}">
             <MenuItem Header="_File">
                 <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
@@ -36,8 +38,8 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
             <MenuItem Header="_Mode">
-                <MenuItem Header="_Author"/>
-                <MenuItem Header="_Book" Command="{Binding NextPageCommand}"/>
+                <MenuItem Header="_Author" Command="{Binding ModeCommand}"/>
+                <MenuItem Header="_Book" Command="{Binding ModeCommand}" CommandParameter="book"/>
                 <MenuItem Header="_Reader"/>
             </MenuItem>
             <MenuItem Header="_Help">
@@ -96,9 +98,9 @@
         <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
         </GroupBox>
 
-        <StatusBar Grid.ColumnSpan="2" Grid.Row="3">
+        <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource statusViewModel}">
             <StatusBarItem>
-                <Label Content="test" />
+                <Label Content="{Binding Status}" />
             </StatusBarItem>
         </StatusBar>
     </Grid>

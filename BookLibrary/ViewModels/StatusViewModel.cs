@@ -3,25 +3,24 @@ using System.ComponentModel;
 
 namespace BookLibrary.ViewModels
 {
-    public class StatusViewModel : INotifyPropertyChanged
+    public class StatusViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private string status;
+        //private string status;
         public string Status
         {
             get
             {
-                return status;
+                //return status;
+                return base.mode.ToString();
             }
         }
 
         public StatusViewModel()
         {
-            status = DateTime.Now.ToString();
+            //status = DateTime.Now.ToString();
         }
 
-        protected void OnPropertyChanged(params string[] propertyNames)
+        /*protected void OnPropertyChanged(params string[] propertyNames)
         {
             if (PropertyChanged != null)
             {
@@ -30,6 +29,6 @@ namespace BookLibrary.ViewModels
                     PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
                 }
             }
-        }
+        }*/
     }
 }
