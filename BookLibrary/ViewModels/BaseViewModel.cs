@@ -4,20 +4,7 @@ namespace BookLibrary.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        //protected Mode mode;
-        /*public Mode Mode
-        {
-            get
-            {
-                return mode;
-            }
-            set
-            {
-                value = mode;
-                OnPropertyChanged("Mode");
-            }
-        }*/
-  
+        public string Testt { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -25,12 +12,16 @@ namespace BookLibrary.ViewModels
         {
             //this.mode = Mode.Book;
         }
-    }
 
-    /*public enum Mode
-    {
-        Author,
-        Book,
-        Reader
-    }*/
+        protected void OnPropertyChanged(params string[] propertyNames)
+        {
+            if (PropertyChanged != null)
+            {
+                foreach (string propertyName in propertyNames)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                }
+            }
+        }
+    }
 }

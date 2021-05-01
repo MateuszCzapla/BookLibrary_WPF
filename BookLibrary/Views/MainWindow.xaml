@@ -38,9 +38,9 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
             <MenuItem Header="_Mode">
-                <MenuItem Header="_Author" Command="{Binding ModeCommand}"/>
+                <MenuItem Header="_Author" Command="{Binding ModeCommand}" CommandParameter="author"/>
                 <MenuItem Header="_Book" Command="{Binding ModeCommand}" CommandParameter="book"/>
-                <MenuItem Header="_Reader"/>
+                <MenuItem Header="_Reader" Command="{Binding ModeCommand}" CommandParameter="reader"/>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="About"/>
@@ -100,7 +100,7 @@
 
         <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource statusViewModel}">
             <StatusBarItem>
-                <Label Content="{Binding Status}" />
+                <Label Content="{Binding Testt}" />
             </StatusBarItem>
         </StatusBar>
     </Grid>

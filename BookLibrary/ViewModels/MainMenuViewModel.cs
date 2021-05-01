@@ -9,6 +9,8 @@ namespace BookLibrary.ViewModels
         {
             get
             {
+                StatusViewModel statusViewModel = new StatusViewModel();
+
                 if (modeCommand == null)
                 {
                     modeCommand = new RelayCommand(
@@ -17,13 +19,21 @@ namespace BookLibrary.ViewModels
                             switch (argument)
                             {
                                 case "author":
-                                    //base.mode = Mode.Author;
+                                    //Settings.Save(Mode.Author);
+                                    statusViewModel.Status = Mode.Author;
                                     break;
+
                                 case "book":
-                                    //base.mode = Mode.Book;
+                                    //Settings.Save(Mode.Book);
+                                    statusViewModel.Status = Mode.Book;
                                     break;
+
                                 case "reader":
-                                    //base.mode = Mode.Reader;
+                                    Settings.Save(Mode.Reader);
+                                    break;
+
+                                default:
+                                    Settings.Save(Mode.Book);
                                     break;
                             }
                         },
