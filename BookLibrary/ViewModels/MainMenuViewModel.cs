@@ -17,13 +17,13 @@ namespace BookLibrary.ViewModels
                             switch (argument)
                             {
                                 case "author":
-                                    base.mode = Mode.Author;
+                                    //base.mode = Mode.Author;
                                     break;
                                 case "book":
-                                    base.mode = Mode.Book;
+                                    //base.mode = Mode.Book;
                                     break;
                                 case "reader":
-                                    base.mode = Mode.Reader;
+                                    //base.mode = Mode.Reader;
                                     break;
                             }
                         },

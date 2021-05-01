@@ -4,7 +4,7 @@ namespace BookLibrary.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        protected Mode mode;
+        //protected Mode mode;
         /*public Mode Mode
         {
             get
@@ -23,14 +23,14 @@ namespace BookLibrary.ViewModels
 
         public BaseViewModel()
         {
-            this.mode = Mode.Book;
+            //this.mode = Mode.Book;
         }
     }
 
-    public enum Mode
+    /*public enum Mode
     {
         Author,
         Book,
         Reader
-    }
+    }*/
 }

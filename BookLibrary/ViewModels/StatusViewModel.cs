@@ -5,13 +5,13 @@ namespace BookLibrary.ViewModels
 {
     public class StatusViewModel : BaseViewModel
     {
-        //private string status;
+        private string status;
         public string Status
         {
             get
             {
-                //return status;
-                return base.mode.ToString();
+                return status;
+                //return base.mode.ToString();
             }
         }
 
