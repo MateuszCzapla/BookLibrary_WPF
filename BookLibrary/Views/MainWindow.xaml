@@ -13,7 +13,7 @@
         <vm:ResultViewModel x:Key="resultViewModel" />
         <vm:QueryViewModel x:Key="queryViewModel" />
         <vm:MainMenuViewModel x:Key="mainMenuViewModel" />
-        <vm:StatusViewModel x:Key="statusViewModel" />
+        <vm:BaseViewModel x:Key="statusViewModel" />
     </Window.Resources>
 
     <Grid>
@@ -100,7 +100,7 @@
 
         <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource statusViewModel}">
             <StatusBarItem>
-                <Label Content="{Binding Testt}" />
+                <Label Content="{Binding Test}" />
             </StatusBarItem>
         </StatusBar>
     </Grid>

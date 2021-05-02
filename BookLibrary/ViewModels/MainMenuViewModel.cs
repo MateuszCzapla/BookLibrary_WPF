@@ -4,6 +4,20 @@ namespace BookLibrary.ViewModels
 {
     public class MainMenuViewModel : BaseViewModel
     {
+        private string test2;
+        public string Test2
+        {
+            get
+            {
+                return test2;
+            }
+            set
+            {
+                test2 = value;
+                OnPropertyChanged("Test2");
+            }
+        }
+
         private ICommand modeCommand;
         public ICommand ModeCommand
         {
@@ -19,21 +33,22 @@ namespace BookLibrary.ViewModels
                             switch (argument)
                             {
                                 case "author":
-                                    //Settings.Save(Mode.Author);
-                                    statusViewModel.Status = Mode.Author;
+                                    base.Mode = Mode.Author;
                                     break;
 
                                 case "book":
-                                    //Settings.Save(Mode.Book);
-                                    statusViewModel.Status = Mode.Book;
+                                    base.Mode = Mode.Book;
+                                    Test = "Z menu 1";
                                     break;
 
                                 case "reader":
-                                    Settings.Save(Mode.Reader);
+                                    base.Mode = Mode.Reader;
+
+                                    Test = "Z menu 2";
                                     break;
 
                                 default:
-                                    Settings.Save(Mode.Book);
+                                    base.Mode = Mode.Book;
                                     break;
                             }
                         },
