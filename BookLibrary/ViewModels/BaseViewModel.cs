@@ -1,26 +1,32 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace BookLibrary.ViewModels
 { 
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private string test;
-        public string Test
+        private string testBase;
+        public string TestBase
         {
             get
             {
-                return test;
+                return testBase;
             }
             set
             {
-                test = value;
-               // OnPropertyChanged("Test");
-                OnPropertyChanged();
+                testBase = value;
+                //OnPropertyChanged("Test");
+                //OnPropertyChanged();
+
+                OnPropertyChanged("TestBase");
+                //RaisePropertyChanged("TestBase");
+
+                SetProperty(ref testBase, value);
             }
         }
 
-        private Mode mode;
+        protected Mode mode;
         public Mode Mode
         {
             get
@@ -48,36 +54,56 @@ namespace BookLibrary.ViewModels
                 Properties.Settings.Default.Save();
                 //RaisePropertyChanged("Mode");
                 //OnPropertyChanged("Mode");
-                OnPropertyChanged();
+                //OnPropertyChanged();
+                //OnPropertyChanged();
             }
         }
 
-        /*public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        //public event PropertyChangedEventHandler PropertyChanged;
+        /*protected void RaisePropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }*/
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        /*protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        /*protected void OnPropertyChanged(params string[] propertyNames)
+        }*/
+
+        /*protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value)) return false;
+            storage = value;
+            this.OnPropertyChanged(propertyName);
+            return true;
+        }*/
+
+        protected void OnPropertyChanged(params string[] propertyNames)
         {
             if (PropertyChanged != null)
             {
                 foreach (string propertyName in propertyNames)
                 {
                     PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                    //PropertyChanged();
                 }
             }
-        }*/
+        }
+
+        protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+                return false;
+            storage = value;
+            this.OnPropertyChanged(propertyName);
+            return true;
+        }
 
         public BaseViewModel()
         {
             Properties.Settings.Default.Mode = 0;
-            this.test = "Testowy tekst.";
+            this.testBase = "Testowy tekst base.";
         }
     }
 

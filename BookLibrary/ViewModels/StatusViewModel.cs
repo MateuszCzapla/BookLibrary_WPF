@@ -5,19 +5,21 @@ namespace BookLibrary.ViewModels
 {
     public class StatusViewModel : BaseViewModel
     {
-        //private Mode modeStatus;
+        private Mode modeStatus;
         public Mode ModeStatus
         {
             get
             {
                 //return base.Mode;
-                return Mode.Author;
+                //return Mode.Author;
+                return base.mode;
             }
             set
             {
-                base.Mode = value;
-                OnPropertyChanged("ModeStatus");
+                //base.Mode = value;
+                //OnPropertyChanged("ModeStatus");
                 //RaisePropertyChanged("ModeStatus");
+                //SetProperty(ref base.mode, value);
             }
         }
 

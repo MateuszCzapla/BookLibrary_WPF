@@ -23,7 +23,7 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                StatusViewModel statusViewModel = new StatusViewModel();
+                //StatusViewModel statusViewModel = new StatusViewModel();
 
                 if (modeCommand == null)
                 {
@@ -33,22 +33,50 @@ namespace BookLibrary.ViewModels
                             switch (argument)
                             {
                                 case "author":
-                                    base.Mode = Mode.Author;
+                                    //base.Mode = Mode.Author;
+                                    //SetProperty(ref base.mode, Mode.Author);
+                                    //SetProperty("Mode");
+                                    //base.Test = "Autor";
+
+                                    //this.Test2 = "Z menu author";//OK
+                                    TestBase = "Z base author";
+
+                                    //OnPropertyChanged();
                                     break;
 
                                 case "book":
-                                    base.Mode = Mode.Book;
-                                    Test = "Z menu 1";
+                                    //base.Mode = Mode.Book;
+                                    //Test = "Z menu 1";
+
+                                    //this.Test2 = "Z menu book";//OK
+                                    TestBase = "Z base book";
+
+                                    //SetProperty(ref base.mode, Mode.Book);
+                                    //base.Test = "Book";
+                                    //OnPropertyChanged();
                                     break;
 
                                 case "reader":
-                                    base.Mode = Mode.Reader;
+                                    //base.Mode = Mode.Reader;
+                                    //Test = "Z menu 2";
 
-                                    Test = "Z menu 2";
+                                    //this.Test2 = "Z menu reader";//OK
+                                    TestBase = "Z base reader";
+
+                                    //SetProperty(ref base.mode, Mode.Reader);
+                                    //base.Test = "Reader";
+                                    //OnPropertyChanged();
                                     break;
 
                                 default:
-                                    base.Mode = Mode.Book;
+                                    //base.Mode = Mode.Book;
+                                    //SetProperty(ref base.mode, Mode.Book);
+                                    //base.Test = "Book";
+
+                                    //this.Test2 = "Z menu book";//OK
+                                    TestBase = "Z base book";
+
+                                    //OnPropertyChanged();
                                     break;
                             }
                         },

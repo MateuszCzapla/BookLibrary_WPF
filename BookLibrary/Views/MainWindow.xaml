@@ -13,7 +13,8 @@
         <vm:ResultViewModel x:Key="resultViewModel" />
         <vm:QueryViewModel x:Key="queryViewModel" />
         <vm:MainMenuViewModel x:Key="mainMenuViewModel" />
-        <vm:BaseViewModel x:Key="statusViewModel" />
+        <vm:StatusViewModel x:Key="statusViewModel" />
+        <vm:BaseViewModel x:Key="baseViewModel" />
     </Window.Resources>
 
     <Grid>
@@ -98,9 +99,9 @@
         <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
         </GroupBox>
 
-        <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource statusViewModel}">
+        <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource baseViewModel}">
             <StatusBarItem>
-                <Label Content="{Binding Test}" />
+                <Label Content="{Binding Path=TestBase}" />
             </StatusBarItem>
         </StatusBar>
     </Grid>
