@@ -3,18 +3,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BookLibrary.Views"
-        xmlns:vm="clr-namespace:BookLibrary.ViewModels"
+        xmlns:views="clr-namespace:BookLibrary.Views"
+        xmlns:viewmodels="clr-namespace:BookLibrary.ViewModels"
         mc:Ignorable="d"
         Title="Book Library" Height="450" Width="800">
+    
+    <!--
+            xmlns:local="clr-namespace:BookLibrary.Views"
+    -->
 
 
     <Window.Resources>
-        <vm:ResultViewModel x:Key="resultViewModel" />
-        <vm:QueryViewModel x:Key="queryViewModel" />
-        <vm:MainMenuViewModel x:Key="mainMenuViewModel" />
-        <vm:StatusViewModel x:Key="statusViewModel" />
-        <vm:BaseViewModel x:Key="baseViewModel" />
+        <DataTemplate x:Key="queryAuthorViewTemple" DataType="{x:Type viewmodels:QueryAuthorViewModel}">
+            <views:QueryAuthorView DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Key="queryBookViewTemple" DataType="{x:Type viewmodels:QueryBookViewModel}">
+            <views:QueryAuthorView DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Key="modifyAuthorViewTemple" DataType="{x:Type viewmodels:ModifyAuthorViewModel}">
+            <views:QueryAuthorView DataContext="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Key="modifyBookViewTemple" DataType="{x:Type viewmodels:ModifyBookViewModel}">
+            <views:QueryAuthorView DataContext="{Binding}" />
+        </DataTemplate>
+
+        <viewmodels:ResultViewModel x:Key="resultViewModel" />
+        <viewmodels:QueryViewModel x:Key="queryViewModel" />
+        <viewmodels:MainMenuViewModel x:Key="mainMenuViewModel" />
+        <viewmodels:StatusViewModel x:Key="statusViewModel" />
+        <viewmodels:BaseViewModel x:Key="baseViewModel" />
     </Window.Resources>
 
     <Grid>
