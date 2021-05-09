@@ -79,6 +79,7 @@
             </Grid>
         </GroupBox>
 
+        <!--
         <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource queryViewModel}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -95,16 +96,19 @@
                 <Button Content="Search" Grid.Column="0" Grid.Row="2" Command="{Binding SearchCommand}" CommandParameter="{StaticResource queryViewModel}" />
             </Grid>
         </GroupBox>
+        -->
+        <ContentControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Content="{Binding}" />
 
+        <!--
         <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
         </GroupBox>
+        -->
+        <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding}" />
 
         <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource baseViewModel}">
             <StatusBarItem>
                 <Label Content="{Binding Path=TestBase}" />
             </StatusBarItem>
         </StatusBar>
-
-        <ContentControl Content="{Binding}" />
     </Grid>
 </Window>
