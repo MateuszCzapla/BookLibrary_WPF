@@ -104,5 +104,7 @@
                 <Label Content="{Binding Path=TestBase}" />
             </StatusBarItem>
         </StatusBar>
+
+        <ContentControl Content="{Binding}" />
     </Grid>
 </Window>

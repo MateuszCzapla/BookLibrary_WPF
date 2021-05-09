@@ -104,7 +104,35 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\ModifyAuthorView.xaml.cs">
+      <DependentUpon>ModifyAuthorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModifyBookView.xaml.cs">
+      <DependentUpon>ModifyBookView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueryAuthorView.xaml.cs">
+      <DependentUpon>QueryAuthorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueryBookView.xaml.cs">
+      <DependentUpon>QueryBookView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModifyAuthorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModifyBookView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueryAuthorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueryBookView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
