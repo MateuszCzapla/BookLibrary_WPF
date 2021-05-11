@@ -12,7 +12,6 @@
             xmlns:local="clr-namespace:BookLibrary.Views"
     -->
 
-
     <Window.Resources>
         <DataTemplate x:Key="queryAuthorViewTemple" DataType="{x:Type viewmodels:QueryAuthorViewModel}">
             <views:QueryAuthorView DataContext="{Binding}" />
@@ -32,6 +31,8 @@
         <viewmodels:MainMenuViewModel x:Key="mainMenuViewModel" />
         <viewmodels:StatusViewModel x:Key="statusViewModel" />
         <viewmodels:BaseViewModel x:Key="baseViewModel" />
+
+        <viewmodels:BindingProxy x:Key="Proxy" Data="{Binding}" />
     </Window.Resources>
 
     <Grid>
@@ -56,9 +57,11 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
             <MenuItem Header="_Mode">
-                <MenuItem Header="_Author" Command="{Binding ModeCommand}" CommandParameter="author"/>
-                <MenuItem Header="_Book" Command="{Binding ModeCommand}" CommandParameter="book"/>
+                <MenuItem Header="_Author" DataContext="{StaticResource queryAuthorViewTemple}" />
+                <MenuItem Header="_Book" Command="{Binding ModeCommand}" CommandParameter="book" />
                 <MenuItem Header="_Reader" Command="{Binding ModeCommand}" CommandParameter="reader"/>
+                <MenuItem Header="X" Click="MenuItem_Click" />
+                <MenuItem Header="Y" Click="MenuItem_Click_1" />
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="About"/>

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using BookLibrary.Other;
+using BookLibrary.ViewModels;
 
 namespace BookLibrary.Views
 {
@@ -12,6 +13,16 @@ namespace BookLibrary.Views
         {
             InitializeComponent();
             DatabaseOperations.CheckDatabase();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new QueryAuthorViewModel();
+        }
+
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            DataContext = new QueryBookViewModel();
         }
     }
 }

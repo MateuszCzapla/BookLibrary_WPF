@@ -1,9 +1,19 @@
 ﻿using System.Windows.Input;
+using BookLibrary.ViewModels;
+using BookLibrary.Views;
+
 
 namespace BookLibrary.ViewModels
 {
     public class MainMenuViewModel : BaseViewModel
     {
+        public QueryAuthorViewModel QueryAuthorViewModel = null;
+        public QueryBookViewModel QueryBookViewModel = null;
+        public ModifyAuthorViewModel ModifyAuthorViewModel = null;
+        public ModifyBookViewModel ModifyBookViewModel = null;
+
+        //public MainWindow MainWindow = null;
+
         private string test2;
         public string Test2
         {
@@ -42,6 +52,11 @@ namespace BookLibrary.ViewModels
                                     TestBase = "Z base author";
 
                                     //OnPropertyChanged();
+
+                                    //DataContext = QueryAuthorViewModel;
+
+                                    //MainWindow.DataContext = QueryAuthorViewModel;
+                                    //MainWindow.DataContext = ModifyAuthorViewModel;
                                     break;
 
                                 case "book":
@@ -54,6 +69,9 @@ namespace BookLibrary.ViewModels
                                     //SetProperty(ref base.mode, Mode.Book);
                                     //base.Test = "Book";
                                     //OnPropertyChanged();
+
+                                    //MainWindow.DataContext = QueryBookViewModel;
+                                    //MainWindow.DataContext = ModifyBookViewModel;
                                     break;
 
                                 case "reader":
@@ -66,6 +84,8 @@ namespace BookLibrary.ViewModels
                                     //SetProperty(ref base.mode, Mode.Reader);
                                     //base.Test = "Reader";
                                     //OnPropertyChanged();
+
+                                    
                                     break;
 
                                 default:
@@ -77,6 +97,8 @@ namespace BookLibrary.ViewModels
                                     TestBase = "Z base book";
 
                                     //OnPropertyChanged();
+
+                                    
                                     break;
                             }
                         },
@@ -88,7 +110,12 @@ namespace BookLibrary.ViewModels
 
         public MainMenuViewModel()
         {
+            QueryAuthorViewModel = new QueryAuthorViewModel();
+            QueryBookViewModel = new QueryBookViewModel();
+            ModifyAuthorViewModel = new ModifyAuthorViewModel();
+            ModifyBookViewModel = new ModifyBookViewModel();
 
+            //MainWindow = new MainWindow();
         }
     }
 }
