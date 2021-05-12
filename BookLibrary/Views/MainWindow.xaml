@@ -14,7 +14,7 @@
 
     <Window.Resources>
         <DataTemplate x:Key="queryAuthorViewTemple" DataType="{x:Type viewmodels:QueryAuthorViewModel}">
-            <views:QueryAuthorView DataContext="{Binding}" />
+            <views:QueryAuthorView />
         </DataTemplate>
         <DataTemplate x:Key="queryBookViewTemple" DataType="{x:Type viewmodels:QueryBookViewModel}">
             <views:QueryAuthorView DataContext="{Binding}" />
