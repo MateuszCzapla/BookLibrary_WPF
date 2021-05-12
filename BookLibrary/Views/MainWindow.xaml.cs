@@ -13,6 +13,7 @@ namespace BookLibrary.Views
         {
             InitializeComponent();
             DatabaseOperations.CheckDatabase();
+            this.DataContext = new MainMenuViewModel();
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

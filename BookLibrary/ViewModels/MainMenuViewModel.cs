@@ -1,6 +1,4 @@
 ﻿using System.Windows.Input;
-using BookLibrary.ViewModels;
-using BookLibrary.Views;
 
 
 namespace BookLibrary.ViewModels
@@ -116,6 +114,34 @@ namespace BookLibrary.ViewModels
             ModifyBookViewModel = new ModifyBookViewModel();
 
             //MainWindow = new MainWindow();
+
+            EmpCommand = new RelayCommand(OpenEmp);
+            DeptCommand = new RelayCommand(OpenDept);
+        }
+
+        ////
+        ///
+        public ICommand EmpCommand { get; set; }
+        public ICommand DeptCommand { get; set; }
+
+        private object selectedViewModel;
+        public object SelectedViewModel
+        {
+            get { return selectedViewModel; }
+            set { selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
+        }
+
+
+        private void OpenEmp(object obj)
+        {
+            //SelectedViewModel = new EmployeeViewModel();
+            SelectedViewModel = new QueryAuthorViewModel();
+        }
+
+        private void OpenDept(object obj)
+        {
+            //SelectedViewModel = new DepartmentViewModel();
+            SelectedViewModel = new QueryBookViewModel();
         }
     }
 }

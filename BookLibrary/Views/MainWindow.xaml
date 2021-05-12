@@ -17,13 +17,13 @@
             <views:QueryAuthorView />
         </DataTemplate>
         <DataTemplate x:Key="queryBookViewTemple" DataType="{x:Type viewmodels:QueryBookViewModel}">
-            <views:QueryAuthorView DataContext="{Binding}" />
+            <views:QueryBookView />
         </DataTemplate>
         <DataTemplate x:Key="modifyAuthorViewTemple" DataType="{x:Type viewmodels:ModifyAuthorViewModel}">
-            <views:QueryAuthorView DataContext="{Binding}" />
+            <views:ModifyAuthorView DataContext="{Binding}" />
         </DataTemplate>
         <DataTemplate x:Key="modifyBookViewTemple" DataType="{x:Type viewmodels:ModifyBookViewModel}">
-            <views:QueryAuthorView DataContext="{Binding}" />
+            <views:ModifyBookView DataContext="{Binding}" />
         </DataTemplate>
 
         <viewmodels:ResultViewModel x:Key="resultViewModel" />
@@ -57,8 +57,8 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
             <MenuItem Header="_Mode">
-                <MenuItem Header="_Author" DataContext="{StaticResource queryAuthorViewTemple}" />
-                <MenuItem Header="_Book" Command="{Binding ModeCommand}" CommandParameter="book" />
+                <MenuItem Header="_Author" Command="{Binding EmpCommand}" />
+                <MenuItem Header="_Book" Command="{Binding DeptCommand}" />
                 <MenuItem Header="_Reader" Command="{Binding ModeCommand}" CommandParameter="reader"/>
                 <MenuItem Header="X" Click="MenuItem_Click" />
                 <MenuItem Header="Y" Click="MenuItem_Click_1" />
@@ -117,7 +117,9 @@
             </Grid>
         </GroupBox>
         -->
-        <ContentControl Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Content="{Binding}" />
+        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
+            <ContentControl Content="{Binding SelectedViewModel}" />
+        </GroupBox>
 
         <!--
         <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
