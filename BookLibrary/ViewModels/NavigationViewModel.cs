@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
 {
-    class NavigationViewModel : BaseViewModel
+    public class NavigationViewModel : BaseViewModel
     {
         public ICommand EmpCommand { get; set; }
         public ICommand DeptCommand { get; set; }
@@ -27,15 +27,19 @@ namespace BookLibrary.ViewModels
         public NavigationViewModel()
         {
             //EmpCommand = new BaseCommand(OpenEmp);
+            EmpCommand = new RelayCommand(OpenEmp);
             //DeptCommand = new BaseCommand(OpenDept);
+            DeptCommand = new RelayCommand(OpenDept);
         }
         private void OpenEmp(object obj)
         {
             //SelectedViewModel = new EmployeeViewModel();
+            SelectedViewModel = new QueryAuthorViewModel();
         }
         private void OpenDept(object obj)
         {
             //SelectedViewModel = new DepartmentViewModel();
+            SelectedViewModel = new QueryBookViewModel();
         }
     }
 }
