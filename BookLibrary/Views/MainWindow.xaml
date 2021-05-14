@@ -13,16 +13,16 @@
     -->
 
     <Window.Resources>
-        <DataTemplate x:Key="queryAuthorViewTemple" DataType="{x:Type viewmodels:QueryAuthorViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:QueryAuthorViewModel}">
             <views:QueryAuthorView />
         </DataTemplate>
-        <DataTemplate x:Key="queryBookViewTemple" DataType="{x:Type viewmodels:QueryBookViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:QueryBookViewModel}">
             <views:QueryBookView />
         </DataTemplate>
-        <DataTemplate x:Key="modifyAuthorViewTemple" DataType="{x:Type viewmodels:ModifyAuthorViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:ModifyAuthorViewModel}">
             <views:ModifyAuthorView DataContext="{Binding}" />
         </DataTemplate>
-        <DataTemplate x:Key="modifyBookViewTemple" DataType="{x:Type viewmodels:ModifyBookViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:ModifyBookViewModel}">
             <views:ModifyBookView DataContext="{Binding}" />
         </DataTemplate>
 
@@ -117,9 +117,24 @@
             </Grid>
         </GroupBox>
         -->
-        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
+        
+        
+        <!--<GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
             <ContentControl Content="{Binding SelectedViewModel}" />
-        </GroupBox>
+        </GroupBox>-->
+
+        <DockPanel LastChildFill="True"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
+
+            <StackPanel x:Name="navigation" DockPanel.Dock="Left">
+
+                <Button Content="Employee" Command="{Binding EmpCommand}"></Button>
+
+                <Button Content="Department" Command="{Binding DeptCommand}"></Button>
+
+            </StackPanel>
+
+            <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
+        </DockPanel>
 
         <!--
         <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
