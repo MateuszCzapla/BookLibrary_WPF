@@ -20,10 +20,10 @@
             <views:QueryBookView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:ModifyAuthorViewModel}">
-            <views:ModifyAuthorView DataContext="{Binding}" />
+            <views:ModifyAuthorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:ModifyBookViewModel}">
-            <views:ModifyBookView DataContext="{Binding}" />
+            <views:ModifyBookView />
         </DataTemplate>
 
         <viewmodels:ResultViewModel x:Key="resultViewModel" />
@@ -124,15 +124,6 @@
         </GroupBox>-->
 
         <DockPanel LastChildFill="True"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
-
-            <StackPanel x:Name="navigation" DockPanel.Dock="Left">
-
-                <Button Content="Employee" Command="{Binding EmpCommand}"></Button>
-
-                <Button Content="Department" Command="{Binding DeptCommand}"></Button>
-
-            </StackPanel>
-
             <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
         </DockPanel>
 
