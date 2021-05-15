@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
 {
@@ -26,19 +21,15 @@ namespace BookLibrary.ViewModels
         }
         public NavigationViewModel()
         {
-            //EmpCommand = new BaseCommand(OpenEmp);
             EmpCommand = new RelayCommand(OpenEmp);
-            //DeptCommand = new BaseCommand(OpenDept);
             DeptCommand = new RelayCommand(OpenDept);
         }
         private void OpenEmp(object obj)
         {
-            //SelectedViewModel = new EmployeeViewModel();
             SelectedViewModel = new QueryAuthorViewModel();
         }
         private void OpenDept(object obj)
         {
-            //SelectedViewModel = new DepartmentViewModel();
             SelectedViewModel = new QueryBookViewModel();
         }
     }

@@ -7,10 +7,6 @@
         xmlns:viewmodels="clr-namespace:BookLibrary.ViewModels"
         mc:Ignorable="d"
         Title="Book Library" Height="450" Width="800">
-    
-    <!--
-            xmlns:local="clr-namespace:BookLibrary.Views"
-    -->
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewmodels:QueryAuthorViewModel}">
@@ -19,11 +15,17 @@
         <DataTemplate DataType="{x:Type viewmodels:QueryBookViewModel}">
             <views:QueryBookView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:QueryReaderViewModel}">
+            <views:QueryReaderView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:ModifyAuthorViewModel}">
             <views:ModifyAuthorView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:ModifyBookViewModel}">
             <views:ModifyBookView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ModifyReaderViewModel}">
+            <views:ModifyReaderView />
         </DataTemplate>
 
         <viewmodels:ResultViewModel x:Key="resultViewModel" />
@@ -57,11 +59,9 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
             <MenuItem Header="_Mode">
-                <MenuItem Header="_Author" Command="{Binding EmpCommand}" />
-                <MenuItem Header="_Book" Command="{Binding DeptCommand}" />
-                <MenuItem Header="_Reader" Command="{Binding ModeCommand}" CommandParameter="reader"/>
-                <MenuItem Header="X" Click="MenuItem_Click" />
-                <MenuItem Header="Y" Click="MenuItem_Click_1" />
+                <MenuItem Header="_Author" Command="{Binding AuthorModeCommand}" />
+                <MenuItem Header="_Book" Command="{Binding BookModeCommand}" />
+                <MenuItem Header="_Reader" Command="{Binding ReaderModeCommand}" />
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="About"/>
@@ -122,11 +122,9 @@
             <ContentControl Content="{Binding SelectedViewModel}" />
         </GroupBox>
 
-        <!--
-        <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">
+        <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2" DataContext="{StaticResource mainMenuViewModel}">
+            <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding SelectedViewModel}" />
         </GroupBox>
-        -->
-        <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding}" />
 
         <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource baseViewModel}">
             <StatusBarItem>

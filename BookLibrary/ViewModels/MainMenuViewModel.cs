@@ -7,16 +7,16 @@ namespace BookLibrary.ViewModels
     {
         public QueryAuthorViewModel QueryAuthorViewModel = null;
         public QueryBookViewModel QueryBookViewModel = null;
+        public QueryReaderViewModel QueryReaderViewModel = null;
         public ModifyAuthorViewModel ModifyAuthorViewModel = null;
         public ModifyBookViewModel ModifyBookViewModel = null;
+        public ModifyReaderViewModel ModifyReaderViewModel = null;
 
         private ICommand modeCommand;
         public ICommand ModeCommand
         {
             get
             {
-                //StatusViewModel statusViewModel = new StatusViewModel();
-
                 if (modeCommand == null)
                 {
                     modeCommand = new RelayCommand(
@@ -25,62 +25,19 @@ namespace BookLibrary.ViewModels
                             switch (argument)
                             {
                                 case "author":
-                                    //base.Mode = Mode.Author;
-                                    //SetProperty(ref base.mode, Mode.Author);
-                                    //SetProperty("Mode");
-                                    //base.Test = "Autor";
-
-                                    //this.Test2 = "Z menu author";//OK
                                     TestBase = "Z base author";
-
-                                    //OnPropertyChanged();
-
-                                    //DataContext = QueryAuthorViewModel;
-
-                                    //MainWindow.DataContext = QueryAuthorViewModel;
-                                    //MainWindow.DataContext = ModifyAuthorViewModel;
                                     break;
 
                                 case "book":
-                                    //base.Mode = Mode.Book;
-                                    //Test = "Z menu 1";
-
-                                    //this.Test2 = "Z menu book";//OK
                                     TestBase = "Z base book";
-
-                                    //SetProperty(ref base.mode, Mode.Book);
-                                    //base.Test = "Book";
-                                    //OnPropertyChanged();
-
-                                    //MainWindow.DataContext = QueryBookViewModel;
-                                    //MainWindow.DataContext = ModifyBookViewModel;
                                     break;
 
                                 case "reader":
-                                    //base.Mode = Mode.Reader;
-                                    //Test = "Z menu 2";
-
-                                    //this.Test2 = "Z menu reader";//OK
                                     TestBase = "Z base reader";
-
-                                    //SetProperty(ref base.mode, Mode.Reader);
-                                    //base.Test = "Reader";
-                                    //OnPropertyChanged();
-
-                                    
                                     break;
 
                                 default:
-                                    //base.Mode = Mode.Book;
-                                    //SetProperty(ref base.mode, Mode.Book);
-                                    //base.Test = "Book";
-
-                                    //this.Test2 = "Z menu book";//OK
                                     TestBase = "Z base book";
-
-                                    //OnPropertyChanged();
-
-                                    
                                     break;
                             }
                         },
@@ -90,42 +47,52 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        public ICommand AuthorModeCommand { get; set; }
+        public ICommand BookModeCommand { get; set; }
+        public ICommand ReaderModeCommand { get; set; }
+
         public MainMenuViewModel()
         {
             QueryAuthorViewModel = new QueryAuthorViewModel();
             QueryBookViewModel = new QueryBookViewModel();
+            QueryReaderViewModel = new QueryReaderViewModel();
             ModifyAuthorViewModel = new ModifyAuthorViewModel();
             ModifyBookViewModel = new ModifyBookViewModel();
+            ModifyReaderViewModel = new ModifyReaderViewModel();
 
-            //MainWindow = new MainWindow();
-
-            EmpCommand = new RelayCommand(OpenEmp);
-            DeptCommand = new RelayCommand(OpenDept);
+            AuthorModeCommand = new RelayCommand(SelectAuthorMode);
+            BookModeCommand = new RelayCommand(SelectBookMode);
+            ReaderModeCommand = new RelayCommand(SelectReaderMode);
         }
-
-        ////
-        ///
-        public ICommand EmpCommand { get; set; }
-        public ICommand DeptCommand { get; set; }
 
         private object selectedViewModel;
         public object SelectedViewModel
         {
-            get { return selectedViewModel; }
-            set { selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
+            get
+            {
+                return selectedViewModel;
+            }
+            set
+            {
+                selectedViewModel = value;
+                OnPropertyChanged("SelectedViewModel");
+            }
         }
 
 
-        private void OpenEmp(object obj)
+        private void SelectAuthorMode(object obj)
         {
-            //SelectedViewModel = new EmployeeViewModel();
             SelectedViewModel = new QueryAuthorViewModel();
         }
 
-        private void OpenDept(object obj)
+        private void SelectBookMode(object obj)
         {
-            //SelectedViewModel = new DepartmentViewModel();
             SelectedViewModel = new QueryBookViewModel();
+        }
+
+        private void SelectReaderMode(object obj)
+        {
+            SelectedViewModel = new QueryReaderViewModel();
         }
     }
 }

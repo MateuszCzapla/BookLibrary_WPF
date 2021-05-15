@@ -15,15 +15,5 @@ namespace BookLibrary.Views
             DatabaseOperations.CheckDatabase();
             this.DataContext = new MainMenuViewModel();
         }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            DataContext = new QueryAuthorViewModel();
-        }
-
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            DataContext = new QueryBookViewModel();
-        }
     }
 }
