@@ -117,15 +117,10 @@
             </Grid>
         </GroupBox>
         -->
-        
-        
-        <!--<GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
-            <ContentControl Content="{Binding SelectedViewModel}" />
-        </GroupBox>-->
 
-        <DockPanel LastChildFill="True"  Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
-            <ContentControl x:Name="Pages" DockPanel.Dock="Right" Content="{Binding SelectedViewModel}"/>
-        </DockPanel>
+        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
+            <ContentControl Content="{Binding SelectedViewModel}" />
+        </GroupBox>
 
         <!--
         <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2">

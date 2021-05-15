@@ -10,22 +10,6 @@ namespace BookLibrary.ViewModels
         public ModifyAuthorViewModel ModifyAuthorViewModel = null;
         public ModifyBookViewModel ModifyBookViewModel = null;
 
-        //public MainWindow MainWindow = null;
-
-        private string test2;
-        public string Test2
-        {
-            get
-            {
-                return test2;
-            }
-            set
-            {
-                test2 = value;
-                OnPropertyChanged("Test2");
-            }
-        }
-
         private ICommand modeCommand;
         public ICommand ModeCommand
         {
