@@ -31,8 +31,6 @@
         <viewmodels:ResultViewModel x:Key="resultViewModel" />
         <viewmodels:QueryViewModel x:Key="queryViewModel" />
         <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
-        <viewmodels:StatusViewModel x:Key="statusViewModel" />
-        <viewmodels:BaseViewModel x:Key="baseViewModel" />
 
         <viewmodels:BindingProxy x:Key="Proxy" Data="{Binding}" />
     </Window.Resources>
@@ -99,36 +97,17 @@
             </Grid>
         </GroupBox>
 
-        <!--
-        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource queryViewModel}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                
-                <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding Path=EditMode}" />
-                <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Path=SearchText}" />
-                <Button Content="Search" Grid.Column="0" Grid.Row="2" Command="{Binding SearchCommand}" CommandParameter="{StaticResource queryViewModel}" />
-            </Grid>
-        </GroupBox>
-        -->
-
         <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource navigationViewModel}">
-            <ContentControl Content="{Binding SelectedViewModel}" />
+            <ContentControl Content="{Binding SelectedQueryViewModel}" />
         </GroupBox>
 
         <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2" DataContext="{StaticResource navigationViewModel}">
-            <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding SelectedViewModel}" />
+            <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding SelectedModifyViewModel}" />
         </GroupBox>
 
-        <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource baseViewModel}">
+        <StatusBar Grid.ColumnSpan="2" Grid.Row="3" DataContext="{StaticResource navigationViewModel}">
             <StatusBarItem>
-                <Label Content="{Binding Path=TestBase}" />
+                <Label Content="{Binding ModeStatus}" />
             </StatusBarItem>
         </StatusBar>
     </Grid>

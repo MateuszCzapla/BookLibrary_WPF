@@ -12,41 +12,6 @@ namespace BookLibrary.ViewModels
         public ModifyBookViewModel ModifyBookViewModel = null;
         public ModifyReaderViewModel ModifyReaderViewModel = null;
 
-        private ICommand modeCommand;
-        public ICommand ModeCommand
-        {
-            get
-            {
-                if (modeCommand == null)
-                {
-                    modeCommand = new RelayCommand(
-                        argument =>
-                        {
-                            switch (argument)
-                            {
-                                case "author":
-                                    TestBase = "Z base author";
-                                    break;
-
-                                case "book":
-                                    TestBase = "Z base book";
-                                    break;
-
-                                case "reader":
-                                    TestBase = "Z base reader";
-                                    break;
-
-                                default:
-                                    TestBase = "Z base book";
-                                    break;
-                            }
-                        },
-                        argument => true);
-                }
-                return modeCommand;
-            }
-        }
-
         public ICommand AuthorModeCommand { get; set; }
         public ICommand BookModeCommand { get; set; }
         public ICommand ReaderModeCommand { get; set; }
@@ -63,36 +28,87 @@ namespace BookLibrary.ViewModels
             AuthorModeCommand = new RelayCommand(SelectAuthorMode);
             BookModeCommand = new RelayCommand(SelectBookMode);
             ReaderModeCommand = new RelayCommand(SelectReaderMode);
+
+            SelectedQueryViewModel = QueryBookViewModel;
+            SelectedModifyViewModel = ModifyBookViewModel;
+            ModeStatus = Mode.Book;
         }
 
-        private object selectedViewModel;
-        public object SelectedViewModel
+        private object selectedQueryViewModel;
+        public object SelectedQueryViewModel
         {
             get
             {
-                return selectedViewModel;
+                return selectedQueryViewModel;
             }
             set
             {
-                selectedViewModel = value;
-                OnPropertyChanged("SelectedViewModel");
+                selectedQueryViewModel = value;
+                OnPropertyChanged("SelectedQueryViewModel");
             }
         }
 
+        private object selectedModifyViewModel;
+        public object SelectedModifyViewModel
+        {
+            get
+            {
+                return selectedModifyViewModel;
+            }
+            set
+            {
+                selectedModifyViewModel = value;
+                OnPropertyChanged("SelectedModifyViewModel");
+            }
+        }
+
+        public Mode ModeStatus
+        {
+            get
+            {
+                switch (Properties.Settings.Default.Mode)
+                {
+                    case 0:
+                        return Mode.Author;
+
+                    case 1:
+                        return Mode.Book;
+
+                    case 2:
+                        return Mode.Reader;
+
+                    default:
+                        return Mode.Book;
+                }
+            }
+            set
+            {
+                Properties.Settings.Default.Mode = (byte)value;
+                Properties.Settings.Default.Save();
+
+                OnPropertyChanged("ModeStatus");
+            }
+        }
 
         private void SelectAuthorMode(object obj)
         {
-            SelectedViewModel = new QueryAuthorViewModel();
+            SelectedQueryViewModel = new QueryAuthorViewModel();
+            SelectedModifyViewModel = new ModifyAuthorViewModel();
+            ModeStatus = Mode.Author;
         }
 
         private void SelectBookMode(object obj)
         {
-            SelectedViewModel = new QueryBookViewModel();
+            SelectedQueryViewModel = new QueryBookViewModel();
+            SelectedModifyViewModel = new ModifyBookViewModel();
+            ModeStatus = Mode.Book;
         }
 
         private void SelectReaderMode(object obj)
         {
-            SelectedViewModel = new QueryReaderViewModel();
+            SelectedQueryViewModel = new QueryReaderViewModel();
+            SelectedModifyViewModel = new ModifyReaderViewModel();
+            ModeStatus = Mode.Reader;
         }
     }
 }

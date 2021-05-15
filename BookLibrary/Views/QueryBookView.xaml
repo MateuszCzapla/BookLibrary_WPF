@@ -6,7 +6,22 @@
              xmlns:local="clr-namespace:BookLibrary.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Blue">
-        <Label Content="test33" FontSize="50" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Label Content="QueryBookView" FontSize="55" />
+
+        <!--
+        <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding Path=EditMode}" />
+        <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Path=SearchText}" />
+        <Button Content="Search" Grid.Column="0" Grid.Row="2" Command="{Binding SearchCommand}" CommandParameter="{StaticResource queryViewModel}" />
+        -->
     </Grid>
 </UserControl>
