@@ -13,7 +13,7 @@ namespace BookLibrary.Views
         {
             InitializeComponent();
             DatabaseOperations.CheckDatabase();
-            this.DataContext = new MainMenuViewModel();
+            this.DataContext = new NavigationViewModel();
         }
     }
 }

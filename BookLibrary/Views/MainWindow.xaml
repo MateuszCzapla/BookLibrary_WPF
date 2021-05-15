@@ -30,7 +30,7 @@
 
         <viewmodels:ResultViewModel x:Key="resultViewModel" />
         <viewmodels:QueryViewModel x:Key="queryViewModel" />
-        <viewmodels:MainMenuViewModel x:Key="mainMenuViewModel" />
+        <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
         <viewmodels:StatusViewModel x:Key="statusViewModel" />
         <viewmodels:BaseViewModel x:Key="baseViewModel" />
 
@@ -49,7 +49,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Menu x:Name="mainMenu" Grid.Row="0" Grid.ColumnSpan="2" IsMainMenu="true" DataContext="{StaticResource mainMenuViewModel}">
+        <Menu x:Name="mainMenu" Grid.Row="0" Grid.ColumnSpan="2" IsMainMenu="true" DataContext="{StaticResource navigationViewModel}">
             <MenuItem Header="_File">
                 <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
@@ -118,11 +118,11 @@
         </GroupBox>
         -->
 
-        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource mainMenuViewModel}">
+        <GroupBox Header="Query" Margin="10" Padding="10" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" DataContext="{StaticResource navigationViewModel}">
             <ContentControl Content="{Binding SelectedViewModel}" />
         </GroupBox>
 
-        <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2" DataContext="{StaticResource mainMenuViewModel}">
+        <GroupBox Header="Modify" Margin="10" Padding="10" Grid.Column="0" Grid.Row="2" DataContext="{StaticResource navigationViewModel}">
             <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding SelectedViewModel}" />
         </GroupBox>
 

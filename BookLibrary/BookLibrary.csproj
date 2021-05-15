@@ -92,11 +92,10 @@
     <Compile Include="ViewModels\BookViewModels\BookViewModel.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DatabaseOperations.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DBSampleDataOperations.cs" />
-    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ModifyAuthorViewModel.cs" />
     <Compile Include="ViewModels\ModifyBookViewModel.cs" />
     <Compile Include="ViewModels\ModifyReaderViewModel.cs" />
-    <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\QueryAuthorViewModel.cs" />
     <Compile Include="ViewModels\QueryBookViewModel.cs" />
     <Compile Include="ViewModels\QueryReaderViewModel.cs" />
