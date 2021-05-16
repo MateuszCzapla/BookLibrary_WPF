@@ -27,15 +27,19 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Title" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Title}" />
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
         <Label Grid.Row="1" Grid.Column="0" Content="Year" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Year}" PreviewTextInput="NumberValidation" />
         <Label Grid.Row="2" Grid.Column="0" Content="Modify date (from)" />
         <Label Grid.Row="3" Grid.Column="0" Content="{Binding Date_from}" />
-        <Calendar Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Date_from}"/>
+        <Expander Grid.Row="3" Grid.Column="1" Header="Set date from">
+            <Calendar SelectedDate="{Binding Date_from}"/>
+        </Expander>
         <Label Grid.Row="4" Grid.Column="0" Content="Modify date (to)" />
         <Label Grid.Row="5" Grid.Column="0" Content="{Binding Date_to}" />
-        <Calendar Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Date_to}" IsEnabled="False" />
+        <Expander Grid.Row="5" Grid.Column="1" Header="Set date to" IsEnabled="False">
+            <Calendar SelectedDate="{Binding Date_to}" />
+        </Expander>
         <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" CommandParameter="{StaticResource queryBookViewModel}" />
     </Grid>
 </UserControl>

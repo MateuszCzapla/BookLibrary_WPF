@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using System.Text.RegularExpressions;
 
 namespace BookLibrary.ViewModels
 {
@@ -74,16 +73,15 @@ namespace BookLibrary.ViewModels
                         {
                             //TODO
                         },
-                        argument => true);
+                        argument => title != String.Empty);
                 }
                 return searchCommand;
             }
         }
 
-        private void NumberValidation(object sender, TextCompositionEventArgs e)
+        public QueryBookViewModel()
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            title = String.Empty;
         }
     }
 }
