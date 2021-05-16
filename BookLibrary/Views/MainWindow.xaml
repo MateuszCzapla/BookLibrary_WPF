@@ -31,8 +31,6 @@
         <viewmodels:ResultViewModel x:Key="resultViewModel" />
         <viewmodels:QueryViewModel x:Key="queryViewModel" />
         <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
-
-        <viewmodels:BindingProxy x:Key="Proxy" Data="{Binding}" />
     </Window.Resources>
 
     <Grid>

@@ -1,6 +1,5 @@
 ﻿using System.Windows.Input;
 
-
 namespace BookLibrary.ViewModels
 {
     public class NavigationViewModel : BaseViewModel

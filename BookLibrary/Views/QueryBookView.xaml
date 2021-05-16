@@ -27,21 +27,15 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Title" />
-        <TextBox Grid.Row="0" Grid.Column="1" />
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Title}" />
         <Label Grid.Row="1" Grid.Column="0" Content="Year" />
-        <TextBox Grid.Row="1" Grid.Column="1" />
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Year}" PreviewTextInput="NumberValidation" />
         <Label Grid.Row="2" Grid.Column="0" Content="Modify date (from)" />
-        <Label Grid.Row="3" Grid.Column="0" Content="YYYY-MM-DD" />
-        <Calendar Grid.Row="3" Grid.Column="1" />
+        <Label Grid.Row="3" Grid.Column="0" Content="{Binding Date_from}" />
+        <Calendar Grid.Row="3" Grid.Column="1" SelectedDate="{Binding Date_from}"/>
         <Label Grid.Row="4" Grid.Column="0" Content="Modify date (to)" />
-        <Label Grid.Row="5" Grid.Column="0" Content="YYYY-MM-DD" />
-        <Calendar Grid.Row="5" Grid.Column="1" IsEnabled="False" />
-        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Search" />
-
-        <!--
-        <CheckBox Grid.Column="0" Grid.Row="0" IsChecked="{Binding Path=EditMode}" />
-        <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Path=SearchText}" />
-        <Button Content="Search" Grid.Column="0" Grid.Row="2" Command="{Binding SearchCommand}" CommandParameter="{StaticResource queryViewModel}" />
-        -->
+        <Label Grid.Row="5" Grid.Column="0" Content="{Binding Date_to}" />
+        <Calendar Grid.Row="5" Grid.Column="1" SelectedDate="{Binding Date_to}" IsEnabled="False" />
+        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" CommandParameter="{StaticResource queryBookViewModel}" />
     </Grid>
 </UserControl>
