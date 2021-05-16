@@ -186,6 +186,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ViewModels\ModifyViewModels\" />
+    <Folder Include="ViewModels\QueryViewModels\" />
     <Folder Include="Views\Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
