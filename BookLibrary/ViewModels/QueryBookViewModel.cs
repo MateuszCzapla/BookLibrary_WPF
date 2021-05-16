@@ -19,8 +19,8 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        private byte year;
-        public byte Year
+        private short year;
+        public short Year
         {
             get
             {
