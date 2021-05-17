@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace BookLibrary.ViewModels
 {
-    public class QueryBookViewModel : BaseViewModel
+    public class QueryBookViewModel : BaseViewModel, IDataErrorInfo
     {
         private string title;
         public string Title
@@ -83,5 +84,28 @@ namespace BookLibrary.ViewModels
         {
             title = String.Empty;
         }
+
+        #region IDataErrorInfo Members
+        string IDataErrorInfo.Error
+        {
+            get
+            {
+                return null;
+            }
+        }
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                if (columnName == "Title")
+                {
+                    if (string.IsNullOrEmpty(Title)) return "Title is Required";
+                }
+
+                return null;
+            }
+        }
+        #endregion
     }
 }
