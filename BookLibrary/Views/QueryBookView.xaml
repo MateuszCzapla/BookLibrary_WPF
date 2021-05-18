@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Title" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" />
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[Title]}" />
         <Label Grid.Row="1" Grid.Column="0" Content="Year" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Year, Converter={StaticResource stringToShortConverter}}" PreviewTextInput="NumberValidation" />
         <!--

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace BookLibrary.ViewModels
 {
@@ -86,6 +87,7 @@ namespace BookLibrary.ViewModels
         }
 
         #region IDataErrorInfo Members
+
         string IDataErrorInfo.Error
         {
             get
@@ -94,16 +96,27 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        string IDataErrorInfo.this[string columnName]
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
+
+        public string this[string title]
         {
             get
             {
-                if (columnName == "Title")
+                string result = null;
+
+                switch(title)
                 {
-                    if (string.IsNullOrEmpty(Title)) return "Title is Required";
+                    case "Title":
+                        if (string.IsNullOrWhiteSpace(Title)) result = "Title cannot be empty";
+                        else if (Title.Length < 5) result = "Title must be a minimum of 5 character";
+                        break;
                 }
 
-                return null;
+                if (ErrorCollection.ContainsKey(title)) ErrorCollection[title] = result;
+                else if (result != null) ErrorCollection.Add(title, result);
+
+                OnPropertyChanged("ErrorCollection");
+                return result;
             }
         }
         #endregion
