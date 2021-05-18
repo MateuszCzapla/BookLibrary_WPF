@@ -35,31 +35,35 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        private DateTime date_from;
-        public DateTime Date_from
+        public bool DateToEnable { get; set; } = false;
+
+        private DateTime dateFrom;
+        public DateTime DateFrom
         {
             get
             {
-                return date_from;
+                return dateFrom;
             }
             set
             {
-                date_from = value;
-                OnPropertyChanged("Date_from");
+                dateFrom = value;
+                DateToEnable = true;
+                OnPropertyChanged("DateToEnable");
+                OnPropertyChanged("DateFrom");
             }
         }
 
-        private DateTime date_to;
-        public DateTime Date_to
+        private DateTime dateTo;
+        public DateTime DateTo
         {
             get
             {
-                return date_to;
+                return dateTo;
             }
             set
             {
-                date_to = value;
-                OnPropertyChanged("Date_to");
+                dateTo = value;
+                OnPropertyChanged("DateTo");
             }
         }
 
@@ -92,28 +96,31 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                return null;
+                throw new NotImplementedException();
             }
         }
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
 
-        public string this[string title]
+        public string this[string columnName]
         {
             get
             {
                 string result = null;
 
-                switch(title)
+                switch(columnName)
                 {
                     case "Title":
-                        if (string.IsNullOrWhiteSpace(Title)) result = "Title cannot be empty";
-                        else if (Title.Length < 5) result = "Title must be a minimum of 5 character";
+                        if (!string.IsNullOrEmpty(Title) && Title.Length < 2) result = "Title must be a minimum of 2 character";
+                        break;
+
+                    case "Year":
+                        if (!string.IsNullOrEmpty(Title) && Title.Length < 2) result = "Title must be a minimum of 2 character";
                         break;
                 }
 
-                if (ErrorCollection.ContainsKey(title)) ErrorCollection[title] = result;
-                else if (result != null) ErrorCollection.Add(title, result);
+                if (ErrorCollection.ContainsKey(columnName)) ErrorCollection[columnName] = result;
+                else if (result != null) ErrorCollection.Add(columnName, result);
 
                 OnPropertyChanged("ErrorCollection");
                 return result;

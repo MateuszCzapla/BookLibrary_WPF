@@ -31,21 +31,18 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Content="Title" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[Title]}" />
+        <TextBox Grid.Row="0" Grid.Column="1" MaxLength="20" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[Title]}" />
         <Label Grid.Row="1" Grid.Column="0" Content="Year" />
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Year, Converter={StaticResource stringToShortConverter}}" PreviewTextInput="NumberValidation" />
-        <!--
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Year, Mode=OneWayToSource}"  />
-        -->
+        <TextBox Grid.Row="1" Grid.Column="1" MaxLength="4" Text="{Binding Year, Converter={StaticResource stringToShortConverter}}" PreviewTextInput="NumberValidation" />
         <Label Grid.Row="2" Grid.Column="0" Content="Modify date (from)" />
-        <Label Grid.Row="3" Grid.Column="0" Content="{Binding Date_from}" />
+        <Label Grid.Row="3" Grid.Column="0" Content="{Binding DateFrom}" />
         <Expander Grid.Row="3" Grid.Column="1" Header="Set date from">
-            <Calendar SelectedDate="{Binding Date_from}"/>
+            <Calendar SelectedDate="{Binding DateFrom}"/>
         </Expander>
         <Label Grid.Row="4" Grid.Column="0" Content="Modify date (to)" />
-        <Label Grid.Row="5" Grid.Column="0" Content="{Binding Date_to}" />
-        <Expander Grid.Row="5" Grid.Column="1" Header="Set date to" IsEnabled="False">
-            <Calendar SelectedDate="{Binding Date_to}" />
+        <Label Grid.Row="5" Grid.Column="0" Content="{Binding DateTo}" />
+        <Expander Grid.Row="5" Grid.Column="1" Header="Set date to" IsEnabled="{Binding DateToEnable}">
+            <Calendar SelectedDate="{Binding DateTo}" />
         </Expander>
         
         <!--
