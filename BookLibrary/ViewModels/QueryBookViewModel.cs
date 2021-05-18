@@ -26,10 +26,12 @@ namespace BookLibrary.ViewModels
         {
             get
             {
+                //return year.ToString();
                 return year;
             }
             set
             {
+                //year = Convert.ToInt16(value);
                 year = value;
                 OnPropertyChanged("Year");
             }
