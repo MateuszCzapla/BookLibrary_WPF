@@ -12,6 +12,7 @@ namespace BookLibrary.Views.Converters
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            if (value.Equals(String.Empty)) return 0;
             return System.Convert.ToInt16(value);
         }
     }

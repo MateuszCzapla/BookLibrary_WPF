@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using BookLibrary.Models;
 using BookLibrary.Other;
 using System.Windows.Input;
@@ -7,7 +6,7 @@ using System;
 
 namespace BookLibrary.ViewModels
 {
-    public class ResultViewModel : INotifyPropertyChanged
+    public class ResultViewModel : BaseViewModel
     {
         private int firstRow;
         public int FirstRow
@@ -79,8 +78,6 @@ namespace BookLibrary.ViewModels
                 OnPropertyChanged("LibraryGrid");
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private ICommand nextPageCommand;
         public ICommand NextPageCommand
@@ -164,17 +161,6 @@ namespace BookLibrary.ViewModels
             rowsCount = 15;
             totalRowsCount = 0;
             RefreshLibraryGrid();
-        }
-
-        protected void OnPropertyChanged(params string[] propertyNames)
-        {
-            if (PropertyChanged != null)
-            {
-                foreach (string propertyName in propertyNames)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
         }
 
         private void RefreshLibraryGrid()

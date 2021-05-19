@@ -69,24 +69,6 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        private ICommand searchCommand;
-        public ICommand SearchCommand
-        {
-            get
-            {
-                if (searchCommand == null)
-                {
-                    searchCommand = new RelayCommand(
-                        argument =>
-                        {
-                            //TODO
-                        },
-                        argument => title != String.Empty);
-                }
-                return searchCommand;
-            }
-        }
-
         public QueryBookViewModel()
         {
             title = String.Empty;
@@ -129,5 +111,23 @@ namespace BookLibrary.ViewModels
             }
         }
         #endregion
+
+        private ICommand searchCommand;
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if (searchCommand == null)
+                {
+                    searchCommand = new RelayCommand(
+                        argument =>
+                        {
+                            //TODO
+                        },
+                        argument => title.Length >= 2 || year != 0 || dateFrom.ToString() != "01.01.0001 00:00:00");
+                }
+                return searchCommand;
+            }
+        }
     }
 }
