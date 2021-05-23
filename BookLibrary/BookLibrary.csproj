@@ -90,6 +90,8 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DatabaseOperations.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DBSampleDataOperations.cs" />
+    <Compile Include="ViewModels\Mediator\ConcreteMediator.cs" />
+    <Compile Include="ViewModels\Mediator\IMediator.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ModifyAuthorViewModel.cs" />
     <Compile Include="ViewModels\ModifyBookViewModel.cs" />
