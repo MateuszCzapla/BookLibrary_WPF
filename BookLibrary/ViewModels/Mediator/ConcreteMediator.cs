@@ -2,12 +2,12 @@
 
 namespace BookLibrary.ViewModels.Mediator
 {
-    class ConcreteMediator : IMediator
+    public class ConcreteMediator : IMediator
     {
+        private ResultViewModel resultViewModel;
         private QueryBookViewModel queryBookViewModel;
-        private OldResultViewModel resultViewModel;
 
-        public ConcreteMediator(QueryBookViewModel queryBookViewModel, OldResultViewModel resultViewModel)
+        public ConcreteMediator(ResultViewModel resultViewModel, QueryBookViewModel queryBookViewModel)
         {
             this.queryBookViewModel = queryBookViewModel;
             this.queryBookViewModel.SetMediator(this);
@@ -22,11 +22,11 @@ namespace BookLibrary.ViewModels.Mediator
                 Console.WriteLine("Mediator reacts on A and triggers folowing operations:");
                 //this.resultViewModel.DoC();
             }
-            if (ev == "D")
+            if (ev == "B")
             {
-                Console.WriteLine("Mediator reacts on D and triggers following operations:");
+                Console.WriteLine("Mediator reacts on B and triggers following operations:");
                 //this.queryBookViewModel.DoB();
-                //this.resultViewModel.DoC();
+                this.resultViewModel.TestResultVM();
             }
         }
     }

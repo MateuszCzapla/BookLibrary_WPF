@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using BookLibrary.ViewModels.Mediator;
 
 namespace BookLibrary.ViewModels
 {
@@ -86,6 +87,8 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        public ConcreteMediator mediator;
+
         public NavigationViewModel()
         {
             ResultViewModel = new ResultViewModel();
@@ -104,6 +107,8 @@ namespace BookLibrary.ViewModels
             SelectedQueryViewModel = QueryBookViewModel;
             SelectedModifyViewModel = ModifyBookViewModel;
             ModeStatus = Mode.Book;
+
+            mediator = new ConcreteMediator(ResultViewModel, QueryBookViewModel);
         }
 
         private void SelectAuthorMode(object obj)

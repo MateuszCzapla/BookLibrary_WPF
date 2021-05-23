@@ -168,5 +168,10 @@ namespace BookLibrary.ViewModels
             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
+
+        public void TestResultVM()
+        {
+            PageDisplay = "TestResultVM";
+        }
     }
 }
