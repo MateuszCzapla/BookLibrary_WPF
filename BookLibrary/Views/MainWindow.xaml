@@ -9,6 +9,9 @@
         Title="Book Library" Height="450" Width="800">
 
     <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:ResultViewModel}">
+            <views:ResultView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodels:QueryAuthorViewModel}">
             <views:QueryAuthorView />
         </DataTemplate>
@@ -67,6 +70,10 @@
             </MenuItem>
         </Menu>
 
+        <GroupBox Header="Result" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0" DataContext="{StaticResource navigationViewModel}">
+        </GroupBox>
+
+        <!--
         <GroupBox Header="Result" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0" DataContext="{StaticResource oldResultViewModel}">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -84,7 +91,6 @@
 
                 <DataGrid Grid.Row="0" Grid.ColumnSpan="5" AlternatingRowBackground="Gray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=LibraryGrid}">
                     <DataGrid.Columns>
-                        <!--<DataGridCheckBoxColumn Header="Delete" IsThreeState="False" Binding="{Binding OnlineOrderFlag}" />-->
                         <DataGridCheckBoxColumn Header="Delete" IsThreeState="False" />
                     </DataGrid.Columns>
                 </DataGrid>
@@ -94,13 +100,9 @@
                 <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding NextPageCommand}" CommandParameter="{StaticResource oldResultViewModel}" />
                 <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding LastPageCommand}" CommandParameter="{StaticResource oldResultViewModel}" />
                 <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Path=RowsCount}"/>
-                <!--<ComboBox Grid.Row="2" Grid.Column="0">
-                    <ComboBoxItem>1</ComboBoxItem>
-                    <ComboBoxItem>2</ComboBoxItem>
-                    <ComboBoxItem>3</ComboBoxItem>
-                </ComboBox>-->
             </Grid>
         </GroupBox>
+        -->
 
         <GroupBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Header="Query" Margin="10" Padding="10" DataContext="{StaticResource navigationViewModel}">
             <ContentControl Content="{Binding SelectedQueryViewModel}" />
