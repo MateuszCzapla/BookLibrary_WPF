@@ -31,7 +31,6 @@
             <views:ModifyReaderView />
         </DataTemplate>
 
-        <viewmodels:OldResultViewModel x:Key="oldResultViewModel" />
         <viewmodels:QueryViewModel x:Key="queryViewModel" />
         <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
     </Window.Resources>
@@ -71,38 +70,8 @@
         </Menu>
 
         <GroupBox Header="Result" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0" DataContext="{StaticResource navigationViewModel}">
+            <ContentControl Content="{Binding SelectedResultViewModel}" />
         </GroupBox>
-
-        <!--
-        <GroupBox Header="Result" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0" DataContext="{StaticResource oldResultViewModel}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <DataGrid Grid.Row="0" Grid.ColumnSpan="5" AlternatingRowBackground="Gray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=LibraryGrid}">
-                    <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Header="Delete" IsThreeState="False" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <Button Content="First" Grid.Column="0" Grid.Row="1" Command="{Binding FirstPageCommand}" CommandParameter="{StaticResource oldResultViewModel}" />
-                <Button Content="Previous" Grid.Column="1" Grid.Row="1" Command="{Binding PreviousPageCommand}" CommandParameter="{StaticResource oldResultViewModel}" />
-                <Label Grid.Column="2" Grid.Row="1" Content="{Binding PageDisplay}" />
-                <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding NextPageCommand}" CommandParameter="{StaticResource oldResultViewModel}" />
-                <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding LastPageCommand}" CommandParameter="{StaticResource oldResultViewModel}" />
-                <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Path=RowsCount}"/>
-            </Grid>
-        </GroupBox>
-        -->
 
         <GroupBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Header="Query" Margin="10" Padding="10" DataContext="{StaticResource navigationViewModel}">
             <ContentControl Content="{Binding SelectedQueryViewModel}" />
