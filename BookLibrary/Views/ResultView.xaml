@@ -16,14 +16,26 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <DataGrid Grid.Row="0" Grid.ColumnSpan="5" AlternatingRowBackground="Gray" VerticalAlignment="Stretch">
-            
+        <DataGrid Grid.Row="0" Grid.ColumnSpan="5" AlternatingRowBackground="Gray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=LibraryGrid}">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Delete" IsThreeState="False" />
+            </DataGrid.Columns>
         </DataGrid>
+        <Button Content="First" Grid.Column="0" Grid.Row="1" Command="{Binding FirstPageCommand}" />
+        <Button Content="Previous" Grid.Column="1" Grid.Row="1" Command="{Binding PreviousPageCommand}" />
+        <Label Grid.Column="2" Grid.Row="1" Content="{Binding PageDisplay}" />
+        <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding NextPageCommand}" />
+        <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding LastPageCommand}" />
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Path=RowsCount}"/>
     </Grid>
 </UserControl>
