@@ -104,34 +104,43 @@ namespace BookLibrary.ViewModels
             ReaderModeCommand = new RelayCommand(SelectReaderMode);
 
             SelectedResultViewModel = ResultViewModel;
-            SelectedQueryViewModel = QueryBookViewModel;
+            //SelectedQueryViewModel = QueryBookViewModel;
             SelectedModifyViewModel = ModifyBookViewModel;
             ModeStatus = Mode.Book;
 
-            mediator = new ConcreteMediator(ResultViewModel, QueryBookViewModel);
+            //mediator = new ConcreteMediator(ResultViewModel, QueryBookViewModel);
         }
 
         private void SelectAuthorMode(object obj)
         {
-            SelectedResultViewModel = new ResultViewModel();
-            SelectedQueryViewModel = new QueryAuthorViewModel();
-            SelectedModifyViewModel = new ModifyAuthorViewModel();
+            //SelectedResultViewModel = new ResultViewModel();
+            //SelectedQueryViewModel = new QueryAuthorViewModel();
+            //SelectedModifyViewModel = new ModifyAuthorViewModel();
+            SelectedResultViewModel = ResultViewModel;
+            SelectedQueryViewModel = QueryAuthorViewModel;
+            SelectedModifyViewModel = ModifyAuthorViewModel;
             ModeStatus = Mode.Author;
         }
 
         private void SelectBookMode(object obj)
         {
-            SelectedResultViewModel = new ResultViewModel();
-            SelectedQueryViewModel = new QueryBookViewModel();
-            SelectedModifyViewModel = new ModifyBookViewModel();
+            //SelectedResultViewModel = new ResultViewModel();
+            //SelectedQueryViewModel = new QueryBookViewModel();
+            //SelectedModifyViewModel = new ModifyBookViewModel();
+            SelectedResultViewModel = ResultViewModel;
+            SelectedQueryViewModel = QueryBookViewModel;
+            SelectedModifyViewModel = ModifyBookViewModel;
             ModeStatus = Mode.Book;
         }
 
         private void SelectReaderMode(object obj)
         {
-            SelectedResultViewModel = new ResultViewModel();
-            SelectedQueryViewModel = new QueryReaderViewModel();
-            SelectedModifyViewModel = new ModifyReaderViewModel();
+            //SelectedResultViewModel = new ResultViewModel();
+            //SelectedQueryViewModel = new QueryReaderViewModel();
+            //SelectedModifyViewModel = new ModifyReaderViewModel();
+            SelectedResultViewModel = ResultViewModel;
+            SelectedQueryViewModel = QueryReaderViewModel;
+            SelectedModifyViewModel = ModifyReaderViewModel;
             ModeStatus = Mode.Reader;
         }
     }

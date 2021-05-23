@@ -123,6 +123,7 @@ namespace BookLibrary.ViewModels
                         argument =>
                         {
                             //TOTO
+                            if (mediator != null) this.mediator.Notify(this, "B");
                             //this.mediator.Notify(this, "B");
                         },
                         argument => title.Length >= 2 || year != 0 || dateFrom.ToString() != "01.01.0001 00:00:00");

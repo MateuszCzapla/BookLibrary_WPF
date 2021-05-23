@@ -16,6 +16,7 @@
     </UserControl.Resources>
 
     <Grid>
+        <!--
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -44,11 +45,7 @@
         <Expander Grid.Row="5" Grid.Column="1" Header="Set date to" IsEnabled="{Binding DateToEnable}">
             <Calendar SelectedDate="{Binding DateTo}" />
         </Expander>
-        
-        <!--
-        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" CommandParameter="{StaticResource queryBookViewModel}" />
-        -->
         <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" />
-
+        -->
     </Grid>
 </UserControl>

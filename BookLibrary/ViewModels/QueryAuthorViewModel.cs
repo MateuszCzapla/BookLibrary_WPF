@@ -8,5 +8,9 @@ namespace BookLibrary.ViewModels
 {
     public class QueryAuthorViewModel
     {
+        public QueryAuthorViewModel()
+        {
+
+        }
     }
 }

@@ -31,7 +31,7 @@
             <views:ModifyReaderView />
         </DataTemplate>
 
-        <viewmodels:QueryViewModel x:Key="queryViewModel" />
+        <!--<viewmodels:QueryViewModel x:Key="queryViewModel" />-->
         <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
     </Window.Resources>
 
