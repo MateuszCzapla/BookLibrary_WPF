@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -69,10 +70,17 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        public QueryBookViewModel(string test)
+        {
+            title = String.Empty;
+        }
+
         public QueryBookViewModel()
         {
             title = String.Empty;
         }
+
+
 
         #region IDataErrorInfo Members
 
@@ -123,13 +131,55 @@ namespace BookLibrary.ViewModels
                         argument =>
                         {
                             //TOTO
-                            if (mediator != null) this.mediator.Notify(this, "B");
+                            //if (mediator != null) this.mediator.Notify(this, "B");
                             //this.mediator.Notify(this, "B");
+                            TextInControl = "test__";
                         },
                         argument => title.Length >= 2 || year != 0 || dateFrom.ToString() != "01.01.0001 00:00:00");
                 }
                 return searchCommand;
             }
         }
+
+        /*public static readonly DependencyProperty PrzyciskProperty = DependencyProperty.Register(
+            "Przycisk",
+            typeof(string),
+            typeof(QueryBookViewModel),
+            new PropertyMetadata(null, PrzyciskZmieniony)
+        );
+
+        public string Przycisk
+        {
+            get
+            {
+                return (string)GetValue(PrzyciskProperty);
+            }
+            set
+            {
+                SetValue(PrzyciskProperty, value);
+            }
+        }
+
+        static string t = String.Empty;
+        private static void PrzyciskZmieniony(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            t = "Mateusz";
+        }*/
+
+        public string TextInControl
+        {
+            get
+            {
+                return (string)GetValue(TextInControlProperty);
+            }
+            set
+            {
+                SetValue(TextInControlProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty TextInControlProperty =
+            DependencyProperty.Register("TextInControl", typeof(string),
+                                           typeof(QueryBookViewModel));
     }
 }

@@ -16,7 +16,6 @@
     </UserControl.Resources>
 
     <Grid>
-        <!--
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -46,6 +45,5 @@
             <Calendar SelectedDate="{Binding DateTo}" />
         </Expander>
         <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" />
-        -->
     </Grid>
 </UserControl>

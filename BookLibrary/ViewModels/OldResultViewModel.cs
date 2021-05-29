@@ -6,9 +6,9 @@ using System;
 
 namespace BookLibrary.ViewModels
 {
-    public class OldResultViewModel : BaseViewModel
+    public class OldResultViewModel// : BaseViewModel
     {
-        private int firstRow;
+        /*private int firstRow;
         public int FirstRow
         {
             get
@@ -167,6 +167,6 @@ namespace BookLibrary.ViewModels
         {
             LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
-        }
+        }*/
     }
 }

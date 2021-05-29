@@ -155,7 +155,7 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        public ResultViewModel()
+        public ResultViewModel()// : base (this)
         {
             firstRow = 0;
             rowsCount = 15;

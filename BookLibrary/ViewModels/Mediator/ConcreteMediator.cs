@@ -15,6 +15,11 @@ namespace BookLibrary.ViewModels.Mediator
             this.resultViewModel.SetMediator(this);
         }
 
+        public ConcreteMediator()
+        {
+
+        }
+
         public void Notify(object sender, string ev)
         {
             if (ev == "A")

@@ -93,7 +93,7 @@ namespace BookLibrary.ViewModels
         {
             ResultViewModel = new ResultViewModel();
             QueryAuthorViewModel = new QueryAuthorViewModel();
-            QueryBookViewModel = new QueryBookViewModel();
+            QueryBookViewModel = new QueryBookViewModel("test11");
             QueryReaderViewModel = new QueryReaderViewModel();
             ModifyAuthorViewModel = new ModifyAuthorViewModel();
             ModifyBookViewModel = new ModifyBookViewModel();
@@ -104,11 +104,11 @@ namespace BookLibrary.ViewModels
             ReaderModeCommand = new RelayCommand(SelectReaderMode);
 
             SelectedResultViewModel = ResultViewModel;
-            //SelectedQueryViewModel = QueryBookViewModel;
+            SelectedQueryViewModel = QueryBookViewModel;
             SelectedModifyViewModel = ModifyBookViewModel;
             ModeStatus = Mode.Book;
 
-            //mediator = new ConcreteMediator(ResultViewModel, QueryBookViewModel);
+            mediator = new ConcreteMediator(ResultViewModel, QueryBookViewModel);
         }
 
         private void SelectAuthorMode(object obj)

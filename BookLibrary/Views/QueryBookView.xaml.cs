@@ -26,10 +26,10 @@ namespace BookLibrary.Views
             InitializeComponent();
         }
 
-        /*private void NumberValidation(object sender, TextCompositionEventArgs e)
+        private void NumberValidation(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]");
             e.Handled = regex.IsMatch(e.Text);
-        }*/
+        }
     }
 }

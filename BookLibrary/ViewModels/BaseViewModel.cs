@@ -1,16 +1,22 @@
-﻿using System.ComponentModel;
+﻿using System.Windows;
+using System.ComponentModel;
 using BookLibrary.ViewModels.Mediator;
+using System.Windows.Controls;
+using System.Windows.Input;
+//using System.Windows;
 
 namespace BookLibrary.ViewModels
-{ 
-    public class BaseViewModel : INotifyPropertyChanged
+{
+    //public class BaseViewModel : Behavior<Window>, INotifyPropertyChanged
+    public class BaseViewModel : DependencyObject, INotifyPropertyChanged
     {
         protected IMediator mediator;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        //public BaseViewModel(IMediator mediator)
         public BaseViewModel(IMediator mediator = null)
         {
-            this.mediator = mediator;
+            if (this.mediator == null) this.mediator = mediator;
         }
 
         public void SetMediator(IMediator mediator)
