@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewmodels="clr-namespace:BookLibrary.ViewModels"
-             xmlns:local="clr-namespace:BookLibrary.Views"
+             xmlns:views="clr-namespace:BookLibrary.Views"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -13,8 +13,6 @@
     </UserControl.DataContext>
 
     <Grid>
-
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -39,7 +37,7 @@
         <Label Grid.Column="2" Grid.Row="1" Content="{Binding PageDisplay}" />
         <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding NextPageCommand}" />
         <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding LastPageCommand}" />
-        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Path=RowsCount}"/>
-        <TextBox Grid.Row="3" Grid.ColumnSpan="5" Text="{Binding Path=RowsCount}"/>
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Path=RowsCount}" />
+        <TextBox Grid.Row="3" Grid.ColumnSpan="5" Text="{Binding Path=RowsCount}" />
     </Grid>
 </UserControl>

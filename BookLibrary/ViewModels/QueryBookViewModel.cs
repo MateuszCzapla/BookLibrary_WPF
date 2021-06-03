@@ -133,7 +133,7 @@ namespace BookLibrary.ViewModels
                             //TOTO
                             //if (mediator != null) this.mediator.Notify(this, "B");
                             //this.mediator.Notify(this, "B");
-                            TextInControl = "test__";
+                            //TextInControl = "test__";
                         },
                         argument => title.Length >= 2 || year != 0 || dateFrom.ToString() != "01.01.0001 00:00:00");
                 }
@@ -166,7 +166,7 @@ namespace BookLibrary.ViewModels
             t = "Mateusz";
         }*/
 
-        public string TextInControl
+        /*public string TextInControl
         {
             get
             {
@@ -180,6 +180,6 @@ namespace BookLibrary.ViewModels
 
         public static readonly DependencyProperty TextInControlProperty =
             DependencyProperty.Register("TextInControl", typeof(string),
-                                           typeof(QueryBookViewModel));
+                                           typeof(QueryBookViewModel));*/
     }
 }
