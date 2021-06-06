@@ -69,6 +69,7 @@ namespace BookLibrary.ViewModels
                         argument =>
                         {
                             //firstRow = totalRowsCount - rowsCount;
+                            this.resultViewModel.TestResultVM();
                         },
                         argument => true);
                 }
@@ -82,7 +83,7 @@ namespace BookLibrary.ViewModels
         {
             this.editMode = false;
             this.searchText = "binding test";
-            this.resultViewModel = new ResultViewModel();
+            //this.resultViewModel = new ResultViewModel();
         }
     }
 }

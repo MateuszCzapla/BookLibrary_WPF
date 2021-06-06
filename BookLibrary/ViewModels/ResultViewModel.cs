@@ -9,6 +9,9 @@ namespace BookLibrary.ViewModels
 {
     public class ResultViewModel : BaseViewModel
     {
+        private static int c = 0;
+        private int d = 0;
+
         private int firstRow;
         public int FirstRow
         {
@@ -158,6 +161,9 @@ namespace BookLibrary.ViewModels
 
         public ResultViewModel()
         {
+            c++;
+            d = c;
+
             firstRow = 0;
             rowsCount = 15;
             totalRowsCount = 0;
@@ -173,6 +179,11 @@ namespace BookLibrary.ViewModels
         public void TestResultVM()
         {
             PageDisplay = "TestResultVM";
+
+            firstRow = 0;
+            rowsCount = 15;
+            totalRowsCount = 0;
+            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
         }
 
         #region Test zachowan
