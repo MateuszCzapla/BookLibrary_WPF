@@ -5,6 +5,20 @@ namespace BookLibrary.ViewModels
 {
     public class QueryViewModel : INotifyPropertyChanged
     {
+        private ResultViewModel resultViewModel;
+        public ResultViewModel ResultViewModell
+        {
+            get
+            {
+                return resultViewModel;
+            }
+            set
+            {
+                resultViewModel = value;
+                OnPropertyChanged("ResultViewModell");
+            }
+        }
+
         private bool editMode;
         public bool EditMode
         {
@@ -68,6 +82,7 @@ namespace BookLibrary.ViewModels
         {
             this.editMode = false;
             this.searchText = "binding test";
+            this.resultViewModel = new ResultViewModel();
         }
     }
 }
