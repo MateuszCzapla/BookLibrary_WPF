@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
 {
-    public class QueryViewModel : INotifyPropertyChanged
+    public class BookViewModel : INotifyPropertyChanged
     {
         private ResultViewModel resultViewModel;
         public ResultViewModel ResultViewModell
@@ -79,11 +79,11 @@ namespace BookLibrary.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public QueryViewModel()
+        public BookViewModel()
         {
             this.editMode = false;
             this.searchText = "binding test";
-            //this.resultViewModel = new ResultViewModel();
+            this.resultViewModel = new ResultViewModel();
         }
     }
 }

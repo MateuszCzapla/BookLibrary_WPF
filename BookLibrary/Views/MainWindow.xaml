@@ -9,6 +9,15 @@
         Title="Book Library" Height="450" Width="800">
 
     <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:BookViewModel}">
+            <views:BookView />
+        </DataTemplate>
+
+        <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
+    </Window.Resources>
+
+    <!--
+    <Window.Resources>
         
         <DataTemplate DataType="{x:Type viewmodels:ResultViewModel}">
             <views:ResultView />
@@ -83,6 +92,44 @@
         </GroupBox>
 
         <StatusBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{StaticResource navigationViewModel}">
+            <StatusBarItem>
+                <Label Content="{Binding ModeStatus}" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+    -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="true" DataContext="{StaticResource navigationViewModel}">
+            <MenuItem Header="_File">
+                <MenuItem Command="ApplicationCommands.Close"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+            <MenuItem Header="_Mode">
+                <MenuItem Header="_Author" Command="{Binding AuthorModeCommand}" />
+                <MenuItem Header="_Book" Command="{Binding BookModeCommand}" />
+                <MenuItem Header="_Reader" Command="{Binding ReaderModeCommand}" />
+            </MenuItem>
+            <MenuItem Header="_Settings">
+                <MenuItem Header="_Language" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="About"/>
+            </MenuItem>
+        </Menu>
+
+        <views:BookView Grid.Row="1" />
+
+        <StatusBar Grid.Row="2" DataContext="{StaticResource navigationViewModel}">
             <StatusBarItem>
                 <Label Content="{Binding ModeStatus}" />
             </StatusBarItem>

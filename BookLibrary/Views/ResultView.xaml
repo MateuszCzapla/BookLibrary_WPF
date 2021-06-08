@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.DataContext>
-        <viewmodels:QueryViewModel />
+        <viewmodels:BookViewModel />
     </UserControl.DataContext>
 
     <Grid>
