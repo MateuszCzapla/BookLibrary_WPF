@@ -127,7 +127,9 @@
             </MenuItem>
         </Menu>
 
-        <views:BookView Grid.Row="1" />
+        <views:BookView Grid.Row="1" DataContext="{StaticResource navigationViewModel}">
+            <ContentControl Content="{Binding SelectedViewModel}" />
+        </views:BookView>
 
         <StatusBar Grid.Row="2" DataContext="{StaticResource navigationViewModel}">
             <StatusBarItem>
