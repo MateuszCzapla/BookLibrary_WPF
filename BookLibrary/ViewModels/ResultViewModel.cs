@@ -72,6 +72,21 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        private int objectNr = 0;
+        private static int objectCounter = 0;
+        public int ObjectCounter
+        {
+            get
+            {
+                return objectNr;
+            }
+            set
+            {
+                objectNr = value;
+                OnPropertyChanged("ObjectCounter");
+            }
+        }
+
         private ObservableCollection<Book> libraryGrid;
         public ObservableCollection<Book> LibraryGrid
         {
@@ -168,6 +183,9 @@ namespace BookLibrary.ViewModels
             rowsCount = 15;
             totalRowsCount = 0;
             RefreshLibraryGrid();
+
+            ResultViewModel.objectCounter++;
+            this.objectNr = ResultViewModel.objectCounter;
         }
 
         private void RefreshLibraryGrid()
