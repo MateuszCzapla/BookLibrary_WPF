@@ -8,6 +8,9 @@ namespace BookLibrary.ViewModels
 {
     public class QueryReaderViewModel
     {
+        public QueryReaderViewModel()
+        {
 
+        }
     }
 }

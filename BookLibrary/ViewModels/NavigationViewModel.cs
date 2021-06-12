@@ -13,9 +13,9 @@ namespace BookLibrary.ViewModels
         public ModifyReaderViewModel ModifyReaderViewModel = null;
         public BookViewModel BookViewModel = null;
 
-        public ICommand AuthorModeCommand { get; set; }
-        public ICommand BookModeCommand { get; set; }
-        public ICommand ReaderModeCommand { get; set; }
+        public ICommand AuthorModeCommand { get; }
+        public ICommand BookModeCommand { get; }
+        public ICommand ReaderModeCommand { get; }
 
         private object selectedViewModel;
         public object SelectedViewModel
@@ -27,7 +27,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 selectedViewModel = value;
-                OnPropertyChanged("SelectedViewModel");
+                //OnPropertyChanged("SelectedViewModel");
             }
         }
 
@@ -101,8 +101,6 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        //public ConcreteMediator mediator;
-
         public NavigationViewModel()
         {
             //ResultViewModel = new ResultViewModel();
@@ -118,9 +116,6 @@ namespace BookLibrary.ViewModels
             BookModeCommand = new RelayCommand(SelectBookMode);
             ReaderModeCommand = new RelayCommand(SelectReaderMode);
 
-            //SelectedResultViewModel = ResultViewModel;
-            //SelectedQueryViewModel = QueryBookViewModel;
-            //SelectedModifyViewModel = ModifyBookViewModel;
 
             SelectedViewModel = BookViewModel;
             ModeStatus = Mode.Book;
@@ -128,11 +123,6 @@ namespace BookLibrary.ViewModels
 
         private void SelectAuthorMode(object obj)
         {
-            //SelectedResultViewModel = new ResultViewModel();
-            //SelectedQueryViewModel = new QueryAuthorViewModel();
-            //SelectedModifyViewModel = new ModifyAuthorViewModel();
-
-            //SelectedResultViewModel = ResultViewModel;
             SelectedQueryViewModel = QueryAuthorViewModel;
             SelectedModifyViewModel = ModifyAuthorViewModel;
 
@@ -142,25 +132,12 @@ namespace BookLibrary.ViewModels
 
         private void SelectBookMode(object obj)
         {
-            //SelectedResultViewModel = new ResultViewModel();
-            //SelectedQueryViewModel = new QueryBookViewModel();
-            //SelectedModifyViewModel = new ModifyBookViewModel();
-
-            //SelectedResultViewModel = ResultViewModel;
-            SelectedQueryViewModel = QueryBookViewModel;
-            SelectedModifyViewModel = ModifyBookViewModel;
-
             SelectedViewModel = BookViewModel;
-            ModeStatus = Mode.Book;
+            //ModeStatus = Mode.Book;
         }
 
         private void SelectReaderMode(object obj)
         {
-            //SelectedResultViewModel = new ResultViewModel();
-            //SelectedQueryViewModel = new QueryReaderViewModel();
-            //SelectedModifyViewModel = new ModifyReaderViewModel();
-
-            //SelectedResultViewModel = ResultViewModel;
             SelectedQueryViewModel = QueryReaderViewModel;
             SelectedModifyViewModel = ModifyReaderViewModel;
 
