@@ -27,7 +27,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 selectedViewModel = value;
-                //OnPropertyChanged("SelectedViewModel");
+                OnPropertyChanged("SelectedViewModel");
             }
         }
 
@@ -123,8 +123,8 @@ namespace BookLibrary.ViewModels
 
         private void SelectAuthorMode(object obj)
         {
-            SelectedQueryViewModel = QueryAuthorViewModel;
-            SelectedModifyViewModel = ModifyAuthorViewModel;
+            //SelectedQueryViewModel = QueryAuthorViewModel;
+            //SelectedModifyViewModel = ModifyAuthorViewModel;
 
             SelectedViewModel = null;
             ModeStatus = Mode.Author;
@@ -133,13 +133,13 @@ namespace BookLibrary.ViewModels
         private void SelectBookMode(object obj)
         {
             SelectedViewModel = BookViewModel;
-            //ModeStatus = Mode.Book;
+            ModeStatus = Mode.Book;
         }
 
         private void SelectReaderMode(object obj)
         {
-            SelectedQueryViewModel = QueryReaderViewModel;
-            SelectedModifyViewModel = ModifyReaderViewModel;
+            //SelectedQueryViewModel = QueryReaderViewModel;
+            //SelectedModifyViewModel = ModifyReaderViewModel;
 
             SelectedViewModel = null;
             ModeStatus = Mode.Reader;

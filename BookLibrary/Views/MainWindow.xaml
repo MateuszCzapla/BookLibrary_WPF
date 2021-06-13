@@ -16,48 +16,14 @@
         <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
     </Window.Resources>
 
-    <!--
-    <Window.Resources>
-        
-        <DataTemplate DataType="{x:Type viewmodels:ResultViewModel}">
-            <views:ResultView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:QueryAuthorViewModel}">
-            <views:QueryAuthorView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:QueryBookViewModel}">
-            <views:QueryBookView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:QueryReaderViewModel}">
-            <views:QueryReaderView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ModifyAuthorViewModel}">
-            <views:ModifyAuthorView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ModifyBookViewModel}">
-            <views:ModifyBookView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ModifyReaderViewModel}">
-            <views:ModifyReaderView />
-        </DataTemplate>
-        
-        <viewmodels:NavigationViewModel x:Key="navigationViewModel" />
-
-    </Window.Resources>
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+    <Grid DataContext="{StaticResource navigationViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <Menu x:Name="mainMenu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsMainMenu="true" DataContext="{StaticResource navigationViewModel}">
+        <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="true">
             <MenuItem Header="_File">
                 <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
@@ -79,59 +45,15 @@
             </MenuItem>
         </Menu>
 
-        <GroupBox Header="Result" Margin="10" Padding="10" Grid.Row="1" Grid.Column="0" DataContext="{StaticResource navigationViewModel}">
-            <ContentControl Content="{Binding SelectedResultViewModel}" />
-        </GroupBox>
-
-        <GroupBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Header="Query" Margin="10" Padding="10" DataContext="{StaticResource navigationViewModel}">
-            <ContentControl Content="{Binding SelectedQueryViewModel}" />
-        </GroupBox>
-
-        <GroupBox Grid.Column="0" Grid.Row="2" Header="Modify" Margin="10" Padding="10" DataContext="{StaticResource navigationViewModel}">
-            <ContentControl Grid.Column="0" Grid.Row="2" Content="{Binding SelectedModifyViewModel}" />
-        </GroupBox>
-
-        <StatusBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" DataContext="{StaticResource navigationViewModel}">
-            <StatusBarItem>
-                <Label Content="{Binding ModeStatus}" />
-            </StatusBarItem>
-        </StatusBar>
-    </Grid>
-    -->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-
-        <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="true" DataContext="{StaticResource navigationViewModel}">
-            <MenuItem Header="_File">
-                <MenuItem Command="ApplicationCommands.Close"/>
-            </MenuItem>
-            <MenuItem Header="_Edit">
-                <MenuItem Command="ApplicationCommands.Copy"/>
-                <MenuItem Command="ApplicationCommands.Cut"/>
-                <MenuItem Command="ApplicationCommands.Paste"/>
-            </MenuItem>
-            <MenuItem Header="_Mode">
-                <MenuItem Header="_Author" Command="{Binding AuthorModeCommand}" />
-                <MenuItem Header="_Book" Command="{Binding BookModeCommand}" />
-                <MenuItem Header="_Reader" Command="{Binding ReaderModeCommand}" />
-            </MenuItem>
-            <MenuItem Header="_Settings">
-                <MenuItem Header="_Language" />
-            </MenuItem>
-            <MenuItem Header="_Help">
-                <MenuItem Header="About"/>
-            </MenuItem>
-        </Menu>
-
+        <!--
         <views:BookView Grid.Row="1" DataContext="{StaticResource navigationViewModel}">
             <ContentControl Content="{Binding SelectedViewModel}" />
         </views:BookView>
+        -->
 
-        <StatusBar Grid.Row="2" DataContext="{StaticResource navigationViewModel}">
+        <ContentControl Grid.Row="1" Content="{Binding Path=SelectedViewModel}" />
+
+        <StatusBar Grid.Row="2">
             <StatusBarItem>
                 <Label Content="{Binding ModeStatus}" />
             </StatusBarItem>
