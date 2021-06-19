@@ -3,8 +3,13 @@ using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
 {
-    public class BookViewModel : INotifyPropertyChanged
+    public class BookViewModel : INotifyPropertyChanged, IPageViewModel
     {
+        public string Name
+        {
+            get { return "Books"; }
+        }
+
         private ResultViewModel resultViewModel;
         public ResultViewModel ResultViewModell
         {

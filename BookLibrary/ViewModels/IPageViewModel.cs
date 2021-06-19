@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BookLibrary.ViewModels
 {
-    interface IPageViewModel
+    public interface IPageViewModel
     {
         string Name { get; }
     }

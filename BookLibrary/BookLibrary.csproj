@@ -85,11 +85,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Readers.cs" />
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DatabaseOperations.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DBSampleDataOperations.cs" />
+    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ModifyAuthorViewModel.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="ViewModels\ModifyReaderViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel2.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
+    <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\QueryAuthorViewModel.cs" />
     <Compile Include="ViewModels\QueryBookViewModel.cs" />
     <Compile Include="ViewModels\QueryReaderViewModel.cs" />
@@ -118,6 +121,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\MainWindow2.xaml.cs">
+      <DependentUpon>MainWindow2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ModifyAuthorView.xaml.cs">
       <DependentUpon>ModifyAuthorView.xaml</DependentUpon>
@@ -149,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
