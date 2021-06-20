@@ -73,11 +73,8 @@ namespace BookLibrary.ViewModels
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {
-            if (!PageViewModels.Contains(viewModel))
-                PageViewModels.Add(viewModel);
-
-            CurrentPageViewModel = PageViewModels
-                .FirstOrDefault(vm => vm == viewModel);
+            if (!PageViewModels.Contains(viewModel)) PageViewModels.Add(viewModel);
+            CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
         }
 
         #endregion
