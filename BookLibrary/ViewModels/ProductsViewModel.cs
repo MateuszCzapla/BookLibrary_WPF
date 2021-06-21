@@ -3,7 +3,7 @@ using BookLibrary.Models;
 
 namespace BookLibrary.ViewModels
 {
-    public class ProductsViewModel : ObservableObject, IPageViewModel
+    public class ProductsViewModel : BaseViewModel, IPageViewModel
     {
         #region Fields
 
@@ -95,6 +95,11 @@ namespace BookLibrary.ViewModels
         private void SaveProduct()
         {
             // You would implement your Product save here
+        }
+
+        public ProductsViewModel()
+        {
+
         }
 
         #endregion

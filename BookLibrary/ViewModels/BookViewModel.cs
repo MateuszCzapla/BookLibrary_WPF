@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
 {
-    public class BookViewModel : INotifyPropertyChanged, IPageViewModel
+    public class BookViewModel : BaseViewModel, IPageViewModel
     {
         public string Name
         {
@@ -52,17 +52,6 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        protected void OnPropertyChanged(params string[] propertyNames)
-        {
-            if (PropertyChanged != null)
-            {
-                foreach (string propertyName in propertyNames)
-                {
-                    PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                }
-            }
-        }
-
         private ICommand searchCommand;
         public ICommand SearchCommand
         {
@@ -74,7 +63,7 @@ namespace BookLibrary.ViewModels
                         argument =>
                         {
                             //firstRow = totalRowsCount - rowsCount;
-                            resultViewModel.TestResultVM();
+                            //resultViewModel.TestResultVM();
                         },
                         argument => true);
                 }
@@ -82,12 +71,10 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public BookViewModel()
         {
-            this.editMode = false;
-            this.searchText = "binding test";
+            //this.editMode = false;
+            //this.searchText = "binding test";
             this.resultViewModel = new ResultViewModel();
         }
     }

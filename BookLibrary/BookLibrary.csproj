@@ -134,6 +134,9 @@
     <Compile Include="Views\ModifyReaderView.xaml.cs">
       <DependentUpon>ModifyReaderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProductView.xaml.cs">
+      <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\QueryAuthorView.xaml.cs">
       <DependentUpon>QueryAuthorView.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModifyReaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

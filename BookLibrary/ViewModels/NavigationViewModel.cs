@@ -11,7 +11,7 @@ namespace BookLibrary.ViewModels
         public ModifyAuthorViewModel ModifyAuthorViewModel = null;
         public ModifyBookViewModel ModifyBookViewModel = null;
         public ModifyReaderViewModel ModifyReaderViewModel = null;
-        public BookViewModel BookViewModel = null;
+        //public BookViewModel BookViewModel = null;
 
         public ICommand AuthorModeCommand { get; }
         public ICommand BookModeCommand { get; }
@@ -110,14 +110,14 @@ namespace BookLibrary.ViewModels
             ModifyAuthorViewModel = new ModifyAuthorViewModel();
             ModifyBookViewModel = new ModifyBookViewModel();
             ModifyReaderViewModel = new ModifyReaderViewModel();
-            BookViewModel = new BookViewModel();
+            //BookViewModel = new BookViewModel();
 
             AuthorModeCommand = new RelayCommand(SelectAuthorMode);
             BookModeCommand = new RelayCommand(SelectBookMode);
             ReaderModeCommand = new RelayCommand(SelectReaderMode);
 
 
-            SelectedViewModel = BookViewModel;
+            //SelectedViewModel = BookViewModel;
             ModeStatus = Mode.Book;
         }
 
@@ -132,7 +132,7 @@ namespace BookLibrary.ViewModels
 
         private void SelectBookMode(object obj)
         {
-            SelectedViewModel = BookViewModel;
+            //SelectedViewModel = BookViewModel;
             ModeStatus = Mode.Book;
         }
 

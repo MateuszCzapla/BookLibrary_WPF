@@ -12,7 +12,10 @@
         <DataTemplate DataType="{x:Type viewmodels:BookViewModel}">
             <views:BookView />
         </DataTemplate>
-        
+        <DataTemplate DataType="{x:Type viewmodels:ProductsViewModel}">
+            <views:ProductView />
+        </DataTemplate>
+
         <viewmodels:NavigationViewModel2 x:Key="navigationViewModel2" />
     </Window.Resources>
 
@@ -33,24 +36,19 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
             </MenuItem>
             <MenuItem Header="_Mode" ItemsSource="{Binding Path=PageViewModels}">
-                <MenuItem.ItemTemplate>
-                    <DataTemplate>
-                        <MenuItem
-                            Header="{Binding Name}"
-                            Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"                             
-                            CommandParameter="{Binding }"
-                        />
-                    </DataTemplate>
-                </MenuItem.ItemTemplate>
-                <!--<MenuItem Header="_Author" Command="{Binding AuthorModeCommand}" />
-                <MenuItem Header="_Book" Command="{Binding BookModeCommand}" />
-                <MenuItem Header="_Reader" Command="{Binding ReaderModeCommand}" />-->
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="MenuItem">
+                        <Setter Property="Header" Value="{Binding Path=Name}"></Setter>
+                        <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=MenuItem}, Path=DataContext.ChangePageCommand}"></Setter>
+                        <Setter Property="CommandParameter" Value="{Binding}"></Setter>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
             </MenuItem>
             <MenuItem Header="_Settings">
-                <MenuItem Header="_Language" />
+                <MenuItem Header="_Language" Command="{Binding Path=ChangePageCommand}" />
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="About"/>
+                <MenuItem Header="About" />
             </MenuItem>
         </Menu>
 
