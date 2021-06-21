@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace BookLibrary.ViewModels
 {
@@ -14,6 +15,9 @@ namespace BookLibrary.ViewModels
         private IPageViewModel _currentPageViewModel;
         private List<IPageViewModel> _pageViewModels;
 
+        //private IPageViewModel _currentPageViewModel_2;
+        //private ObservableCollection<IPageViewModel> _pageViewModels_2;
+
         #endregion
 
         public NavigationViewModel2()
@@ -21,6 +25,10 @@ namespace BookLibrary.ViewModels
             PageViewModels.Add(new BookViewModel());
             PageViewModels.Add(new ProductsViewModel());
             CurrentPageViewModel = PageViewModels[0];
+
+            //PageViewModels_2.Add(new BookViewModel());
+            //PageViewModels_2.Add(new ProductsViewModel());
+            //CurrentPageViewModel = PageViewModels_2[0];
         }
 
         #region Properties / Commands
@@ -44,12 +52,22 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                if (_pageViewModels == null)
-                    _pageViewModels = new List<IPageViewModel>();
-
+                if (_pageViewModels == null) _pageViewModels = new List<IPageViewModel>();
                 return _pageViewModels;
             }
         }
+
+        /*public ObservableCollection<IPageViewModel> PageViewModels_2
+        {
+            get
+            {
+                //if (_pageViewModels == null) _pageViewModels = new List<IPageViewModel>();
+                //return _pageViewModels;
+
+                if (_pageViewModels == null) _pageViewModels_2 = new ObservableCollection<IPageViewModel>();
+                return _pageViewModels_2;
+            }
+        }*/
 
         public IPageViewModel CurrentPageViewModel
         {

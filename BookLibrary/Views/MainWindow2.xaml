@@ -16,51 +16,45 @@
         <viewmodels:NavigationViewModel2 x:Key="navigationViewModel2" />
     </Window.Resources>
 
-    <!--<Grid DataContext="{StaticResource navigationViewModel2}">-->
-    <Grid>
+    <Grid DataContext="{StaticResource navigationViewModel2}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
+        <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="true">
+            <MenuItem Header="_File">
+                <MenuItem Command="ApplicationCommands.Close"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Command="ApplicationCommands.Copy"/>
+                <MenuItem Command="ApplicationCommands.Cut"/>
+                <MenuItem Command="ApplicationCommands.Paste"/>
+            </MenuItem>
+            <MenuItem Header="_Mode" ItemsSource="{Binding Path=PageViewModels}">
+                <MenuItem.ItemTemplate>
+                    <DataTemplate>
+                        <MenuItem
+                            Header="{Binding Name}"
+                            Command="{Binding DataContext.ChangePageCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"                             
+                            CommandParameter="{Binding }"
+                        />
+                    </DataTemplate>
+                </MenuItem.ItemTemplate>
+                <!--<MenuItem Header="_Author" Command="{Binding AuthorModeCommand}" />
+                <MenuItem Header="_Book" Command="{Binding BookModeCommand}" />
+                <MenuItem Header="_Reader" Command="{Binding ReaderModeCommand}" />-->
+            </MenuItem>
+            <MenuItem Header="_Settings">
+                <MenuItem Header="_Language" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="About"/>
+            </MenuItem>
+        </Menu>
 
-        <ItemsControl ItemsSource="{Binding PageViewModel}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <!--
-                    <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="true">
-                        <MenuItem Header="_File">
-                            <MenuItem Command="ApplicationCommands.Close"/>
-                        </MenuItem>
-                        <MenuItem Header="_Edit">
-                            <MenuItem Command="ApplicationCommands.Copy"/>
-                            <MenuItem Command="ApplicationCommands.Cut"/>
-                            <MenuItem Command="ApplicationCommands.Paste"/>
-                        </MenuItem>
-                        <MenuItem Header="_Mode">
-                            <MenuItem Header="_Author" Command="{Binding AuthorModeCommand}" />
-                            <MenuItem Header="_Book" Command="{Binding BookModeCommand}" />
-                            <MenuItem Header="_Reader" />
-                        </MenuItem>
-                        <MenuItem Header="_Settings">
-                            <MenuItem Header="_Language" />
-                        </MenuItem>
-                        <MenuItem Header="_Help">
-                            <MenuItem Header="About"/>
-                        </MenuItem>
-                    </Menu>
-                    -->
-
-                    <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="true">
-                        
-                    </Menu>
-
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        
-        <ContentControl Grid.Row="1" Content="{Binding Path=SelectedViewModel}" />
+        <ContentControl Grid.Row="1" Content="{Binding Path=CurrentPageViewModel}" />
 
         <StatusBar Grid.Row="2">
             <StatusBarItem>
