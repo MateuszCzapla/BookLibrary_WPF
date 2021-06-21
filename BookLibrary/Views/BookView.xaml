@@ -14,9 +14,11 @@
     </UserControl.DataContext>-->
 
     <UserControl.Resources>
+        <viewmodels:BookViewModel x:Key="bookViewModel" />
         <converters:ShortToStringConverter x:Key="shortToStringConverter"/>
     </UserControl.Resources>
 
+    <!--<Grid DataContext="{StaticResource bookViewModel}">-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -39,9 +41,9 @@
         <Label Grid.Row="0" Grid.Column="1" Content="Title" />
         <TextBox Grid.Row="0" Grid.Column="2" MaxLength="20" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" ToolTip="{Binding ErrorCollection[Title]}" />
         <Label Grid.Row="1" Grid.Column="1" Content="Year" />
-        <!--<TextBox Grid.Row="1" Grid.Column="2" MaxLength="4" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}" PreviewTextInput="NumberValidation" />-->
+        <TextBox Grid.Row="1" Grid.Column="2" MaxLength="4" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}" PreviewTextInput="NumberValidation" />
         <Label Grid.Row="2" Grid.Column="1" Content="Modify date (from)" />
-        <Label Grid.Row="3" Grid.Column="1" Content="{Binding DateFrom}" />
+        <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
         <Expander Grid.Row="3" Grid.Column="2" Header="Set date from">
             <Calendar SelectedDate="{Binding DateFrom}"/>
         </Expander>
@@ -51,6 +53,5 @@
             <Calendar SelectedDate="{Binding DateTo}" />
         </Expander>
         <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" />
-
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
@@ -38,6 +39,22 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        private DateTime dateFrom;
+        public DateTime DateFrom
+        {
+            get
+            {
+                return dateFrom;
+            }
+            set
+            {
+                dateFrom = value;
+                //DateToEnable = true;
+                OnPropertyChanged("DateToEnable");
+                OnPropertyChanged("DateFrom");
+            }
+        }
+
         private string searchText;
         public string SearchText
         {
@@ -62,8 +79,7 @@ namespace BookLibrary.ViewModels
                     searchCommand = new RelayCommand(
                         argument =>
                         {
-                            //firstRow = totalRowsCount - rowsCount;
-                            //resultViewModel.TestResultVM();
+                            resultViewModel.TestResultVM();
                         },
                         argument => true);
                 }

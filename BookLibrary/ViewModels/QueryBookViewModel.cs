@@ -140,46 +140,5 @@ namespace BookLibrary.ViewModels
                 return searchCommand;
             }
         }
-
-        /*public static readonly DependencyProperty PrzyciskProperty = DependencyProperty.Register(
-            "Przycisk",
-            typeof(string),
-            typeof(QueryBookViewModel),
-            new PropertyMetadata(null, PrzyciskZmieniony)
-        );
-
-        public string Przycisk
-        {
-            get
-            {
-                return (string)GetValue(PrzyciskProperty);
-            }
-            set
-            {
-                SetValue(PrzyciskProperty, value);
-            }
-        }
-
-        static string t = String.Empty;
-        private static void PrzyciskZmieniony(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            t = "Mateusz";
-        }*/
-
-        /*public string TextInControl
-        {
-            get
-            {
-                return (string)GetValue(TextInControlProperty);
-            }
-            set
-            {
-                SetValue(TextInControlProperty, value);
-            }
-        }
-
-        public static readonly DependencyProperty TextInControlProperty =
-            DependencyProperty.Register("TextInControl", typeof(string),
-                                           typeof(QueryBookViewModel));*/
     }
 }
