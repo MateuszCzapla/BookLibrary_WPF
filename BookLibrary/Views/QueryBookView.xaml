@@ -8,17 +8,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--
     <UserControl.DataContext>
-        <viewmodels:BookViewModel />
+        <viewmodels:QueryBookViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
         <converters:ShortToStringConverter x:Key="shortToStringConverter"/>
     </UserControl.Resources>
-    -->
-    
+
     <Grid>
-        <!--
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition />
@@ -48,6 +45,5 @@
             <Calendar SelectedDate="{Binding DateTo}" />
         </Expander>
         <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" />
-        -->
     </Grid>
 </UserControl>

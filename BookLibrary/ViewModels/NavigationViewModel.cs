@@ -4,14 +4,13 @@ namespace BookLibrary.ViewModels
 {
     public class NavigationViewModel : BaseViewModel
     {
-        //public ResultViewModel ResultViewModel = null;
+        public ResultViewModel ResultViewModel = null;
         public QueryAuthorViewModel QueryAuthorViewModel = null;
         public QueryBookViewModel QueryBookViewModel = null;
         public QueryReaderViewModel QueryReaderViewModel = null;
         public ModifyAuthorViewModel ModifyAuthorViewModel = null;
         public ModifyBookViewModel ModifyBookViewModel = null;
         public ModifyReaderViewModel ModifyReaderViewModel = null;
-        //public BookViewModel BookViewModel = null;
 
         public ICommand AuthorModeCommand { get; }
         public ICommand BookModeCommand { get; }
@@ -103,21 +102,20 @@ namespace BookLibrary.ViewModels
 
         public NavigationViewModel()
         {
-            //ResultViewModel = new ResultViewModel();
+            ResultViewModel = new ResultViewModel();
             QueryAuthorViewModel = new QueryAuthorViewModel();
             QueryBookViewModel = new QueryBookViewModel();
             QueryReaderViewModel = new QueryReaderViewModel();
             ModifyAuthorViewModel = new ModifyAuthorViewModel();
             ModifyBookViewModel = new ModifyBookViewModel();
             ModifyReaderViewModel = new ModifyReaderViewModel();
-            //BookViewModel = new BookViewModel();
 
             AuthorModeCommand = new RelayCommand(SelectAuthorMode);
             BookModeCommand = new RelayCommand(SelectBookMode);
             ReaderModeCommand = new RelayCommand(SelectReaderMode);
 
 
-            //SelectedViewModel = BookViewModel;
+            SelectedViewModel = QueryBookViewModel;
             ModeStatus = Mode.Book;
         }
 

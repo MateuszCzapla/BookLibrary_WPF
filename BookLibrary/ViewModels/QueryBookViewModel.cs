@@ -80,8 +80,6 @@ namespace BookLibrary.ViewModels
             title = String.Empty;
         }
 
-
-
         #region IDataErrorInfo Members
 
         string IDataErrorInfo.Error

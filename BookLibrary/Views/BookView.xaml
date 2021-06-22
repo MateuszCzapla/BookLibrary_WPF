@@ -9,16 +9,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <!--<UserControl.DataContext>
-        <viewmodels:BookViewModel />
-    </UserControl.DataContext>-->
-
     <UserControl.Resources>
         <viewmodels:BookViewModel x:Key="bookViewModel" />
         <converters:ShortToStringConverter x:Key="shortToStringConverter"/>
     </UserControl.Resources>
 
-    <!--<Grid DataContext="{StaticResource bookViewModel}">-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
@@ -45,12 +40,12 @@
         <Label Grid.Row="2" Grid.Column="1" Content="Modify date (from)" />
         <Label Grid.Row="3" Grid.Column="1" Content="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
         <Expander Grid.Row="3" Grid.Column="2" Header="Set date from">
-            <Calendar SelectedDate="{Binding DateFrom}"/>
+            <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateFrom)}"/>
         </Expander>
         <Label Grid.Row="4" Grid.Column="1" Content="Modify date (to)" />
-        <Label Grid.Row="5" Grid.Column="1" Content="{Binding DateTo}" />
-        <Expander Grid.Row="5" Grid.Column="2" Header="Set date to" IsEnabled="{Binding DateToEnable}">
-            <Calendar SelectedDate="{Binding DateTo}" />
+        <Label Grid.Row="5" Grid.Column="1" Content="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
+        <Expander Grid.Row="5" Grid.Column="2" Header="Set date to" IsEnabled="{Binding Path=(viewmodels:BookViewModel.DateToEnable)}">
+            <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
         </Expander>
         <Button Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" Content="Search" Command="{Binding SearchCommand}" />
     </Grid>
