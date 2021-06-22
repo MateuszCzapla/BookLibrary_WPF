@@ -130,7 +130,6 @@ namespace BookLibrary.ViewModels
         }
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
-
         public string this[string columnName]
         {
             get
@@ -140,7 +139,10 @@ namespace BookLibrary.ViewModels
                 switch (columnName)
                 {
                     case "Title":
-                        if (!string.IsNullOrEmpty(Title) && Title.Length < 2) result = "Title must be a minimum of 2 character";
+                        if (!string.IsNullOrEmpty(Title) && Title.Length < 2)
+                        {
+                            result = "Title must be a minimum of 2 character";
+                        }
                         break;
 
                     case "Year":
@@ -155,6 +157,16 @@ namespace BookLibrary.ViewModels
                 return result;
             }
         }
+
+        private string toolTipTitle;
+        public string ToolTipTitle
+        {
+            get
+            {
+                return "test";
+            }
+        }
+
         #endregion
 
         private ICommand searchCommand;
@@ -167,7 +179,7 @@ namespace BookLibrary.ViewModels
                     searchCommand = new RelayCommand(
                         argument =>
                         {
-                            //resultViewModel.TestResultVM();
+                            resultViewModel.TestResultVM();
                         },
                         argument => true);
                 }
@@ -178,6 +190,7 @@ namespace BookLibrary.ViewModels
         public BookViewModel()
         {
             title = String.Empty;
+            this.toolTipTitle = String.Empty;
 
             //this.editMode = false;
             //this.searchText = "binding test";

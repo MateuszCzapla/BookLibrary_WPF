@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE0025: Użyj treści wyrażenia dla właściwości
+csharp_style_expression_bodied_properties = false
+
+# IDE0027: Użyj treści wyrażenia dla metod dostępu
+csharp_style_expression_bodied_accessors = false
