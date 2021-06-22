@@ -22,7 +22,7 @@
     <Grid DataContext="{StaticResource navigationViewModel2}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
@@ -52,7 +52,9 @@
             </MenuItem>
         </Menu>
 
+        <!--<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">-->
         <ContentControl Grid.Row="1" Content="{Binding Path=CurrentPageViewModel}" />
+        <!--</ScrollViewer>-->
 
         <StatusBar Grid.Row="2">
             <StatusBarItem>
