@@ -21,58 +21,63 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <views:ResultView Grid.Column="0" Grid.Row="0" />
 
-        <Expander Grid.Column="1" ExpandDirection="Right" IsExpanded="True" Header="Search">
+        <Expander Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" ExpandDirection="Right" IsExpanded="True" Header="Search">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                <GroupBox Padding="10" >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
 
-                    <Label Grid.Column="0" Grid.Row="0" Content="Title" />
-                    <!--
-                        ToolTip="{Binding ErrorCollection[Title]}"
-                        ToolTip="{Binding Path=(viewmodels:BookViewModel.ErrorCollection)}"
-                    -->
-                    <TextBox Grid.Column="1" Grid.Row="0" MaxLength="20"
-                            Text="{Binding Path=(viewmodels:BookViewModel.Title),
-                            UpdateSourceTrigger=PropertyChanged,
-                            ValidatesOnDataErrors=True}"
-                    />
-                    <Label Grid.Column="0" Grid.Row="1" Content="Year" />
-                    <TextBox Grid.Column="1" Grid.Row="1" MaxLength="4"
-                             Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}"
-                             PreviewTextInput="NumberValidation"
-                    />
-                    <Label Grid.Column="0" Grid.Row="2" Content="Modify date (from)" />
-                    <Label Grid.Column="0" Grid.Row="3" Content="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
-                    <Expander Grid.Column="1" Grid.Row="3" Header="Set date from">
-                        <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateFrom)}"/>
-                    </Expander>
-                    <Label Grid.Column="0" Grid.Row="4" Content="Modify date (to)" />
-                    <Label Grid.Column="0" Grid.Row="5" Content="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
-                    <Expander Grid.Column="1" Grid.Row="5" Header="Set date to" IsEnabled="{Binding Path=(viewmodels:BookViewModel.DateToEnable)}">
-                        <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
-                    </Expander>
-                    <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Content="Search" Command="{Binding Path=(viewmodels:BookViewModel.SearchCommand)}" />
-
-                    <Border BorderThickness="2" BorderBrush="Gray" CornerRadius="8,8,3,3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="7" />
-                </Grid>
+                        <Label Grid.Column="0" Grid.Row="0" Content="Title" />
+                        <!--
+                            ToolTip="{Binding ErrorCollection[Title]}"
+                            ToolTip="{Binding Path=(viewmodels:BookViewModel.ErrorCollection)}"
+                        -->
+                        <TextBox Grid.Column="1" Grid.Row="0" MaxLength="20"
+                                Text="{Binding Path=(viewmodels:BookViewModel.Title),
+                                UpdateSourceTrigger=PropertyChanged,
+                                ValidatesOnDataErrors=True}"
+                        />
+                        <Label Grid.Column="0" Grid.Row="1" Content="Year" />
+                        <TextBox Grid.Column="1" Grid.Row="1" MaxLength="4"
+                                 Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}"
+                                 PreviewTextInput="NumberValidation"
+                        />
+                        <Label Grid.Column="0" Grid.Row="2" Content="Modify date (from)" />
+                        <Label Grid.Column="0" Grid.Row="3" Content="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
+                        <Expander Grid.Column="1" Grid.Row="3" Header="Set date from">
+                            <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateFrom)}"/>
+                        </Expander>
+                        <Label Grid.Column="0" Grid.Row="4" Content="Modify date (to)" />
+                        <Label Grid.Column="0" Grid.Row="5" Content="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
+                        <Expander Grid.Column="1" Grid.Row="5" Header="Set date to" IsEnabled="{Binding Path=(viewmodels:BookViewModel.DateToEnable)}">
+                            <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
+                        </Expander>
+                        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Content="Search" Command="{Binding Path=(viewmodels:BookViewModel.SearchCommand)}" />
+                    </Grid>
+                </GroupBox>
             </ScrollViewer>
+        </Expander>
+
+        <Expander Grid.Column="0" Grid.Row="1" IsExpanded="True" Header="Modify">
+            <Button Content="Modify" />
         </Expander>
     </Grid>
 </UserControl>

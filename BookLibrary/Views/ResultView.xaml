@@ -24,9 +24,9 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <DataGrid Grid.Row="0" Grid.ColumnSpan="5" AlternatingRowBackground="LightGray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=ResultViewModell.LibraryGrid}">
@@ -41,6 +41,6 @@
         <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding Path=ResultViewModell.NextPageCommand}" />
         <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding Path=ResultViewModell.LastPageCommand}" />
         <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Path=ResultViewModell.RowsCount}" />
-        <TextBox Grid.Row="3" Grid.ColumnSpan="5" Background="Red" Text="{Binding Path=ResultViewModell.ObjectCounter}" />
+        <TextBox Grid.Row="3" Grid.Column="0" Background="Red" Text="{Binding Path=ResultViewModell.ObjectCounter}" />
     </Grid>
 </UserControl>
