@@ -39,7 +39,7 @@ namespace BookLibrary.ViewModels
                 OnPropertyChanged("RowsCount");
 
                 firstRow = 0;
-                LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+                LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
                 PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
             }
         }
@@ -190,7 +190,7 @@ namespace BookLibrary.ViewModels
 
         private void RefreshLibraryGrid()
         {
-            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+            LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
 
@@ -201,37 +201,14 @@ namespace BookLibrary.ViewModels
             firstRow = 0;
             rowsCount = 15;
             totalRowsCount = 0;
-            LibraryGrid = DatabaseOperations.ReadDatabase(firstRow, rowsCount, ref totalRowsCount);
+            LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
+            RefreshLibraryGrid();
         }
 
-        #region Test zachowan
-
-        public static readonly DependencyProperty PrzyciskProperty = DependencyProperty.Register(
-            "Przycisk",
-            typeof(string),
-            typeof(QueryBookViewModel),
-            new PropertyMetadata(null, PrzyciskZmieniony)
-        );
-        
-        public string Przycisk
+        public void Search(string title)
         {
-            get
-            {
-                return (string)GetValue(PrzyciskProperty);
-            }
-            set
-            {
-                SetValue(PrzyciskProperty, value);
-            }
+            LibraryGrid = DatabaseOperations.ReadDataBase(-1, title, -1, String.Empty, String.Empty);
+            //RefreshLibraryGrid();
         }
-        
-        static string t = String.Empty;
-        
-        private static void PrzyciskZmieniony(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            t = "Mateusz";
-        }
-
-        #endregion
     }
 }

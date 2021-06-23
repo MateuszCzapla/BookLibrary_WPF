@@ -179,7 +179,8 @@ namespace BookLibrary.ViewModels
                     searchCommand = new RelayCommand(
                         argument =>
                         {
-                            resultViewModel.TestResultVM();
+                            //resultViewModel.TestResultVM();
+                            resultViewModel.Search(Title);
                         },
                         argument => true);
                 }

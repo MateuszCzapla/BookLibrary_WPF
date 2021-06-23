@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.Data.Sqlite;
 using BookLibrary.Models;
 using System.Collections.ObjectModel;
@@ -44,7 +45,7 @@ namespace BookLibrary.Other
             DBSampleDataOperations.FillAuthorHasBookSampleData();
         }
 
-        public static ObservableCollection<Book> ReadDatabase(int firstRow, int rowsCount, ref int totalRowsCount)
+        public static ObservableCollection<Book> ReadDataBase(int firstRow, int rowsCount, ref int totalRowsCount)
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
 
@@ -56,7 +57,6 @@ namespace BookLibrary.Other
 
                 var command = connection.CreateCommand();
 
-                int tmp;
                 command.CommandText =@"SELECT COUNT(*) FROM book;";
                 using (var reader = command.ExecuteReader())
                 {
@@ -71,6 +71,37 @@ namespace BookLibrary.Other
                 ";
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
+                    }
+                }
+            }
+
+            return books;
+        }
+
+        public static ObservableCollection<Book> ReadDataBase(int id, string title, int year, string dateFrom, string dateTo)
+        {
+            ObservableCollection<Book> books = new ObservableCollection<Book>();
+
+            if (!File.Exists(dbName)) return books;
+
+            using (var connection = new SqliteConnection("Data Source=" + dbName))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+
+                command.CommandText =
+                @"
+                    SELECT id, title, year, timestamp
+                    FROM book WHERE title LIKE $title
+                ";
+                command.Parameters.AddWithValue("$title", "%" + title + "%");
 
                 using (var reader = command.ExecuteReader())
                 {
