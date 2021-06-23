@@ -21,12 +21,12 @@
 
     <Grid DataContext="{StaticResource navigationViewModel2}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="true">
+        <Menu x:Name="mainMenu" Grid.Row="0" IsMainMenu="True">
             <MenuItem Header="_File">
                 <MenuItem Command="ApplicationCommands.Close"/>
             </MenuItem>
@@ -52,9 +52,7 @@
             </MenuItem>
         </Menu>
 
-        <!--<ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="1">-->
-        <ContentControl Grid.Row="1" Content="{Binding Path=CurrentPageViewModel}" />
-        <!--</ScrollViewer>-->
+        <ContentControl Grid.Row="1" Content="{Binding Path=CurrentPageViewModel}"/>
 
         <StatusBar Grid.Row="2">
             <StatusBarItem>
