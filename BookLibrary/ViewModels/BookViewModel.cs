@@ -25,6 +25,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 title = value;
+                searchAble = true;
                 OnPropertyChanged("Title");
             }
         }
@@ -41,6 +42,7 @@ namespace BookLibrary.ViewModels
             {
                 //year = Convert.ToInt16(value);
                 year = value;
+                searchAble = true;
                 OnPropertyChanged("Year");
             }
         }
@@ -58,6 +60,7 @@ namespace BookLibrary.ViewModels
             {
                 dateFrom = value;
                 DateToEnable = true;
+                searchAble = true;
                 OnPropertyChanged("DateToEnable");
                 OnPropertyChanged("DateFrom");
             }
@@ -73,6 +76,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 dateTo = value;
+                searchAble = true;
                 OnPropertyChanged("DateTo");
             }
         }
@@ -91,31 +95,31 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        private bool editMode;
-        public bool EditMode
+        private bool searchAble;
+        public bool SearchAble
         {
             get
             {
-                return editMode;
+                return searchAble;
             }
             set
             {
-                editMode = value;
+                searchAble = value;
                 OnPropertyChanged("EditMode");
             }
         }
 
-        private string searchText;
-        public string SearchText
+        private bool expanderIsExpanded;
+        public bool ExpanderIsExpanded
         {
             get
             {
-                return searchText;
+                return expanderIsExpanded;
             }
             set
             {
-                searchText = value;
-                OnPropertyChanged("SearchText");
+                expanderIsExpanded = value;
+                OnPropertyChanged("ExpanderIsExpanded");
             }
         }
 
@@ -182,20 +186,42 @@ namespace BookLibrary.ViewModels
                             //resultViewModel.TestResultVM();
                             resultViewModel.Search(Title);
                         },
-                        argument => true);
+                        argument => SearchAble);
                 }
                 return searchCommand;
             }
         }
 
+        private ICommand clearCommand;
+        public ICommand ClearCommand
+        {
+            get
+            {
+                if (clearCommand == null)
+                {
+                    clearCommand = new RelayCommand(
+                        argument =>
+                        {
+                            Title = String.Empty;
+                            Year = 0;
+                            DateFrom = DateTime.MinValue;
+                            DateTo = DateTime.MinValue;
+                            searchAble = false;
+                            ExpanderIsExpanded = false;
+                            DateToEnable = false;
+                        },
+                        argument => searchAble);
+                }
+                return clearCommand;
+            }
+        }
+
         public BookViewModel()
         {
-            title = String.Empty;
-            this.toolTipTitle = String.Empty;
-
-            //this.editMode = false;
-            //this.searchText = "binding test";
-            this.resultViewModel = new ResultViewModel();
+            searchAble = false;
+            toolTipTitle = String.Empty;
+            resultViewModel = new ResultViewModel();
+            ExpanderIsExpanded = false;
         }
     }
 }
