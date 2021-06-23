@@ -57,7 +57,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 dateFrom = value;
-                //DateToEnable = true;
+                DateToEnable = true;
                 OnPropertyChanged("DateToEnable");
                 OnPropertyChanged("DateFrom");
             }
