@@ -1,146 +1,84 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 
 namespace BookLibrary.ViewModels
 {
-    public class NavigationViewModel : BaseViewModel
+    public class NavigationViewModel : ObservableObject
     {
-        public ResultViewModel ResultViewModel = null;
-        public QueryAuthorViewModel QueryAuthorViewModel = null;
-        public QueryBookViewModel QueryBookViewModel = null;
-        public QueryReaderViewModel QueryReaderViewModel = null;
-        public ModifyAuthorViewModel ModifyAuthorViewModel = null;
-        public ModifyBookViewModel ModifyBookViewModel = null;
-        public ModifyReaderViewModel ModifyReaderViewModel = null;
+        #region Fields
 
-        public ICommand AuthorModeCommand { get; }
-        public ICommand BookModeCommand { get; }
-        public ICommand ReaderModeCommand { get; }
+        private ICommand changePageCommand;
+        private IPageViewModel currentPageViewModel;
+        private List<IPageViewModel> pageViewModels;
 
-        private object selectedViewModel;
-        public object SelectedViewModel
-        {
-            get
-            {
-                return selectedViewModel;
-            }
-            set
-            {
-                selectedViewModel = value;
-                OnPropertyChanged("SelectedViewModel");
-            }
-        }
-
-        private object selectedResultViewModel;
-        public object SelectedResultViewModel
-        {
-            get
-            {
-                return selectedResultViewModel;
-            }
-            set
-            {
-                selectedResultViewModel = value;
-                OnPropertyChanged("SelectedResultViewModel");
-            }
-        }
-
-        private object selectedQueryViewModel;
-        public object SelectedQueryViewModel
-        {
-            get
-            {
-                return selectedQueryViewModel;
-            }
-            set
-            {
-                selectedQueryViewModel = value;
-                OnPropertyChanged("SelectedQueryViewModel");
-            }
-        }
-
-        private object selectedModifyViewModel;
-        public object SelectedModifyViewModel
-        {
-            get
-            {
-                return selectedModifyViewModel;
-            }
-            set
-            {
-                selectedModifyViewModel = value;
-                OnPropertyChanged("SelectedModifyViewModel");
-            }
-        }
-
-        public Mode ModeStatus
-        {
-            get
-            {
-                switch (Properties.Settings.Default.Mode)
-                {
-                    case 0:
-                        return Mode.Author;
-
-                    case 1:
-                        return Mode.Book;
-
-                    case 2:
-                        return Mode.Reader;
-
-                    default:
-                        return Mode.Book;
-                }
-            }
-            set
-            {
-                Properties.Settings.Default.Mode = (byte)value;
-                Properties.Settings.Default.Save();
-
-                OnPropertyChanged("ModeStatus");
-            }
-        }
+        #endregion
 
         public NavigationViewModel()
         {
-            ResultViewModel = new ResultViewModel();
-            QueryAuthorViewModel = new QueryAuthorViewModel();
-            QueryBookViewModel = new QueryBookViewModel();
-            QueryReaderViewModel = new QueryReaderViewModel();
-            ModifyAuthorViewModel = new ModifyAuthorViewModel();
-            ModifyBookViewModel = new ModifyBookViewModel();
-            ModifyReaderViewModel = new ModifyReaderViewModel();
-
-            AuthorModeCommand = new RelayCommand(SelectAuthorMode);
-            BookModeCommand = new RelayCommand(SelectBookMode);
-            ReaderModeCommand = new RelayCommand(SelectReaderMode);
-
-
-            SelectedViewModel = QueryBookViewModel;
-            ModeStatus = Mode.Book;
+            PageViewModels.Add(new BookViewModel());
+            PageViewModels.Add(new ProductsViewModel());
+            CurrentPageViewModel = PageViewModels[0];
         }
 
-        private void SelectAuthorMode(object obj)
+        #region Properties / Commands
+
+        public ICommand ChangePageCommand
         {
-            //SelectedQueryViewModel = QueryAuthorViewModel;
-            //SelectedModifyViewModel = ModifyAuthorViewModel;
+            get
+            {
+                if (changePageCommand == null)
+                {
+                    changePageCommand = new RelayCommand(
+                        p => ChangeViewModel((IPageViewModel)p),
+                        p => p is IPageViewModel);
+                }
 
-            SelectedViewModel = null;
-            ModeStatus = Mode.Author;
+                return changePageCommand;
+            }
         }
 
-        private void SelectBookMode(object obj)
+        public List<IPageViewModel> PageViewModels
         {
-            //SelectedViewModel = BookViewModel;
-            ModeStatus = Mode.Book;
+            get
+            {
+                if (pageViewModels == null)
+                {
+                    pageViewModels = new List<IPageViewModel>();
+                }
+                return pageViewModels;
+            }
         }
 
-        private void SelectReaderMode(object obj)
+        public IPageViewModel CurrentPageViewModel
         {
-            //SelectedQueryViewModel = QueryReaderViewModel;
-            //SelectedModifyViewModel = ModifyReaderViewModel;
-
-            SelectedViewModel = null;
-            ModeStatus = Mode.Reader;
+            get
+            {
+                return currentPageViewModel;
+            }
+            set
+            {
+                if (currentPageViewModel != value)
+                {
+                    currentPageViewModel = value;
+                    OnPropertyChanged("CurrentPageViewModel");
+                }
+            }
         }
+
+        #endregion
+
+        #region Methods
+
+        private void ChangeViewModel(IPageViewModel viewModel)
+        {
+            if (!PageViewModels.Contains(viewModel))
+            {
+                PageViewModels.Add(viewModel);
+            }
+            CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
+        }
+
+        #endregion
     }
 }

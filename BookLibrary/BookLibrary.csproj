@@ -93,11 +93,10 @@
     <Compile Include="ViewModels\DatabaseOperations\DBSampleDataOperations.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
-    <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ModifyAuthorViewModel.cs" />
     <Compile Include="ViewModels\ModifyBookViewModel.cs" />
     <Compile Include="ViewModels\ModifyReaderViewModel.cs" />
-    <Compile Include="ViewModels\NavigationViewModel2.cs" />
+    <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\QueryAuthorViewModel.cs" />
@@ -116,15 +115,12 @@
     </Compile>
     <Compile Include="Views\Converters\IntToStringConverter.cs" />
     <Compile Include="Views\Converters\ShortToStringConverter.cs" />
-    <Compile Include="Views\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\MainWindow2.xaml.cs">
-      <DependentUpon>MainWindow2.xaml</DependentUpon>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ModifyAuthorView.xaml.cs">
       <DependentUpon>ModifyAuthorView.xaml</DependentUpon>
@@ -159,10 +155,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainWindow2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

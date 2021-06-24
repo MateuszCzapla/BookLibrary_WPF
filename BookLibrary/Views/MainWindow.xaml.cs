@@ -1,7 +1,5 @@
 ﻿using System.Windows;
 using BookLibrary.Other;
-using BookLibrary.ViewModels;
-
 namespace BookLibrary.Views
 {
     /// <summary>
@@ -13,7 +11,6 @@ namespace BookLibrary.Views
         {
             InitializeComponent();
             DatabaseOperations.CheckDatabase();
-            //this.DataContext = new NavigationViewModel();
         }
     }
 }
