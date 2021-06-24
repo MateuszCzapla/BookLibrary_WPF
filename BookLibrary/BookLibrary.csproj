@@ -89,6 +89,7 @@
     <Compile Include="Models\Readers.cs" />
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Books\BookParameters.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DatabaseOperations.cs" />
     <Compile Include="ViewModels\DatabaseOperations\DBSampleDataOperations.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />

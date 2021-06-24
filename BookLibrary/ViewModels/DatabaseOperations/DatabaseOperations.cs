@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Data.Sqlite;
 using BookLibrary.Models;
 using System.Collections.ObjectModel;
+using BookLibrary.ViewModels.Books;
 
 namespace BookLibrary.Other
 {
@@ -102,6 +103,47 @@ namespace BookLibrary.Other
                     FROM book WHERE title LIKE $title
                 ";
                 command.Parameters.AddWithValue("$title", "%" + title + "%");
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
+                    }
+                }
+            }
+
+            return books;
+        }
+
+        public static ObservableCollection<Book> ReadDataBase(BookParameters bookParameters, int firstRow, int rowsCount, ref int totalRowsCount)
+        {
+            ObservableCollection<Book> books = new ObservableCollection<Book>();
+
+            if (!File.Exists(dbName)) return books;
+            if (bookParameters == null) return books;
+
+            using (var connection = new SqliteConnection("Data Source=" + dbName))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+
+                command.CommandText = @"SELECT COUNT(*) FROM book;";
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    totalRowsCount = reader.GetInt32(0);
+                }
+
+                command.CommandText =
+                @"
+                    SELECT id, title, year, timestamp
+                    FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount
+                ";
+                command.Parameters.AddWithValue("$firstRow", firstRow);
+                command.Parameters.AddWithValue("$rowsCount", rowsCount);
+                command.Parameters.AddWithValue("$title", "%" + bookParameters.Title + "%");
 
                 using (var reader = command.ExecuteReader())
                 {

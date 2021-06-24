@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Collections.Generic;
+using BookLibrary.ViewModels.Books;
 
 namespace BookLibrary.ViewModels
 {
@@ -199,7 +200,7 @@ namespace BookLibrary.ViewModels
                         argument =>
                         {
                             //resultViewModel.TestResultVM();
-                            resultViewModel.Search(Title);
+                            resultViewModel.Search(new BookParameters(ID, "visual", Year, DateFrom.ToString(), DateTo.ToString()));
                         },
                         argument => true);
                 }
