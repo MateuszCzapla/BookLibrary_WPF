@@ -11,7 +11,8 @@
 
     <UserControl.Resources>
         <viewmodels:BookViewModel x:Key="bookViewModel" />
-        <converters:ShortToStringConverter x:Key="shortToStringConverter"/>
+        <converters:ShortToStringConverter x:Key="shortToStringConverter" />
+        <converters:IntToStringConverter x:Key="intToStringConverter" />
     </UserControl.Resources>
 
     <Grid>
@@ -48,7 +49,10 @@
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="0" Content="Id" />
-                        <TextBox Grid.Column="1" Grid.Row="0" MaxLength="4" PreviewTextInput="NumberValidation" />
+                        <TextBox Grid.Column="1" Grid.Row="0" MaxLength="4"
+                                 Text="{Binding Path=(viewmodels:BookViewModel.ID), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource intToStringConverter}}"                   
+                                 PreviewTextInput="NumberValidation" 
+                        />
                         <!--
                             ToolTip="{Binding ErrorCollection[Title]}"
                             ToolTip="{Binding Path=(viewmodels:BookViewModel.ErrorCollection)}"
@@ -61,7 +65,7 @@
                         />
                         <Label Grid.Column="0" Grid.Row="2" Content="Year" />
                         <TextBox Grid.Column="1" Grid.Row="2" MaxLength="4"
-                                 Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}"
+                                 Text="{Binding Path=(viewmodels:BookViewModel.Year), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}"
                                  PreviewTextInput="NumberValidation"
                         />
                         <Label Grid.Column="0" Grid.Row="3" Content="Modify date (from)" />

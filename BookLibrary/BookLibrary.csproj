@@ -114,6 +114,7 @@
     <Compile Include="Views\BookView.xaml.cs">
       <DependentUpon>BookView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Converters\IntToStringConverter.cs" />
     <Compile Include="Views\Converters\ShortToStringConverter.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

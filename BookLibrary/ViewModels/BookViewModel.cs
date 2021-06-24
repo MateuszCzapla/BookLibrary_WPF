@@ -15,6 +15,21 @@ namespace BookLibrary.ViewModels
             }
         }
 
+        private int id;
+        public int ID
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+                searchAble = true;
+                OnPropertyChanged("ID");
+            }
+        }
+
         private string title;
         public string Title
         {
@@ -206,7 +221,7 @@ namespace BookLibrary.ViewModels
                             Year = 0;
                             DateFrom = DateTime.MinValue;
                             DateTo = DateTime.MinValue;
-                            searchAble = false;
+                            SearchAble = false;
                             ExpanderIsExpanded = false;
                             DateToEnable = false;
                         },
@@ -218,7 +233,7 @@ namespace BookLibrary.ViewModels
 
         public BookViewModel()
         {
-            searchAble = false;
+            SearchAble = false;
             toolTipTitle = String.Empty;
             resultViewModel = new ResultViewModel();
             ExpanderIsExpanded = false;
