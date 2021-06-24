@@ -9,9 +9,6 @@ namespace BookLibrary.ViewModels
 {
     public class ResultViewModel : BaseViewModel
     {
-        private static int c = 0;
-        private int d = 0;
-
         private int firstRow;
         public int FirstRow
         {
@@ -176,9 +173,6 @@ namespace BookLibrary.ViewModels
 
         public ResultViewModel()
         {
-            c++;
-            d = c;
-
             firstRow = 0;
             rowsCount = 15;
             totalRowsCount = 0;
@@ -190,10 +184,11 @@ namespace BookLibrary.ViewModels
 
         private void RefreshLibraryGrid()
         {
-            LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
+            //LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
 
+        /*
         public void TestResultVM()
         {
             PageDisplay = "TestResultVM";
@@ -204,6 +199,7 @@ namespace BookLibrary.ViewModels
             LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
             RefreshLibraryGrid();
         }
+        */
 
         public void Search(string title)
         {

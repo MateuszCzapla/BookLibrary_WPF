@@ -25,7 +25,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 id = value;
-                searchAble = true;
+                clearAble = true;
                 OnPropertyChanged("ID");
             }
         }
@@ -40,7 +40,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 title = value;
-                searchAble = true;
+                clearAble = true;
                 OnPropertyChanged("Title");
             }
         }
@@ -57,7 +57,7 @@ namespace BookLibrary.ViewModels
             {
                 //year = Convert.ToInt16(value);
                 year = value;
-                searchAble = true;
+                clearAble = true;
                 OnPropertyChanged("Year");
             }
         }
@@ -75,7 +75,7 @@ namespace BookLibrary.ViewModels
             {
                 dateFrom = value;
                 DateToEnable = true;
-                searchAble = true;
+                clearAble = true;
                 OnPropertyChanged("DateToEnable");
                 OnPropertyChanged("DateFrom");
             }
@@ -91,7 +91,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 dateTo = value;
-                searchAble = true;
+                clearAble = true;
                 OnPropertyChanged("DateTo");
             }
         }
@@ -110,16 +110,16 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        private bool searchAble;
-        public bool SearchAble
+        private bool clearAble;
+        public bool ClearAble
         {
             get
             {
-                return searchAble;
+                return clearAble;
             }
             set
             {
-                searchAble = value;
+                clearAble = value;
                 OnPropertyChanged("EditMode");
             }
         }
@@ -201,7 +201,7 @@ namespace BookLibrary.ViewModels
                             //resultViewModel.TestResultVM();
                             resultViewModel.Search(Title);
                         },
-                        argument => SearchAble);
+                        argument => true);
                 }
                 return searchCommand;
             }
@@ -221,11 +221,11 @@ namespace BookLibrary.ViewModels
                             Year = 0;
                             DateFrom = DateTime.MinValue;
                             DateTo = DateTime.MinValue;
-                            SearchAble = false;
+                            ClearAble = false;
                             ExpanderIsExpanded = false;
                             DateToEnable = false;
                         },
-                        argument => searchAble);
+                        argument => clearAble);
                 }
                 return clearCommand;
             }
@@ -233,7 +233,7 @@ namespace BookLibrary.ViewModels
 
         public BookViewModel()
         {
-            SearchAble = false;
+            ClearAble = false;
             toolTipTitle = String.Empty;
             resultViewModel = new ResultViewModel();
             ExpanderIsExpanded = false;
