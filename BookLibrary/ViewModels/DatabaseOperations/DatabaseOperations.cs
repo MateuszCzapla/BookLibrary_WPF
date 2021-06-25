@@ -127,35 +127,23 @@ namespace BookLibrary.Other
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
             {
                 connection.Open();
-
                 totalRowsCount = readAllRows(connection);
 
-                /*
-                ID
-                Title *
-                Year
-                DateFrom
-                DateTo
-                */
-                createSelectSyntax(parameters);
+                SqliteCommand command = connection.CreateCommand();
+                createSelectSyntax(parameters, command, firstRow, rowsCount);
 
-                /*SqliteCommand command = connection.CreateCommand();
-                command.CommandText =
-                @"
-                    SELECT id, title, year, timestamp
-                    FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount
-                ";
+                command.CommandText = "SELECT id, title, year, timestamp FROM book LIMIT $firstRow, $rowsCount";
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
-                command.Parameters.AddWithValue("$title", "%" + bookParameters.Title + "%");*/
+                //command.Parameters.AddWithValue("$title", "%" + bookParameters.Title + "%");*/
 
-                /*using (var reader = command.ExecuteReader())
+                using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
                     }
-                }*/
+                }
             }
 
             return books;
@@ -174,30 +162,40 @@ namespace BookLibrary.Other
             }
         }
 
-        private static string createSelectSyntax(string[] parameters)
+        private static string createSelectSyntax(string[] parameters, SqliteCommand command, int firstRow, int rowsCount)
         {
-            string selectSyntax = string.Empty;
-
+            string selectSyntax = "SELECT id, title, year, timestamp FROM book";
             if (parameters == null) return selectSyntax;
-
-            /*
-            ID
-            Title *
-            Year
-            DateFrom
-            DateTo
-            */
+            bool whereFlag = false;
+            bool andFlag = false;
 
             if (parameters[0] == "Book")
             {
                 for (int i = 1; i < parameters.Length; i++)
                 {
-                    switch (parameters[i])
+                    if (parameters[i] == string.Empty) continue;
+                    if (!whereFlag) selectSyntax += " WHERE";
+                    whereFlag = true;
+                    if (andFlag) selectSyntax += " AND";
+
+                    switch (i)
                     {
-                        case "ID":
-                            //Console.WriteLine("Case 1");
+                        
+                        case 1://ID
+                            selectSyntax += " id = $id";
+                            andFlag = true;
                             break;
-                        case "Title":
+                        case 2://Title
+                            selectSyntax += " title LIKE $title";
+                            andFlag = true;
+                            break;
+                        case 3://Year
+                            selectSyntax += " year = $year";
+                            break;
+                        case 4://DateFrom
+                            //Console.WriteLine("Case 2");
+                            break;
+                        case 5://DateTo
                             //Console.WriteLine("Case 2");
                             break;
                         default:
@@ -208,6 +206,19 @@ namespace BookLibrary.Other
             }
 
             return selectSyntax;
+        }
+
+        private static string[] defaultValuesToStringEmpty(string[] parameters)
+        {
+            for (int i = 1; i < parameters.Length; i++)
+            {
+                if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00")
+                {
+                    parameters[i] = string.Empty;
+                }
+            }
+
+            return parameters;
         }
     }
 }
