@@ -11,6 +11,7 @@ namespace BookLibrary.ViewModels
     public class ResultViewModel : BaseViewModel
     {
         BookParameters bookParameters;
+        string[] parameters;
 
         private int firstRow;
         public int FirstRow
@@ -191,11 +192,10 @@ namespace BookLibrary.ViewModels
             //LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
             //LibraryGrid = DatabaseOperations.ReadDataBase(-1, "tom", -1, String.Empty, String.Empty, firstRow, rowsCount, ref totalRowsCount);
 
-            LibraryGrid = DatabaseOperations.ReadDataBase(bookParameters, firstRow, rowsCount, ref totalRowsCount);
+            LibraryGrid = DatabaseOperations.ReadDataBase(parameters, firstRow, rowsCount, ref totalRowsCount);
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
 
-        /*
         public void TestResultVM()
         {
             PageDisplay = "TestResultVM";
@@ -206,11 +206,11 @@ namespace BookLibrary.ViewModels
             LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
             RefreshLibraryGrid();
         }
-        */
 
-        public void Search(BookParameters bookParameters)
+        public void Search(string[] parameters)
         {
-            this.bookParameters = bookParameters;
+            this.parameters = parameters;
+            //this.bookParameters = bookParameters;
             RefreshLibraryGrid();
         }
     }

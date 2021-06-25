@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.IO;
 using Microsoft.Data.Sqlite;
 using BookLibrary.Models;
@@ -116,26 +117,29 @@ namespace BookLibrary.Other
             return books;
         }
 
-        public static ObservableCollection<Book> ReadDataBase(BookParameters bookParameters, int firstRow, int rowsCount, ref int totalRowsCount)
+        public static ObservableCollection<Book> ReadDataBase(string[] parameters, int firstRow, int rowsCount, ref int totalRowsCount)
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
 
             if (!File.Exists(dbName)) return books;
-            if (bookParameters == null) return books;
+            //if (bookParameters == null) return books;
 
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
             {
                 connection.Open();
 
-                SqliteCommand command = connection.CreateCommand();
+                totalRowsCount = readAllRows(connection);
 
-                command.CommandText = @"SELECT COUNT(*) FROM book;";
-                using (var reader = command.ExecuteReader())
-                {
-                    reader.Read();
-                    totalRowsCount = reader.GetInt32(0);
-                }
+                /*
+                ID
+                Title *
+                Year
+                DateFrom
+                DateTo
+                */
+                //createWhereSyntax(bookParameters);
 
+                /*SqliteCommand command = connection.CreateCommand();
                 command.CommandText =
                 @"
                     SELECT id, title, year, timestamp
@@ -143,15 +147,15 @@ namespace BookLibrary.Other
                 ";
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
-                command.Parameters.AddWithValue("$title", "%" + bookParameters.Title + "%");
+                command.Parameters.AddWithValue("$title", "%" + bookParameters.Title + "%");*/
 
-                using (var reader = command.ExecuteReader())
+                /*using (var reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
                     }
-                }
+                }*/
             }
 
             return books;
@@ -168,6 +172,38 @@ namespace BookLibrary.Other
                 reader.Read();
                 return reader.GetInt32(0);
             }
+        }
+
+        private static string createWhereSyntax(BookParameters bookParameters)
+        {
+            string whereSyntax = string.Empty;
+            //foreach (PropertyInfo propertyInfo in bookParameters.GetType().GetProperties()) { }
+
+            /*
+            ID
+            Title *
+            Year
+            DateFrom
+            DateTo
+            */
+            string[] parameters = new string[5];
+
+            /*
+            switch (caseSwitch)
+            {
+                case 1:
+                    Console.WriteLine("Case 1");
+                    break;
+                case 2:
+                    Console.WriteLine("Case 2");
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+            }
+            */
+
+            return whereSyntax;
         }
     }
 }
