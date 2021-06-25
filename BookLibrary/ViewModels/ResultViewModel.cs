@@ -190,6 +190,7 @@ namespace BookLibrary.ViewModels
         {
             //LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
             //LibraryGrid = DatabaseOperations.ReadDataBase(-1, "tom", -1, String.Empty, String.Empty, firstRow, rowsCount, ref totalRowsCount);
+
             LibraryGrid = DatabaseOperations.ReadDataBase(bookParameters, firstRow, rowsCount, ref totalRowsCount);
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
@@ -209,10 +210,7 @@ namespace BookLibrary.ViewModels
 
         public void Search(BookParameters bookParameters)
         {
-            //LibraryGrid = DatabaseOperations.ReadDataBase(-1, title, -1, String.Empty, String.Empty);
-
             this.bookParameters = bookParameters;
-
             RefreshLibraryGrid();
         }
     }

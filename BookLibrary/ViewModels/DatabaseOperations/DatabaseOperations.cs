@@ -123,11 +123,11 @@ namespace BookLibrary.Other
             if (!File.Exists(dbName)) return books;
             if (bookParameters == null) return books;
 
-            using (var connection = new SqliteConnection("Data Source=" + dbName))
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
             {
                 connection.Open();
 
-                var command = connection.CreateCommand();
+                SqliteCommand command = connection.CreateCommand();
 
                 command.CommandText = @"SELECT COUNT(*) FROM book;";
                 using (var reader = command.ExecuteReader())
@@ -155,6 +155,19 @@ namespace BookLibrary.Other
             }
 
             return books;
+        }
+
+        private static int readAllRows(SqliteConnection connection)
+        {
+            if (connection == null) return -1;
+
+            SqliteCommand command = connection.CreateCommand();
+            command.CommandText = @"SELECT COUNT(*) FROM book;";
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                reader.Read();
+                return reader.GetInt32(0);
+            }
         }
     }
 }
