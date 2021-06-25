@@ -196,7 +196,7 @@ namespace BookLibrary.ViewModels
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
 
-        public void TestResultVM()
+        /*public void TestResultVM()
         {
             PageDisplay = "TestResultVM";
 
@@ -205,12 +205,11 @@ namespace BookLibrary.ViewModels
             totalRowsCount = 0;
             LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
             RefreshLibraryGrid();
-        }
+        }*/
 
         public void Search(string[] parameters)
         {
             this.parameters = parameters;
-            //this.bookParameters = bookParameters;
             RefreshLibraryGrid();
         }
     }

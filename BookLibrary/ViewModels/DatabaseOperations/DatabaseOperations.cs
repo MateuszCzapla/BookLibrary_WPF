@@ -137,7 +137,7 @@ namespace BookLibrary.Other
                 DateFrom
                 DateTo
                 */
-                //createWhereSyntax(bookParameters);
+                createSelectSyntax(parameters);
 
                 /*SqliteCommand command = connection.CreateCommand();
                 command.CommandText =
@@ -174,10 +174,11 @@ namespace BookLibrary.Other
             }
         }
 
-        private static string createWhereSyntax(BookParameters bookParameters)
+        private static string createSelectSyntax(string[] parameters)
         {
-            string whereSyntax = string.Empty;
-            //foreach (PropertyInfo propertyInfo in bookParameters.GetType().GetProperties()) { }
+            string selectSyntax = string.Empty;
+
+            if (parameters == null) return selectSyntax;
 
             /*
             ID
@@ -186,24 +187,27 @@ namespace BookLibrary.Other
             DateFrom
             DateTo
             */
-            string[] parameters = new string[5];
 
-            /*
-            switch (caseSwitch)
+            if (parameters[0] == "Book")
             {
-                case 1:
-                    Console.WriteLine("Case 1");
-                    break;
-                case 2:
-                    Console.WriteLine("Case 2");
-                    break;
-                default:
-                    Console.WriteLine("Default case");
-                    break;
+                for (int i = 1; i < parameters.Length; i++)
+                {
+                    switch (parameters[i])
+                    {
+                        case "ID":
+                            //Console.WriteLine("Case 1");
+                            break;
+                        case "Title":
+                            //Console.WriteLine("Case 2");
+                            break;
+                        default:
+                            //Console.WriteLine("Default case");
+                            break;
+                    }
+                }
             }
-            */
 
-            return whereSyntax;
+            return selectSyntax;
         }
     }
 }

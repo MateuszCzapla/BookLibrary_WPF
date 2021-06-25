@@ -194,7 +194,16 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                string[] parameters = { Mode.Book.ToString(), ID.ToString(), Title, Year.ToString(), DateFrom.ToString(), DateTo.ToString() };
+                string[] parameters =
+                {
+                    Mode.Book.ToString(), 
+                    ID.ToString(), 
+                    Title, 
+                    Year.ToString(),
+                    DateFrom.ToString(),
+                    DateTo.ToString()
+                };
+
                 if (searchCommand == null)
                 {
                     searchCommand = new RelayCommand(
