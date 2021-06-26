@@ -131,11 +131,11 @@ namespace BookLibrary.Other
                 totalRowsCount = readAllRows(connection);
 
                 SqliteCommand command = connection.CreateCommand();
-                createSelectSyntax(parameters, command, firstRow, rowsCount);
+                command = createSelectSyntax(parameters, command, firstRow, rowsCount);
 
-                command.CommandText = "SELECT id, title, year, timestamp FROM book LIMIT $firstRow, $rowsCount";
-                command.Parameters.AddWithValue("$firstRow", firstRow);
-                command.Parameters.AddWithValue("$rowsCount", rowsCount);
+                //command.CommandText = "SELECT id, title, year, timestamp FROM book LIMIT $firstRow, $rowsCount";
+                //command.Parameters.AddWithValue("$firstRow", firstRow);
+                //command.Parameters.AddWithValue("$rowsCount", rowsCount);
                 //command.Parameters.AddWithValue("$title", "%" + bookParameters.Title + "%");*/
 
                 using (var reader = command.ExecuteReader())
@@ -163,10 +163,11 @@ namespace BookLibrary.Other
             }
         }
 
-        private static string createSelectSyntax(List<Tuple<string, string>> parameters, SqliteCommand command, int firstRow, int rowsCount)
+        private static SqliteCommand createSelectSyntax(List<Tuple<string, string>> parameters, SqliteCommand command, int firstRow, int rowsCount)
         {
             string selectSyntax = "SELECT id, title, year, timestamp FROM book";
-            if (parameters == null) return selectSyntax;
+            command.CommandText = selectSyntax;
+            if (parameters == null) return command;
 
             List<int> removeIndexList = new List<int>();
             for (int i = 1; i < parameters.Count; i++)
@@ -176,14 +177,13 @@ namespace BookLibrary.Other
                     removeIndexList.Add(i);
                 }
             }
-            for (int i = removeIndexList.Count - 1; i <= 0; i--) parameters.RemoveAt(removeIndexList[i]);
-            //foreach (int removeValue in removeIndexList) parameters.RemoveAt(removeValue);
-            if (parameters.Count == 0) return selectSyntax;
+            for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
+            if (parameters.Count == 0) return command;
 
             bool andFlag = false;
             selectSyntax += " WHERE";
-            if (parameters[0].Item1 == "Author") throw new NotImplementedException();
-            if (parameters[0].Item1 == "Book")
+            if (parameters[0].Item2 == "Author") throw new NotImplementedException();
+            if (parameters[0].Item2 == "Book")
             {
                 foreach (Tuple<string, string> parameter in parameters)
                 {
@@ -193,68 +193,28 @@ namespace BookLibrary.Other
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " id = $id";
                             break;
-                    }
-                }
-            }
-            if (parameters[0].Item1 == "Reader") throw new NotImplementedException();
 
-            /*
-            List<string> commandParameters = new List<string>();
-            bool whereFlag = false;
-            bool andFlag = false;
-
-            if (parameters[0] == "Book")
-            {
-                for (int i = 1; i < parameters.Length; i++)
-                {
-                    if (parameters[i] == string.Empty) continue;
-                    if (!whereFlag) selectSyntax += " WHERE";
-                    whereFlag = true;
-
-                    switch (i)
-                    {
-                        case 1://ID
-                            if (andFlag) selectSyntax += " AND";
-                            selectSyntax += " id = $id";
-                            andFlag = true;
-                            commandParameters.Add("id");
-                            break;
-                        case 2://Title
+                        case "Title":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " title LIKE $title";
-                            andFlag = true;
-                            commandParameters.Add("title");
                             break;
-                        case 3://Year
+
+                        case "Year":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " year = $year";
-                            commandParameters.Add("year");
-                            break;
-                        case 4://DateFrom
-                            break;
-                        case 5://DateTo
-                            break;
-                        default:
-                            //Console.WriteLine("Default case");
                             break;
                     }
                 }
+
+                command.CommandText = selectSyntax;
+                foreach (Tuple<string, string> parameter in parameters)
+                {
+                    command.Parameters.AddWithValue("$" + parameter, parameter.Item2);
+                }
             }
-            */
-            return selectSyntax;
+            if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
+
+            return command;
         }
-
-        /*private static List<Tuple<int, string>> prepareParameters(List<Tuple<int, string>> parameters)
-        {
-            List<Tuple<int, string>> valueParameters = new List<Tuple<int, string>>();
-
-            for (int i = 1; i < parameters.Count; i++)
-            {
-                if (parameters[i].Item2 == "0" || parameters[i].Item2 == "01.01.0001 00:00:00" || parameters[i].Item2 == string.Empty) parameters.RemoveAt(i);
-                valueParameters.Add(new Tuple<int, string>(i, parameters[i]));
-            }
-
-            return valueParameters;
-        }*/
     }
 }

@@ -223,6 +223,7 @@ namespace BookLibrary.ViewModels
                             parameters.Add(new Tuple<string, string>("DateFrom", DateFrom.ToString()));
                             parameters.Add(new Tuple<string, string>("DateTo", DateTo.ToString()));
                             resultViewModel.Search(parameters);
+                            parameters.Clear();
                         },
                         argument => true);
                 }
