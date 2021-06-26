@@ -125,18 +125,20 @@ namespace BookLibrary.Other
             if (!File.Exists(dbName)) return books;
             //if (bookParameters == null) return books;
 
-            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
-            {
+            //using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
+            //{
+                SqliteConnection connection = new SqliteConnection("Data Source=" + dbName);
                 connection.Open();
                 totalRowsCount = readAllRows(connection);
 
                 SqliteCommand command = connection.CreateCommand();
-                command = createSelectSyntax(parameters, command, firstRow, rowsCount);
+                //command = createSelectSyntax(parameters, command, firstRow, rowsCount);
+                createSelectSyntax(parameters, command, firstRow, rowsCount);
 
-                //command.CommandText = "SELECT id, title, year, timestamp FROM book LIMIT $firstRow, $rowsCount";
-                //command.Parameters.AddWithValue("$firstRow", firstRow);
-                //command.Parameters.AddWithValue("$rowsCount", rowsCount);
-                //command.Parameters.AddWithValue("$title", "%" + bookParameters.Title + "%");*/
+                command.CommandText = "SELECT id, title, year, timestamp FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount";
+                command.Parameters.AddWithValue("$firstRow", firstRow);
+                command.Parameters.AddWithValue("$rowsCount", rowsCount);
+                command.Parameters.AddWithValue("$title", "%visual%");
 
                 using (var reader = command.ExecuteReader())
                 {
@@ -145,7 +147,7 @@ namespace BookLibrary.Other
                         books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
                     }
                 }
-            }
+            //}
 
             return books;
         }
@@ -167,7 +169,11 @@ namespace BookLibrary.Other
         {
             string selectSyntax = "SELECT id, title, year, timestamp FROM book";
             command.CommandText = selectSyntax;
-            if (parameters == null) return command;
+            if (parameters == null)
+            {
+                command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
+                return command;
+            }
 
             List<int> removeIndexList = new List<int>();
             for (int i = 1; i < parameters.Count; i++)
@@ -179,7 +185,11 @@ namespace BookLibrary.Other
             }
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
             parameters.TrimExcess();
-            if (parameters.Count == 0) return command;
+            if (parameters.Count == 0)
+            {
+                command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
+                return command;
+            }
 
             bool andFlag = false;
             selectSyntax += " WHERE";
@@ -198,7 +208,7 @@ namespace BookLibrary.Other
                         case "Title":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " title LIKE $title";
-                            parameters[i] = new Tuple<string, string>("Title,", "%" + parameters[i].Item2 + "%");
+                            parameters[i] = new Tuple<string, string>("title,", "%" + parameters[i].Item2 + "%");
                             break;
 
                         case "Year":
@@ -207,14 +217,17 @@ namespace BookLibrary.Other
                             break;
                     }
                 }
-
-                command.CommandText = selectSyntax;
-                foreach (Tuple<string, string> parameter in parameters)
-                {
-                    command.Parameters.AddWithValue("$" + parameter, parameter.Item2);
-                }
             }
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
+
+
+            command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
+            for (int i = 1; i < parameters.Capacity; i++)
+            {
+                command.Parameters.AddWithValue("$" + parameters[i].Item1, parameters[i].Item2);
+            }
+            command.Parameters.AddWithValue("$firstRow", firstRow);
+            command.Parameters.AddWithValue("$rowsCount", rowsCount);
 
             return command;
         }
