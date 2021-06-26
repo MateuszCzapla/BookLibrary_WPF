@@ -178,6 +178,7 @@ namespace BookLibrary.Other
                 }
             }
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
+            parameters.TrimExcess();
             if (parameters.Count == 0) return command;
 
             bool andFlag = false;
@@ -185,9 +186,9 @@ namespace BookLibrary.Other
             if (parameters[0].Item2 == "Author") throw new NotImplementedException();
             if (parameters[0].Item2 == "Book")
             {
-                foreach (Tuple<string, string> parameter in parameters)
+                for (int i = 0; i < parameters.Capacity; i++)
                 {
-                    switch (parameter.Item1)
+                    switch (parameters[i].Item1)
                     {
                         case "ID":
                             if (andFlag) selectSyntax += " AND";
@@ -197,6 +198,7 @@ namespace BookLibrary.Other
                         case "Title":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " title LIKE $title";
+                            parameters[i] = new Tuple<string, string>("Title,", "%" + parameters[i].Item2 + "%");
                             break;
 
                         case "Year":
