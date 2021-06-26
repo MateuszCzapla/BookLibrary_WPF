@@ -220,14 +220,8 @@ namespace BookLibrary.Other
 
             for (int i = 1; i < parameters.Length; i++)
             {
-                if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00")
-                {
-                    parameters[i] = string.Empty;
-                }
-                else if (parameters[i] != string.Empty)
-                {
-                    valuableParameters.Add(new Tuple<int, string>(i, parameters[i]));
-                }
+                if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00" || parameters[i] == string.Empty) continue;
+                valuableParameters.Add(new Tuple<int, string>(i, parameters[i]));
             }
 
             return valuableParameters;
