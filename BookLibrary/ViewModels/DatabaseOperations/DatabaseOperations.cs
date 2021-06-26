@@ -125,44 +125,31 @@ namespace BookLibrary.Other
             if (!File.Exists(dbName)) return books;
             //if (bookParameters == null) return books;
 
-            //using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
-            //{
-                SqliteConnection connection = new SqliteConnection("Data Source=" + dbName);
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
+            {
+                //SqliteConnection connection = new SqliteConnection("Data Source=" + dbName);
                 connection.Open();
                 totalRowsCount = readAllRows(connection);
 
                 SqliteCommand command = connection.CreateCommand();
-                //command = createSelectSyntax(parameters, command, firstRow, rowsCount);
-                createSelectSyntax(parameters, command, firstRow, rowsCount);
+                command = createSelectSyntax(parameters, command, firstRow, rowsCount);
+                //createSelectSyntax(parameters, command, firstRow, rowsCount);
 
-                command.CommandText = "SELECT id, title, year, timestamp FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount";
+                /*command.CommandText = "SELECT id, title, year, timestamp FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount";
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
-                command.Parameters.AddWithValue("$title", "%visual%");
+                command.Parameters.AddWithValue("$title", "%visual%");*/
 
-                using (var reader = command.ExecuteReader())
+                using (SqliteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
                     }
                 }
-            //}
+            }
 
             return books;
-        }
-
-        private static int readAllRows(SqliteConnection connection)
-        {
-            if (connection == null) return -1;
-
-            SqliteCommand command = connection.CreateCommand();
-            command.CommandText = @"SELECT COUNT(*) FROM book;";
-            using (SqliteDataReader reader = command.ExecuteReader())
-            {
-                reader.Read();
-                return reader.GetInt32(0);
-            }
         }
 
         private static SqliteCommand createSelectSyntax(List<Tuple<string, string>> parameters, SqliteCommand command, int firstRow, int rowsCount)
@@ -221,6 +208,7 @@ namespace BookLibrary.Other
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
 
+             
             command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
             for (int i = 1; i < parameters.Capacity; i++)
             {
@@ -230,6 +218,19 @@ namespace BookLibrary.Other
             command.Parameters.AddWithValue("$rowsCount", rowsCount);
 
             return command;
+        }
+
+        private static int readAllRows(SqliteConnection connection)
+        {
+            if (connection == null) return -1;
+
+            SqliteCommand command = connection.CreateCommand();
+            command.CommandText = @"SELECT COUNT(*) FROM book;";
+            using (SqliteDataReader reader = command.ExecuteReader())
+            {
+                reader.Read();
+                return reader.GetInt32(0);
+            }
         }
     }
 }
