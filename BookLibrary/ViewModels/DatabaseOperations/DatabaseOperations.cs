@@ -5,6 +5,7 @@ using Microsoft.Data.Sqlite;
 using BookLibrary.Models;
 using System.Collections.ObjectModel;
 using BookLibrary.ViewModels.Books;
+using System.Collections.Generic;
 
 namespace BookLibrary.Other
 {
@@ -166,6 +167,8 @@ namespace BookLibrary.Other
         {
             string selectSyntax = "SELECT id, title, year, timestamp FROM book";
             if (parameters == null) return selectSyntax;
+
+            List<string> commandParameters = new List<string>();
             bool whereFlag = false;
             bool andFlag = false;
 
@@ -176,21 +179,25 @@ namespace BookLibrary.Other
                     if (parameters[i] == string.Empty) continue;
                     if (!whereFlag) selectSyntax += " WHERE";
                     whereFlag = true;
-                    if (andFlag) selectSyntax += " AND";
 
                     switch (i)
                     {
-                        
                         case 1://ID
+                            if (andFlag) selectSyntax += " AND";
                             selectSyntax += " id = $id";
                             andFlag = true;
+                            commandParameters.Add("id");
                             break;
                         case 2://Title
+                            if (andFlag) selectSyntax += " AND";
                             selectSyntax += " title LIKE $title";
                             andFlag = true;
+                            commandParameters.Add("title");
                             break;
                         case 3://Year
+                            if (andFlag) selectSyntax += " AND";
                             selectSyntax += " year = $year";
+                            commandParameters.Add("year");
                             break;
                         case 4://DateFrom
                             //Console.WriteLine("Case 2");
@@ -204,21 +211,28 @@ namespace BookLibrary.Other
                     }
                 }
             }
-
             return selectSyntax;
         }
 
-        private static string[] defaultValuesToStringEmpty(string[] parameters)
+        private static List<Tuple<int, string>> parametersToList(string[] parameters)
         {
-            for (int i = 1; i < parameters.Length; i++)
+            List<Tuple<int, string>> valuableParameters = new List<Tuple<int, string>>();
+
+            /*for (int i = 1; i < parameters.Length; i++)
             {
                 if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00")
                 {
                     parameters[i] = string.Empty;
                 }
+            }*/
+
+            for (int i = 1; i < parameters.Length; i++)
+            {
+                if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00" || parameters[i] == string.Empty) continue;
+                valuableParameters.Add(new Tuple<int, string>(i, parameters[i]));
             }
 
-            return parameters;
+            return valuableParameters;
         }
     }
 }
