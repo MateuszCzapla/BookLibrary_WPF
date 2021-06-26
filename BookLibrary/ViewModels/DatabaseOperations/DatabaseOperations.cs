@@ -218,18 +218,16 @@ namespace BookLibrary.Other
         {
             List<Tuple<int, string>> valuableParameters = new List<Tuple<int, string>>();
 
-            /*for (int i = 1; i < parameters.Length; i++)
+            for (int i = 1; i < parameters.Length; i++)
             {
                 if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00")
                 {
                     parameters[i] = string.Empty;
                 }
-            }*/
-
-            for (int i = 1; i < parameters.Length; i++)
-            {
-                if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00" || parameters[i] == string.Empty) continue;
-                valuableParameters.Add(new Tuple<int, string>(i, parameters[i]));
+                else if (parameters[i] != string.Empty)
+                {
+                    valuableParameters.Add(new Tuple<int, string>(i, parameters[i]));
+                }
             }
 
             return valuableParameters;
