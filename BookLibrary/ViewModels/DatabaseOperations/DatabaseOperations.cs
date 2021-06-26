@@ -118,7 +118,7 @@ namespace BookLibrary.Other
             return books;
         }
 
-        public static ObservableCollection<Book> ReadDataBase(string[] parameters, int firstRow, int rowsCount, ref int totalRowsCount)
+        public static ObservableCollection<Book> ReadDataBase(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
 
@@ -163,11 +163,42 @@ namespace BookLibrary.Other
             }
         }
 
-        private static string createSelectSyntax(string[] parameters, SqliteCommand command, int firstRow, int rowsCount)
+        private static string createSelectSyntax(List<Tuple<string, string>> parameters, SqliteCommand command, int firstRow, int rowsCount)
         {
             string selectSyntax = "SELECT id, title, year, timestamp FROM book";
             if (parameters == null) return selectSyntax;
 
+            List<int> removeIndexList = new List<int>();
+            for (int i = 1; i < parameters.Count; i++)
+            {
+                if (parameters[i].Item2 == "0" || parameters[i].Item2 == "01.01.0001 00:00:00" || parameters[i].Item2 == string.Empty || parameters[i].Item2 == null)
+                {
+                    removeIndexList.Add(i);
+                }
+            }
+            for (int i = removeIndexList.Count - 1; i <= 0; i--) parameters.RemoveAt(removeIndexList[i]);
+            //foreach (int removeValue in removeIndexList) parameters.RemoveAt(removeValue);
+            if (parameters.Count == 0) return selectSyntax;
+
+            bool andFlag = false;
+            selectSyntax += " WHERE";
+            if (parameters[0].Item1 == "Author") throw new NotImplementedException();
+            if (parameters[0].Item1 == "Book")
+            {
+                foreach (Tuple<string, string> parameter in parameters)
+                {
+                    switch (parameter.Item1)
+                    {
+                        case "ID":
+                            if (andFlag) selectSyntax += " AND";
+                            selectSyntax += " id = $id";
+                            break;
+                    }
+                }
+            }
+            if (parameters[0].Item1 == "Reader") throw new NotImplementedException();
+
+            /*
             List<string> commandParameters = new List<string>();
             bool whereFlag = false;
             bool andFlag = false;
@@ -200,10 +231,8 @@ namespace BookLibrary.Other
                             commandParameters.Add("year");
                             break;
                         case 4://DateFrom
-                            //Console.WriteLine("Case 2");
                             break;
                         case 5://DateTo
-                            //Console.WriteLine("Case 2");
                             break;
                         default:
                             //Console.WriteLine("Default case");
@@ -211,20 +240,21 @@ namespace BookLibrary.Other
                     }
                 }
             }
+            */
             return selectSyntax;
         }
 
-        private static List<Tuple<int, string>> parametersToList(string[] parameters)
+        /*private static List<Tuple<int, string>> prepareParameters(List<Tuple<int, string>> parameters)
         {
-            List<Tuple<int, string>> valuableParameters = new List<Tuple<int, string>>();
+            List<Tuple<int, string>> valueParameters = new List<Tuple<int, string>>();
 
-            for (int i = 1; i < parameters.Length; i++)
+            for (int i = 1; i < parameters.Count; i++)
             {
-                if (parameters[i] == "0" || parameters[i] == "01.01.0001 00:00:00" || parameters[i] == string.Empty) continue;
-                valuableParameters.Add(new Tuple<int, string>(i, parameters[i]));
+                if (parameters[i].Item2 == "0" || parameters[i].Item2 == "01.01.0001 00:00:00" || parameters[i].Item2 == string.Empty) parameters.RemoveAt(i);
+                valueParameters.Add(new Tuple<int, string>(i, parameters[i]));
             }
 
-            return valuableParameters;
-        }
+            return valueParameters;
+        }*/
     }
 }

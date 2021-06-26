@@ -5,13 +5,14 @@ using BookLibrary.Other;
 using System.Windows.Input;
 using System.Windows;
 using BookLibrary.ViewModels.Books;
+using System.Collections.Generic;
 
 namespace BookLibrary.ViewModels
 {
     public class ResultViewModel : BaseViewModel
     {
-        BookParameters bookParameters;
-        string[] parameters;
+        //BookParameters bookParameters;
+        private List<Tuple<string, string>> parameters;
 
         private int firstRow;
         public int FirstRow
@@ -177,7 +178,7 @@ namespace BookLibrary.ViewModels
 
         public ResultViewModel()
         {
-            bookParameters = null;
+            parameters = null;
             firstRow = 0;
             rowsCount = 15;
             totalRowsCount = 0;
@@ -207,7 +208,7 @@ namespace BookLibrary.ViewModels
             RefreshLibraryGrid();
         }*/
 
-        public void Search(string[] parameters)
+        public void Search(List<Tuple<string, string>> parameters)
         {
             this.parameters = parameters;
             RefreshLibraryGrid();

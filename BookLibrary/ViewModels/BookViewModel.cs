@@ -8,6 +8,8 @@ namespace BookLibrary.ViewModels
 {
     public class BookViewModel : BaseViewModel, IPageViewModel, IDataErrorInfo
     {
+        private List<Tuple<string, string>> parameters = new List<Tuple<string, string>>();
+
         public string Name
         {
             get
@@ -194,15 +196,17 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                string[] parameters =
+                /*string[] parameters =
                 {
                     Mode.Book.ToString(), 
                     ID.ToString(), 
-                    Title, 
+                    Title,
                     Year.ToString(),
                     DateFrom.ToString(),
                     DateTo.ToString()
-                };
+                };*/
+
+
 
                 if (searchCommand == null)
                 {
@@ -211,6 +215,13 @@ namespace BookLibrary.ViewModels
                         {
                             //resultViewModel.TestResultVM();
                             //resultViewModel.Search(new BookParameters(ID, Title, Year, DateFrom.ToString(), DateTo.ToString()));
+
+                            parameters.Add(new Tuple<string, string>("Mode", Mode.Book.ToString()));
+                            parameters.Add(new Tuple<string, string>("ID", ID.ToString()));
+                            parameters.Add(new Tuple<string, string>("Title", Title));
+                            parameters.Add(new Tuple<string, string>("Year", Year.ToString()));
+                            parameters.Add(new Tuple<string, string>("DateFrom", DateFrom.ToString()));
+                            parameters.Add(new Tuple<string, string>("DateTo", DateTo.ToString()));
                             resultViewModel.Search(parameters);
                         },
                         argument => true);
@@ -229,6 +240,7 @@ namespace BookLibrary.ViewModels
                     clearCommand = new RelayCommand(
                         argument =>
                         {
+                            ID = 0;
                             Title = String.Empty;
                             Year = 0;
                             DateFrom = DateTime.MinValue;
