@@ -118,6 +118,30 @@ namespace BookLibrary.Other
             return books;
         }
 
+        public static ObservableCollection<Book> ReadDataBase2(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
+        {
+            ObservableCollection<Book> books = new ObservableCollection<Book>();
+
+            if (!File.Exists(dbName)) return books;
+
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
+            {
+                connection.Open();
+                totalRowsCount = readAllRows(connection);
+
+                SqliteCommand command = connection.CreateCommand();
+
+                string selectSyntax = "SELECT id, title, year, timestamp FROM book";
+                command.CommandText = selectSyntax;
+                if (parameters == null)
+                {
+                    command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
+                }
+            }
+
+            return books;
+        }
+
         public static ObservableCollection<Book> ReadDataBase(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
@@ -132,13 +156,13 @@ namespace BookLibrary.Other
                 totalRowsCount = readAllRows(connection);
 
                 SqliteCommand command = connection.CreateCommand();
-                command = createSelectSyntax(parameters, command, firstRow, rowsCount);
+                //command = createSelectSyntax(parameters, command, firstRow, rowsCount);
                 //createSelectSyntax(parameters, command, firstRow, rowsCount);
 
-                /*command.CommandText = "SELECT id, title, year, timestamp FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount";
+                command.CommandText = "SELECT id, title, year, timestamp FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount";
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
-                command.Parameters.AddWithValue("$title", "%visual%");*/
+                command.Parameters.AddWithValue("$title", "%visual%");
 
                 using (SqliteDataReader reader = command.ExecuteReader())
                 {
@@ -152,14 +176,14 @@ namespace BookLibrary.Other
             return books;
         }
 
-        private static SqliteCommand createSelectSyntax(List<Tuple<string, string>> parameters, SqliteCommand command, int firstRow, int rowsCount)
+        private static List<Tuple<string, string>> prepareSqlQuery(List<Tuple<string, string>> parameters, int firstRow, int rowsCount)
         {
             string selectSyntax = "SELECT id, title, year, timestamp FROM book";
-            command.CommandText = selectSyntax;
             if (parameters == null)
             {
-                command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
-                return command;
+                selectSyntax += " LIMIT $firstRow, $rowsCount";
+                parameters.Add(new Tuple<string, string>("Query", selectSyntax));
+                return parameters;
             }
 
             List<int> removeIndexList = new List<int>();
@@ -174,8 +198,9 @@ namespace BookLibrary.Other
             parameters.TrimExcess();
             if (parameters.Count == 0)
             {
-                command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
-                return command;
+                selectSyntax += " LIMIT $firstRow, $rowsCount";
+                parameters.Add(new Tuple<string, string>("Query", selectSyntax));
+                return parameters;
             }
 
             bool andFlag = false;
@@ -207,17 +232,17 @@ namespace BookLibrary.Other
             }
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
-
+            parameters.Add(new Tuple<string, string>("Query", selectSyntax));
              
-            command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
+            /*command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
             for (int i = 1; i < parameters.Capacity; i++)
             {
                 command.Parameters.AddWithValue("$" + parameters[i].Item1, parameters[i].Item2);
             }
             command.Parameters.AddWithValue("$firstRow", firstRow);
-            command.Parameters.AddWithValue("$rowsCount", rowsCount);
+            command.Parameters.AddWithValue("$rowsCount", rowsCount);*/
 
-            return command;
+            return parameters;
         }
 
         private static int readAllRows(SqliteConnection connection)
