@@ -236,11 +236,14 @@ namespace BookLibrary.Other
                         case "ID":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " id = $id";
+                            //parameters.RemoveAt(i);
+                            parameters[i] = new Tuple<string, string>("id", parameters[i].Item2);
                             break;
 
                         case "Title":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " title LIKE $title";
+                            //parameters.RemoveAt(i);
                             parameters[i] = new Tuple<string, string>("title", "%" + parameters[i].Item2 + "%");
                             break;
 
