@@ -136,6 +136,27 @@ namespace BookLibrary.Other
                 if (parameters == null)
                 {
                     command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
+                    return books;
+                }
+
+                List<Tuple<string, string>> valueParameters = new List<Tuple<string, string>>();
+                valueParameters = prepareSqlQuery(parameters, firstRow, rowsCount);
+                command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
+
+                for (int i = 1; i < valueParameters.Capacity - 1; i++)
+                {
+                    command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
+                }
+                //command.Parameters.AddWithValue("$title", "%visual%");
+                command.Parameters.AddWithValue("$firstRow", firstRow);
+                command.Parameters.AddWithValue("$rowsCount", rowsCount);
+
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
+                    }
                 }
             }
 
@@ -220,7 +241,7 @@ namespace BookLibrary.Other
                         case "Title":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " title LIKE $title";
-                            parameters[i] = new Tuple<string, string>("title,", "%" + parameters[i].Item2 + "%");
+                            parameters[i] = new Tuple<string, string>("title", "%" + parameters[i].Item2 + "%");
                             break;
 
                         case "Year":
