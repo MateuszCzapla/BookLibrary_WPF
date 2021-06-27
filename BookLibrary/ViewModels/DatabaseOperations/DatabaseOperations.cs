@@ -143,7 +143,8 @@ namespace BookLibrary.Other
                 valueParameters = prepareSqlQuery(parameters, firstRow, rowsCount);
                 command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
 
-                for (int i = 1; i < valueParameters.Capacity - 1; i++)
+                //valueParameters.TrimExcess();
+                for (int i = 1; i < valueParameters.Count - 1; i++)
                 {
                     command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
                 }
@@ -216,7 +217,7 @@ namespace BookLibrary.Other
                 }
             }
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
-            parameters.TrimExcess();
+            //parameters.TrimExcess();
             if (parameters.Count == 0)
             {
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
@@ -229,7 +230,7 @@ namespace BookLibrary.Other
             if (parameters[0].Item2 == "Author") throw new NotImplementedException();
             if (parameters[0].Item2 == "Book")
             {
-                for (int i = 0; i < parameters.Capacity; i++)
+                for (int i = 0; i < parameters.Count; i++)
                 {
                     switch (parameters[i].Item1)
                     {
@@ -238,6 +239,7 @@ namespace BookLibrary.Other
                             selectSyntax += " id = $id";
                             //parameters.RemoveAt(i);
                             parameters[i] = new Tuple<string, string>("id", parameters[i].Item2);
+                            andFlag = true;
                             break;
 
                         case "Title":
@@ -245,11 +247,13 @@ namespace BookLibrary.Other
                             selectSyntax += " title LIKE $title";
                             //parameters.RemoveAt(i);
                             parameters[i] = new Tuple<string, string>("title", "%" + parameters[i].Item2 + "%");
+                            andFlag = true;
                             break;
 
                         case "Year":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " year = $year";
+                            andFlag = true;
                             break;
                     }
                 }
@@ -257,14 +261,6 @@ namespace BookLibrary.Other
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
             parameters.Add(new Tuple<string, string>("Query", selectSyntax));
-             
-            /*command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
-            for (int i = 1; i < parameters.Capacity; i++)
-            {
-                command.Parameters.AddWithValue("$" + parameters[i].Item1, parameters[i].Item2);
-            }
-            command.Parameters.AddWithValue("$firstRow", firstRow);
-            command.Parameters.AddWithValue("$rowsCount", rowsCount);*/
 
             return parameters;
         }
