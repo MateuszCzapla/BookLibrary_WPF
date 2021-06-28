@@ -3,7 +3,7 @@
 namespace BookLibrary.Models
 {
     /// <summary>
-    /// The main Book class.
+    /// The Book class.
     /// </summary>
     public class Book
     {
@@ -42,12 +42,16 @@ namespace BookLibrary.Models
             }
         }
 
-        public Book(int id, string title, short year)
+        public Book(int id, string title, short year) : this(id, title, year, DateTime.Now)
+        {
+        }
+
+        public Book(int id, string title, short year, DateTime timestamp)
         {
             this.id = id;
             this.title = title;
             this.year = year;
-            this.timestamp = DateTime.Now;
+            this.timestamp = timestamp;
         }
     }
 }

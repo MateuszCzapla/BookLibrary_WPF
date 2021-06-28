@@ -90,8 +90,8 @@
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Books\BookParameters.cs" />
-    <Compile Include="ViewModels\DatabaseOperations\DatabaseOperations.cs" />
-    <Compile Include="ViewModels\DatabaseOperations\DBSampleDataOperations.cs" />
+    <Compile Include="DataAccessLayer\DatabaseOperations.cs" />
+    <Compile Include="DataAccessLayer\DBSampleDataOperations.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\ModifyAuthorViewModel.cs" />

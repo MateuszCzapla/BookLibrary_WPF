@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using BookLibrary.Models;
-using BookLibrary.Other;
+using BookLibrary.DataAccessLayer;
 using System.Windows.Input;
 using System.Windows;
 using BookLibrary.ViewModels.Books;
@@ -41,7 +41,7 @@ namespace BookLibrary.ViewModels
                 OnPropertyChanged("RowsCount");
 
                 firstRow = 0;
-                LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
+                //LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
                 PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
             }
         }

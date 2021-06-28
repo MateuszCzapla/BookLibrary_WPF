@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Reflection;
 using System.IO;
 using Microsoft.Data.Sqlite;
 using BookLibrary.Models;
 using System.Collections.ObjectModel;
-using BookLibrary.ViewModels.Books;
 using System.Collections.Generic;
 
-namespace BookLibrary.Other
+namespace BookLibrary.DataAccessLayer
 {
     public static class DatabaseOperations
     {
@@ -48,76 +46,6 @@ namespace BookLibrary.Other
             DBSampleDataOperations.FillAuthorHasBookSampleData();
         }
 
-        public static ObservableCollection<Book> ReadDataBase(int firstRow, int rowsCount, ref int totalRowsCount)
-        {
-            ObservableCollection<Book> books = new ObservableCollection<Book>();
-
-            if (!File.Exists(dbName)) return books;
-
-            using (var connection = new SqliteConnection("Data Source=" + dbName))
-            {
-                connection.Open();
-
-                var command = connection.CreateCommand();
-
-                command.CommandText =@"SELECT COUNT(*) FROM book;";
-                using (var reader = command.ExecuteReader())
-                {
-                    reader.Read();
-                    totalRowsCount = reader.GetInt32(0);
-                }
-
-                command.CommandText =
-                @"
-                    SELECT id, title, year, timestamp
-                    FROM book LIMIT $firstRow, $rowsCount
-                ";
-                command.Parameters.AddWithValue("$firstRow", firstRow);
-                command.Parameters.AddWithValue("$rowsCount", rowsCount);
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
-                    }
-                }
-            }
-
-            return books;
-        }
-
-        public static ObservableCollection<Book> ReadDataBase(int id, string title, int year, string dateFrom, string dateTo)
-        {
-            ObservableCollection<Book> books = new ObservableCollection<Book>();
-
-            if (!File.Exists(dbName)) return books;
-
-            using (var connection = new SqliteConnection("Data Source=" + dbName))
-            {
-                connection.Open();
-
-                var command = connection.CreateCommand();
-
-                command.CommandText =
-                @"
-                    SELECT id, title, year, timestamp
-                    FROM book WHERE title LIKE $title
-                ";
-                command.Parameters.AddWithValue("$title", "%" + title + "%");
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
-                    }
-                }
-            }
-
-            return books;
-        }
-
         public static ObservableCollection<Book> ReadDataBase2(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
@@ -143,7 +71,6 @@ namespace BookLibrary.Other
                 valueParameters = prepareSqlQuery(parameters, firstRow, rowsCount);
                 command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
 
-                //valueParameters.TrimExcess();
                 for (int i = 1; i < valueParameters.Count - 1; i++)
                 {
                     command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
@@ -156,41 +83,12 @@ namespace BookLibrary.Other
                 {
                     while (reader.Read())
                     {
-                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
-                    }
-                }
-            }
-
-            return books;
-        }
-
-        public static ObservableCollection<Book> ReadDataBase(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
-        {
-            ObservableCollection<Book> books = new ObservableCollection<Book>();
-
-            if (!File.Exists(dbName)) return books;
-            //if (bookParameters == null) return books;
-
-            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
-            {
-                //SqliteConnection connection = new SqliteConnection("Data Source=" + dbName);
-                connection.Open();
-                totalRowsCount = readAllRows(connection);
-
-                SqliteCommand command = connection.CreateCommand();
-                //command = createSelectSyntax(parameters, command, firstRow, rowsCount);
-                //createSelectSyntax(parameters, command, firstRow, rowsCount);
-
-                command.CommandText = "SELECT id, title, year, timestamp FROM book WHERE title LIKE $title LIMIT $firstRow, $rowsCount";
-                command.Parameters.AddWithValue("$firstRow", firstRow);
-                command.Parameters.AddWithValue("$rowsCount", rowsCount);
-                command.Parameters.AddWithValue("$title", "%visual%");
-
-                using (SqliteDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        books.Add(new Book(reader.GetInt32(0), reader.GetString(1), 1111));
+                        books.Add(new Book(
+                            reader.GetInt32(0),
+                            reader.GetString(1),
+                            reader.GetInt16(2),
+                            UnixTimestampToDateTime(reader.GetInt32(3))
+                        ));
                     }
                 }
             }
@@ -217,8 +115,7 @@ namespace BookLibrary.Other
                 }
             }
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
-            //parameters.TrimExcess();
-            if (parameters.Count == 0)
+            if (parameters.Count < 2)
             {
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
                 parameters.Add(new Tuple<string, string>("Query", selectSyntax));
@@ -237,7 +134,6 @@ namespace BookLibrary.Other
                         case "ID":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " id = $id";
-                            //parameters.RemoveAt(i);
                             parameters[i] = new Tuple<string, string>("id", parameters[i].Item2);
                             andFlag = true;
                             break;
@@ -245,7 +141,6 @@ namespace BookLibrary.Other
                         case "Title":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " title LIKE $title";
-                            //parameters.RemoveAt(i);
                             parameters[i] = new Tuple<string, string>("title", "%" + parameters[i].Item2 + "%");
                             andFlag = true;
                             break;
@@ -253,7 +148,22 @@ namespace BookLibrary.Other
                         case "Year":
                             if (andFlag) selectSyntax += " AND";
                             selectSyntax += " year = $year";
+                            parameters[i] = new Tuple<string, string>("year", parameters[i].Item2);
                             andFlag = true;
+                            break;
+
+                        case "DateFrom":
+                            //if (andFlag) selectSyntax += " AND";
+                            //selectSyntax += " year = $year";
+                            //parameters[i] = new Tuple<string, string>("year", parameters[i].Item2);
+                            //andFlag = true;
+                            break;
+
+                        case "DateTo":
+                            //if (andFlag) selectSyntax += " AND";
+                            //selectSyntax += " year = $year";
+                            //parameters[i] = new Tuple<string, string>("year", parameters[i].Item2);
+                            //andFlag = true;
                             break;
                     }
                 }
@@ -276,6 +186,21 @@ namespace BookLibrary.Other
                 reader.Read();
                 return reader.GetInt32(0);
             }
+        }
+
+        public static DateTime UnixTimestampToDateTime(int unixTimestamp)
+        {
+            DateTime unixYear0 = new DateTime(1970, 1, 1);
+            long unixTimeStampInTicks = unixTimestamp * TimeSpan.TicksPerSecond;
+            DateTime date = new DateTime(unixYear0.Ticks + unixTimeStampInTicks);
+            return date;
+        }
+
+        public static long DateTimeToUnixTimestamp(DateTime date)
+        {
+            long unixTimestamp = date.Ticks - new DateTime(1970, 1, 1).Ticks;
+            unixTimestamp /= TimeSpan.TicksPerSecond;
+            return unixTimestamp;
         }
     }
 }

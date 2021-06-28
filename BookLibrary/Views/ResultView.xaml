@@ -29,6 +29,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
+        <!--
+        <DataGrid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" AlternatingRowBackground="LightGray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=ResultViewModell.LibraryGrid, StringFormat={}{0:dd.MM.yyyy}}">
+        -->
         <DataGrid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" AlternatingRowBackground="LightGray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=ResultViewModell.LibraryGrid}">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Header="Delete" IsThreeState="False" />
