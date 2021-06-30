@@ -89,10 +89,12 @@ namespace BookLibrary.DataAccessLayer
 
         private static List<Tuple<string, string>> PrepareSqlQuery(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
         {
-            string selectSyntax = "SELECT id, title, year, timestamp FROM book";
+            //string selectSyntax = "SELECT id, title, year, timestamp FROM book";
+            string selectSyntax = "FROM book";
             if (parameters == null)
             {
                 parameters = new List<Tuple<string, string>>();
+                selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
                 totalRowsCount = ReadAllRows(selectSyntax);
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
                 parameters.Add(new Tuple<string, string>("Query", selectSyntax));
@@ -110,6 +112,7 @@ namespace BookLibrary.DataAccessLayer
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
             if (parameters.Count < 2)
             {
+                selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
                 totalRowsCount = ReadAllRows(selectSyntax);
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
                 parameters.Add(new Tuple<string, string>("Query", selectSyntax));
@@ -164,6 +167,7 @@ namespace BookLibrary.DataAccessLayer
             }
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
+            selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
             parameters.Add(new Tuple<string, string>("Query", selectSyntax));
 
             return parameters;
