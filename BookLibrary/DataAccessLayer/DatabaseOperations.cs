@@ -55,28 +55,16 @@ namespace BookLibrary.DataAccessLayer
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
             {
                 connection.Open();
-                totalRowsCount = ReadAllRows(connection);
-
                 SqliteCommand command = connection.CreateCommand();
+                List<Tuple<string, string>> valueParameters = new List<Tuple<string, string>>();
+                valueParameters = PrepareSqlQuery(parameters, firstRow, rowsCount, ref totalRowsCount);
+                command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
 
-                string selectSyntax = "SELECT id, title, year, timestamp FROM book";
-                command.CommandText = selectSyntax;
-                if (parameters == null)
+                for (int i = 1; i < valueParameters.Count - 1; i++)
                 {
-                    command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
+                    command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
                 }
-                else
-                {
-                    List<Tuple<string, string>> valueParameters = new List<Tuple<string, string>>();
-                    valueParameters = PrepareSqlQuery(parameters, firstRow, rowsCount);
-                    command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
-
-                    for (int i = 1; i < valueParameters.Count - 1; i++)
-                    {
-                        command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
-                    }
-                    parameters.Clear();
-                }
+                if (parameters != null) parameters.Clear();
 
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
@@ -93,15 +81,19 @@ namespace BookLibrary.DataAccessLayer
                         ));
                     }
                 }
+
+                //totalRowsCount = ReadAllRows(command.CommandText);
             }
             return books;
         }
 
-        private static List<Tuple<string, string>> PrepareSqlQuery(List<Tuple<string, string>> parameters, int firstRow, int rowsCount)
+        private static List<Tuple<string, string>> PrepareSqlQuery(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
         {
             string selectSyntax = "SELECT id, title, year, timestamp FROM book";
             if (parameters == null)
             {
+                parameters = new List<Tuple<string, string>>();
+                totalRowsCount = ReadAllRows(selectSyntax);
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
                 parameters.Add(new Tuple<string, string>("Query", selectSyntax));
                 return parameters;
@@ -118,6 +110,7 @@ namespace BookLibrary.DataAccessLayer
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
             if (parameters.Count < 2)
             {
+                totalRowsCount = ReadAllRows(selectSyntax);
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
                 parameters.Add(new Tuple<string, string>("Query", selectSyntax));
                 return parameters;
@@ -176,16 +169,20 @@ namespace BookLibrary.DataAccessLayer
             return parameters;
         }
 
-        private static int ReadAllRows(SqliteConnection connection)
+        private static int ReadAllRows(string query)
         {
-            if (connection == null) return -1;
-
-            SqliteCommand command = connection.CreateCommand();
-            command.CommandText = @"SELECT COUNT(*) FROM book;";
-            using (SqliteDataReader reader = command.ExecuteReader())
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
             {
-                reader.Read();
-                return reader.GetInt32(0);
+                connection.Open();
+                SqliteCommand command = connection.CreateCommand();
+                if (query == string.Empty) query = @"SELECT COUNT(*) FROM book;";
+                command.CommandText = query;
+                //command.CommandText = @"SELECT COUNT(*) FROM book;";
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    return reader.GetInt32(0);
+                }
             }
         }
 
