@@ -55,7 +55,7 @@ namespace BookLibrary.DataAccessLayer
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
             {
                 connection.Open();
-                totalRowsCount = readAllRows(connection);
+                totalRowsCount = ReadAllRows(connection);
 
                 SqliteCommand command = connection.CreateCommand();
 
@@ -64,18 +64,20 @@ namespace BookLibrary.DataAccessLayer
                 if (parameters == null)
                 {
                     command.CommandText = selectSyntax + " LIMIT $firstRow, $rowsCount";
-                    return books;
                 }
-
-                List<Tuple<string, string>> valueParameters = new List<Tuple<string, string>>();
-                valueParameters = prepareSqlQuery(parameters, firstRow, rowsCount);
-                command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
-
-                for (int i = 1; i < valueParameters.Count - 1; i++)
+                else
                 {
-                    command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
+                    List<Tuple<string, string>> valueParameters = new List<Tuple<string, string>>();
+                    valueParameters = PrepareSqlQuery(parameters, firstRow, rowsCount);
+                    command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
+
+                    for (int i = 1; i < valueParameters.Count - 1; i++)
+                    {
+                        command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
+                    }
+                    parameters.Clear();
                 }
-                //command.Parameters.AddWithValue("$title", "%visual%");
+
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
 
@@ -92,12 +94,10 @@ namespace BookLibrary.DataAccessLayer
                     }
                 }
             }
-
-            parameters.Clear();
             return books;
         }
 
-        private static List<Tuple<string, string>> prepareSqlQuery(List<Tuple<string, string>> parameters, int firstRow, int rowsCount)
+        private static List<Tuple<string, string>> PrepareSqlQuery(List<Tuple<string, string>> parameters, int firstRow, int rowsCount)
         {
             string selectSyntax = "SELECT id, title, year, timestamp FROM book";
             if (parameters == null)
@@ -176,7 +176,7 @@ namespace BookLibrary.DataAccessLayer
             return parameters;
         }
 
-        private static int readAllRows(SqliteConnection connection)
+        private static int ReadAllRows(SqliteConnection connection)
         {
             if (connection == null) return -1;
 
