@@ -85,7 +85,7 @@
             </ScrollViewer>
         </Expander>
 
-        <Expander Grid.Column="0" Grid.Row="1" IsExpanded="True" Header="Modify">
+        <Expander Grid.Column="0" Grid.Row="1" IsExpanded="False" Header="Modify">
             <GroupBox Padding="10" >
                 <Button Content="Modify" />
             </GroupBox>

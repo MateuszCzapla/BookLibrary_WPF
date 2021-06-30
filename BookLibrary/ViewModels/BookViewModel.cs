@@ -53,12 +53,10 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                //return year.ToString();
                 return year;
             }
             set
             {
-                //year = Convert.ToInt16(value);
                 year = value;
                 clearAble = true;
                 OnPropertyChanged("Year");
@@ -196,26 +194,11 @@ namespace BookLibrary.ViewModels
         {
             get
             {
-                /*string[] parameters =
-                {
-                    Mode.Book.ToString(), 
-                    ID.ToString(), 
-                    Title,
-                    Year.ToString(),
-                    DateFrom.ToString(),
-                    DateTo.ToString()
-                };*/
-
-
-
                 if (searchCommand == null)
                 {
                     searchCommand = new RelayCommand(
                         argument =>
                         {
-                            //resultViewModel.TestResultVM();
-                            //resultViewModel.Search(new BookParameters(ID, Title, Year, DateFrom.ToString(), DateTo.ToString()));
-
                             parameters.Add(new Tuple<string, string>("Mode", Mode.Book.ToString()));
                             parameters.Add(new Tuple<string, string>("ID", ID.ToString()));
                             parameters.Add(new Tuple<string, string>("Title", Title));
@@ -262,6 +245,7 @@ namespace BookLibrary.ViewModels
             toolTipTitle = String.Empty;
             resultViewModel = new ResultViewModel();
             ExpanderIsExpanded = false;
+            //DateTo = DateTime.Today;
         }
     }
 }

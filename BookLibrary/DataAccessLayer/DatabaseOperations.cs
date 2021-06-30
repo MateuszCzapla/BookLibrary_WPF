@@ -93,6 +93,7 @@ namespace BookLibrary.DataAccessLayer
                 }
             }
 
+            parameters.Clear();
             return books;
         }
 
