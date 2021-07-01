@@ -167,8 +167,9 @@ namespace BookLibrary.DataAccessLayer
             }
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
-            selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
-            parameters.Add(new Tuple<string, string>("Query", selectSyntax));
+            //selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
+            parameters.Add(new Tuple<string, string>("Query", "SELECT id, title, year, timestamp " + selectSyntax));
+            parameters.Add(new Tuple<string, string>("Query", "SELECT COUNT(*) " + selectSyntax));
 
             return parameters;
         }
