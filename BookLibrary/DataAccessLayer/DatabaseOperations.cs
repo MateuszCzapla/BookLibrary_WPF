@@ -64,7 +64,6 @@ namespace BookLibrary.DataAccessLayer
                 {
                     command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
                 }
-                if (parameters != null) parameters.Clear();
 
                 command.Parameters.AddWithValue("$firstRow", firstRow);
                 command.Parameters.AddWithValue("$rowsCount", rowsCount);
@@ -82,9 +81,8 @@ namespace BookLibrary.DataAccessLayer
                     }
                 }
 
-                //totalRowsCount = ReadAllRows(command.CommandText);
-                //totalRowsCount = ReadAllRows(valueParameters[valueParameters.Count - 2].Item2);
                 totalRowsCount = ReadAllRows(valueParameters);
+                if (parameters != null) parameters.Clear();
             }
             return books;
         }
@@ -96,11 +94,6 @@ namespace BookLibrary.DataAccessLayer
             if (parameters == null)
             {
                 parameters = new List<Tuple<string, string>>();
-                /*selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
-                totalRowsCount = ReadAllRows(selectSyntax);
-                selectSyntax += " LIMIT $firstRow, $rowsCount";
-                parameters.Add(new Tuple<string, string>("Query", selectSyntax));*/
-
                 parameters.Add(new Tuple<string, string>("Query1", "SELECT COUNT(*) " + selectSyntax));
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
                 parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
@@ -111,18 +104,13 @@ namespace BookLibrary.DataAccessLayer
             for (int i = 1; i < parameters.Count; i++)
             {
                 if (parameters[i].Item2 == "0" || parameters[i].Item2 == "01.01.0001 00:00:00" || parameters[i].Item2 == string.Empty || parameters[i].Item2 == null)
-                {
+                { 
                     removeIndexList.Add(i);
                 }
             }
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
             if (parameters.Count < 2)
             {
-                /*selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
-                totalRowsCount = ReadAllRows(selectSyntax);
-                selectSyntax += " LIMIT $firstRow, $rowsCount";
-                parameters.Add(new Tuple<string, string>("Query", selectSyntax));*/
-
                 parameters.Add(new Tuple<string, string>("Query1", "SELECT COUNT(*) " + selectSyntax));
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
                 parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
@@ -182,22 +170,6 @@ namespace BookLibrary.DataAccessLayer
             parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
             return parameters;
         }
-
-        /*private static int ReadAllRows(string query)
-        {
-            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
-            {
-                connection.Open();
-                SqliteCommand command = connection.CreateCommand();
-                if (query == string.Empty) query = @"SELECT COUNT(*) FROM book;";
-                command.CommandText = query;
-                using (SqliteDataReader reader = command.ExecuteReader())
-                {
-                    reader.Read();
-                    return reader.GetInt32(0);
-                }
-            }
-        }*/
 
         private static int ReadAllRows(List<Tuple<string, string>> valueParameters)
         {
