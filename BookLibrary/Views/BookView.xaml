@@ -6,6 +6,7 @@
              xmlns:views="clr-namespace:BookLibrary.Views"
              xmlns:viewmodels="clr-namespace:BookLibrary.ViewModels"
              xmlns:converters="clr-namespace:BookLibrary.Views.Converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -34,6 +35,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -45,11 +47,10 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
                         <Label Grid.Column="0" Grid.Row="0" Content="ID" />
-                        <TextBox Grid.Column="1" Grid.Row="0" MaxLength="4"
+                        <TextBox Grid.Column="2" Grid.Row="0" MaxLength="4"
                                  Text="{Binding Path=(viewmodels:BookViewModel.ID), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource intToStringConverter}}"                   
                                  PreviewTextInput="NumberValidation" 
                         />
@@ -58,28 +59,25 @@
                             ToolTip="{Binding Path=(viewmodels:BookViewModel.ErrorCollection)}"
                         -->
                         <Label Grid.Column="0" Grid.Row="1" Content="Title" />
-                        <TextBox Grid.Column="1" Grid.Row="1" MaxLength="20"
+                        <TextBox Grid.Column="2" Grid.Row="1" MaxLength="20"
                                 Text="{Binding Path=(viewmodels:BookViewModel.Title),
                                 UpdateSourceTrigger=PropertyChanged,
                                 ValidatesOnDataErrors=True}"
                         />
                         <Label Grid.Column="0" Grid.Row="2" Content="Year" />
-                        <TextBox Grid.Column="1" Grid.Row="2" MaxLength="4"
+                        <TextBox Grid.Column="2" Grid.Row="2" MaxLength="4"
                                  Text="{Binding Path=(viewmodels:BookViewModel.Year), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}"
                                  PreviewTextInput="NumberValidation"
                         />
                         <Label Grid.Column="0" Grid.Row="3" Content="Modify date (from)" />
-                        <Label Grid.Column="0" Grid.Row="4" Content="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
-                        <Expander Grid.Column="1" Grid.Row="4" Header="Set date from" IsExpanded="{Binding Path=(viewmodels:BookViewModel.ExpanderIsExpanded)}">
-                            <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateFrom)}"/>
-                        </Expander>
-                        <Label Grid.Column="0" Grid.Row="5" Content="Modify date (to)" />
-                        <Label Grid.Column="0" Grid.Row="6" Content="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
-                        <Expander Grid.Column="1" Grid.Row="6" Header="Set date to" IsEnabled="{Binding Path=(viewmodels:BookViewModel.DateToEnable)}" IsExpanded="{Binding Path=(viewmodels:BookViewModel.ExpanderIsExpanded)}">
-                            <Calendar SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
-                        </Expander>
-                        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Content="Search" Command="{Binding Path=(viewmodels:BookViewModel.SearchCommand)}" />
-                        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Content="Clear" Command="{Binding Path=(viewmodels:BookViewModel.ClearCommand)}" />
+                        <DatePicker Grid.Column="2" Grid.Row="3" DisplayDateEnd="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
+                        <CheckBox Grid.Column="1" Grid.Row="3" />
+                        <Label Grid.Column="0" Grid.Row="4" Content="Modify date (to)" />
+                        <DatePicker Grid.Column="2" Grid.Row="4" DisplayDateEnd="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
+                        <CheckBox Grid.Column="1" Grid.Row="4" />
+                        <Separator Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" />
+                        <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Content="Search" Command="{Binding Path=(viewmodels:BookViewModel.SearchCommand)}" />
+                        <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" Content="Clear" Command="{Binding Path=(viewmodels:BookViewModel.ClearCommand)}" />
                     </Grid>
                 </GroupBox>
             </ScrollViewer>

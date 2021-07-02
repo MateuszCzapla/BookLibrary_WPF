@@ -3,8 +3,6 @@ using System.Collections.ObjectModel;
 using BookLibrary.Models;
 using BookLibrary.DataAccessLayer;
 using System.Windows.Input;
-using System.Windows;
-using BookLibrary.ViewModels.Books;
 using System.Collections.Generic;
 
 namespace BookLibrary.ViewModels

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Collections.Generic;
-using BookLibrary.ViewModels.Books;
 
 namespace BookLibrary.ViewModels
 {
@@ -28,7 +27,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 id = value;
-                clearAble = true;
+                clearEnable = true;
                 OnPropertyChanged("ID");
             }
         }
@@ -43,7 +42,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 title = value;
-                clearAble = true;
+                clearEnable = true;
                 OnPropertyChanged("Title");
             }
         }
@@ -58,12 +57,10 @@ namespace BookLibrary.ViewModels
             set
             {
                 year = value;
-                clearAble = true;
+                clearEnable = true;
                 OnPropertyChanged("Year");
             }
         }
-
-        public bool DateToEnable { get; set; } = false;
 
         private DateTime dateFrom;
         public DateTime DateFrom
@@ -75,8 +72,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 dateFrom = value;
-                DateToEnable = true;
-                clearAble = true;
+                clearEnable = true;
                 OnPropertyChanged("DateToEnable");
                 OnPropertyChanged("DateFrom");
             }
@@ -92,7 +88,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 dateTo = value;
-                clearAble = true;
+                clearEnable = true;
                 OnPropertyChanged("DateTo");
             }
         }
@@ -111,31 +107,17 @@ namespace BookLibrary.ViewModels
             }
         }
 
-        private bool clearAble;
+        private bool clearEnable;
         public bool ClearAble
         {
             get
             {
-                return clearAble;
+                return clearEnable;
             }
             set
             {
-                clearAble = value;
+                clearEnable = value;
                 OnPropertyChanged("EditMode");
-            }
-        }
-
-        private bool expanderIsExpanded;
-        public bool ExpanderIsExpanded
-        {
-            get
-            {
-                return expanderIsExpanded;
-            }
-            set
-            {
-                expanderIsExpanded = value;
-                OnPropertyChanged("ExpanderIsExpanded");
             }
         }
 
@@ -230,10 +212,8 @@ namespace BookLibrary.ViewModels
                             DateFrom = DateTime.MinValue;
                             DateTo = DateTime.MinValue;
                             ClearAble = false;
-                            ExpanderIsExpanded = false;
-                            DateToEnable = false;
                         },
-                        argument => clearAble);
+                        argument => clearEnable);
                 }
                 return clearCommand;
             }
@@ -244,8 +224,8 @@ namespace BookLibrary.ViewModels
             ClearAble = false;
             toolTipTitle = String.Empty;
             resultViewModel = new ResultViewModel();
-            ExpanderIsExpanded = false;
-            //DateTo = DateTime.Today;
+            DateFrom = DateTime.Today.AddDays(-7.0d);
+            DateTo = DateTime.Today;
         }
     }
 }
