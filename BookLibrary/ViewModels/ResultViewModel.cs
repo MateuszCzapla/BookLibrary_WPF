@@ -40,7 +40,7 @@ namespace BookLibrary.ViewModels
                 OnPropertyChanged("RowsCount");
 
                 firstRow = 0;
-                LibraryGrid = DatabaseOperations.ReadDataBase2(parameters, firstRow, rowsCount, ref totalRowsCount);
+                LibraryGrid = DatabaseOperations.ReadDataBase(parameters, firstRow, rowsCount, ref totalRowsCount);
                 PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + totalRowsCount / rowsCount;
             }
         }
@@ -190,7 +190,7 @@ namespace BookLibrary.ViewModels
         private void RefreshLibraryGrid()
         {
             //LibraryGrid = DatabaseOperations.ReadDataBase(firstRow, rowsCount, ref totalRowsCount);
-            LibraryGrid = DatabaseOperations.ReadDataBase2(parameters, firstRow, rowsCount, ref totalRowsCount);
+            LibraryGrid = DatabaseOperations.ReadDataBase(parameters, firstRow, rowsCount, ref totalRowsCount);
             PageDisplay = "Page " + (firstRow / rowsCount + 1) + " of " + Math.Ceiling((double)totalRowsCount / rowsCount);
         }
 

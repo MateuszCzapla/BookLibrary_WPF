@@ -46,7 +46,7 @@ namespace BookLibrary.DataAccessLayer
             DBSampleDataOperations.FillAuthorHasBookSampleData();
         }
 
-        public static ObservableCollection<Book> ReadDataBase2(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
+        public static ObservableCollection<Book> ReadDataBase(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
         {
             ObservableCollection<Book> books = new ObservableCollection<Book>();
 
@@ -83,6 +83,8 @@ namespace BookLibrary.DataAccessLayer
                 }
 
                 //totalRowsCount = ReadAllRows(command.CommandText);
+                //totalRowsCount = ReadAllRows(valueParameters[valueParameters.Count - 2].Item2);
+                totalRowsCount = ReadAllRows(valueParameters);
             }
             return books;
         }
@@ -94,10 +96,14 @@ namespace BookLibrary.DataAccessLayer
             if (parameters == null)
             {
                 parameters = new List<Tuple<string, string>>();
-                selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
+                /*selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
                 totalRowsCount = ReadAllRows(selectSyntax);
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
-                parameters.Add(new Tuple<string, string>("Query", selectSyntax));
+                parameters.Add(new Tuple<string, string>("Query", selectSyntax));*/
+
+                parameters.Add(new Tuple<string, string>("Query1", "SELECT COUNT(*) " + selectSyntax));
+                selectSyntax += " LIMIT $firstRow, $rowsCount";
+                parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
                 return parameters;
             }
 
@@ -112,10 +118,14 @@ namespace BookLibrary.DataAccessLayer
             for (int i = removeIndexList.Count - 1; i >= 0; i--) parameters.RemoveAt(removeIndexList[i]);
             if (parameters.Count < 2)
             {
-                selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
+                /*selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
                 totalRowsCount = ReadAllRows(selectSyntax);
                 selectSyntax += " LIMIT $firstRow, $rowsCount";
-                parameters.Add(new Tuple<string, string>("Query", selectSyntax));
+                parameters.Add(new Tuple<string, string>("Query", selectSyntax));*/
+
+                parameters.Add(new Tuple<string, string>("Query1", "SELECT COUNT(*) " + selectSyntax));
+                selectSyntax += " LIMIT $firstRow, $rowsCount";
+                parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
                 return parameters;
             }
 
@@ -168,13 +178,12 @@ namespace BookLibrary.DataAccessLayer
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
             //selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
-            parameters.Add(new Tuple<string, string>("Query", "SELECT id, title, year, timestamp " + selectSyntax));
-            parameters.Add(new Tuple<string, string>("Query", "SELECT COUNT(*) " + selectSyntax));
-
+            parameters.Add(new Tuple<string, string>("Query1", "SELECT COUNT(*) " + selectSyntax));
+            parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
             return parameters;
         }
 
-        private static int ReadAllRows(string query)
+        /*private static int ReadAllRows(string query)
         {
             using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
             {
@@ -182,12 +191,35 @@ namespace BookLibrary.DataAccessLayer
                 SqliteCommand command = connection.CreateCommand();
                 if (query == string.Empty) query = @"SELECT COUNT(*) FROM book;";
                 command.CommandText = query;
-                //command.CommandText = @"SELECT COUNT(*) FROM book;";
                 using (SqliteDataReader reader = command.ExecuteReader())
                 {
                     reader.Read();
                     return reader.GetInt32(0);
                 }
+            }
+        }*/
+
+        private static int ReadAllRows(List<Tuple<string, string>> valueParameters)
+        {
+            using (SqliteConnection connection = new SqliteConnection("Data Source=" + dbName))
+            {
+                connection.Open();
+                SqliteCommand command = connection.CreateCommand();
+                if (valueParameters == null) command.CommandText = @"SELECT COUNT(*) FROM book;";
+
+                command.CommandText = valueParameters[valueParameters.Count - 2].Item2;
+                for (int i = 1; i < valueParameters.Count - 2; i++)
+                {
+                    command.Parameters.AddWithValue("$" + valueParameters[i].Item1, valueParameters[i].Item2);
+                }
+                if (valueParameters != null) valueParameters.Clear();
+
+                using (SqliteDataReader reader = command.ExecuteReader())
+                {
+                    reader.Read();
+                    return reader.GetInt32(0);
+                }
+                return 0;
             }
         }
 
