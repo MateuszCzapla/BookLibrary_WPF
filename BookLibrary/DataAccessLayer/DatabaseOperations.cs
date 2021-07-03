@@ -166,7 +166,7 @@ namespace BookLibrary.DataAccessLayer
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
             parameters.Add(new Tuple<string, string>("Query1", "SELECT COUNT(*) " + selectSyntax));
-            parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
+            parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax + " LIMIT $firstRow, $rowsCount"));
             return parameters;
         }
 
@@ -190,7 +190,6 @@ namespace BookLibrary.DataAccessLayer
                     reader.Read();
                     return reader.GetInt32(0);
                 }
-                return 0;
             }
         }
 
