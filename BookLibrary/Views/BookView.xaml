@@ -49,8 +49,8 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="0" Content="ID" />
-                        <TextBox Grid.Column="2" Grid.Row="0" MaxLength="4"
+                        <Label Grid.Column="0" Grid.Row="0" Margin="0, 0, 0, 5" Content="ID" />
+                        <TextBox Grid.Column="2" Grid.Row="0" Margin="0, 0, 0, 5" MaxLength="4"
                                  Text="{Binding Path=(viewmodels:BookViewModel.ID), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource intToStringConverter}}"                   
                                  PreviewTextInput="NumberValidation" 
                         />
@@ -58,25 +58,25 @@
                             ToolTip="{Binding ErrorCollection[Title]}"
                             ToolTip="{Binding Path=(viewmodels:BookViewModel.ErrorCollection)}"
                         -->
-                        <Label Grid.Column="0" Grid.Row="1" Content="Title" />
-                        <TextBox Grid.Column="2" Grid.Row="1" MaxLength="20"
+                        <Label Grid.Column="0" Grid.Row="1" Margin="0, 0, 0, 5" Content="Title" />
+                        <TextBox Grid.Column="2" Grid.Row="1" Margin="0, 0, 0, 5" MaxLength="20"
                                 Text="{Binding Path=(viewmodels:BookViewModel.Title),
                                 UpdateSourceTrigger=PropertyChanged,
                                 ValidatesOnDataErrors=True}"
                         />
-                        <Label Grid.Column="0" Grid.Row="2" Content="Year" />
-                        <TextBox Grid.Column="2" Grid.Row="2" MaxLength="4"
+                        <Label Grid.Column="0" Grid.Row="2" Margin="0, 0, 0, 5" Content="Year" />
+                        <TextBox Grid.Column="2" Grid.Row="2" Margin="0, 0, 0, 5" MaxLength="4"
                                  Text="{Binding Path=(viewmodels:BookViewModel.Year), UpdateSourceTrigger=PropertyChanged, Converter={StaticResource shortToStringConverter}}"
                                  PreviewTextInput="NumberValidation"
                         />
-                        <Label Grid.Column="0" Grid.Row="3" Content="Modify date (from)" />
-                        <DatePicker Grid.Column="2" Grid.Row="3" DisplayDateEnd="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
-                        <CheckBox Grid.Column="1" Grid.Row="3" />
+                        <Label Grid.Column="0" Grid.Row="3" Margin="0, 0, 0, 5" Content="Modify date (from)" />
+                        <CheckBox Grid.Column="1" Grid.Row="3" Margin="5, 0, 5, 5" IsChecked ="{Binding Path=(viewmodels:BookViewModel.DateFromChecked)}"/>
+                        <DatePicker Grid.Column="2" Grid.Row="3" Margin="0, 0, 0, 5" DisplayDateEnd="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateFrom)}" />
                         <Label Grid.Column="0" Grid.Row="4" Content="Modify date (to)" />
+                        <CheckBox Grid.Column="1" Grid.Row="4" Margin="5, 0, 5, 0" IsChecked="{Binding Path=(viewmodels:BookViewModel.DateToChecked)}" />
                         <DatePicker Grid.Column="2" Grid.Row="4" DisplayDateEnd="{x:Static sys:DateTime.Today}" SelectedDate="{Binding Path=(viewmodels:BookViewModel.DateTo)}" />
-                        <CheckBox Grid.Column="1" Grid.Row="4" />
-                        <Separator Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" />
-                        <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Content="Search" Command="{Binding Path=(viewmodels:BookViewModel.SearchCommand)}" />
+                        <Separator Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="5" Margin="0, 20, 0, 20" />
+                        <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Content="Search" Margin="0, 0, 0, 5" Command="{Binding Path=(viewmodels:BookViewModel.SearchCommand)}" />
                         <Button Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" Content="Clear" Command="{Binding Path=(viewmodels:BookViewModel.ClearCommand)}" />
                     </Grid>
                 </GroupBox>

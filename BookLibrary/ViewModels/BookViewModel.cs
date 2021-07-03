@@ -42,7 +42,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 title = value;
-                clearEnable = true;
+                ClearEnable = true;
                 OnPropertyChanged("Title");
             }
         }
@@ -57,7 +57,7 @@ namespace BookLibrary.ViewModels
             set
             {
                 year = value;
-                clearEnable = true;
+                ClearEnable = true;
                 OnPropertyChanged("Year");
             }
         }
@@ -72,8 +72,8 @@ namespace BookLibrary.ViewModels
             set
             {
                 dateFrom = value;
-                clearEnable = true;
-                OnPropertyChanged("DateToEnable");
+                ClearEnable = true;
+                DateFromChecked = true;
                 OnPropertyChanged("DateFrom");
             }
         }
@@ -88,7 +88,8 @@ namespace BookLibrary.ViewModels
             set
             {
                 dateTo = value;
-                clearEnable = true;
+                ClearEnable = true;
+                DateToChecked = true;
                 OnPropertyChanged("DateTo");
             }
         }
@@ -108,7 +109,7 @@ namespace BookLibrary.ViewModels
         }
 
         private bool clearEnable;
-        public bool ClearAble
+        public bool ClearEnable
         {
             get
             {
@@ -118,6 +119,34 @@ namespace BookLibrary.ViewModels
             {
                 clearEnable = value;
                 OnPropertyChanged("EditMode");
+            }
+        }
+
+        private bool dateFromChecked;
+        public bool DateFromChecked
+        {
+            get
+            {
+                return dateFromChecked;
+            }
+            set
+            {
+                dateFromChecked = value;
+                OnPropertyChanged("DateFromChecked");
+            }
+        }
+
+        private bool dateToChecked;
+        public bool DateToChecked
+        {
+            get
+            {
+                return dateToChecked;
+            }
+            set
+            {
+                dateToChecked = value;
+                OnPropertyChanged("DateToChecked");
             }
         }
 
@@ -185,8 +214,9 @@ namespace BookLibrary.ViewModels
                             parameters.Add(new Tuple<string, string>("ID", ID.ToString()));
                             parameters.Add(new Tuple<string, string>("Title", Title));
                             parameters.Add(new Tuple<string, string>("Year", Year.ToString()));
-                            parameters.Add(new Tuple<string, string>("DateFrom", DateFrom.ToString()));
-                            parameters.Add(new Tuple<string, string>("DateTo", DateTo.ToString()));
+                            if (DateFromChecked) parameters.Add(new Tuple<string, string>("DateFrom", DateFrom.ToString()));
+                            if (DateToChecked) parameters.Add(new Tuple<string, string>("DateTo", DateTo.ToString()));
+                            
                             resultViewModel.Search(parameters);
                             parameters.Clear();
                         },
@@ -207,13 +237,15 @@ namespace BookLibrary.ViewModels
                         argument =>
                         {
                             ID = 0;
-                            Title = String.Empty;
+                            Title = string.Empty;
                             Year = 0;
-                            DateFrom = DateTime.MinValue;
-                            DateTo = DateTime.MinValue;
-                            ClearAble = false;
+                            DateFrom = DateTime.Today.AddDays(-7.0d);
+                            DateTo = DateTime.Today;
+                            DateFromChecked = false;
+                            DateToChecked = false;
+                            ClearEnable = false;
                         },
-                        argument => clearEnable);
+                        argument => ClearEnable);
                 }
                 return clearCommand;
             }
@@ -221,11 +253,13 @@ namespace BookLibrary.ViewModels
 
         public BookViewModel()
         {
-            ClearAble = false;
             toolTipTitle = String.Empty;
             resultViewModel = new ResultViewModel();
-            DateFrom = DateTime.Today.AddDays(-7.0d);
-            DateTo = DateTime.Today;
+            dateFrom = DateTime.Today.AddDays(-7.0d);
+            dateTo = DateTime.Today;
+            dateFromChecked = false;
+            dateToChecked = false;
+            clearEnable = false;
         }
     }
 }
