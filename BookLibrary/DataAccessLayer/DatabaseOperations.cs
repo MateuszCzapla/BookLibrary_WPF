@@ -34,8 +34,8 @@ namespace BookLibrary.DataAccessLayer
                 var command = connection.CreateCommand();
                 command.CommandText =
                 @"
-                    CREATE TABLE author (id INTEGER PRIMARY KEY, name TEXT, timestamp INTEGER);
-                    CREATE TABLE book (id INTEGER PRIMARY KEY, title TEXT, year INTEGER, timestamp INTEGER);
+                    CREATE TABLE authors (id INTEGER PRIMARY KEY, name TEXT, timestamp INTEGER);
+                    CREATE TABLE books (id INTEGER PRIMARY KEY, title TEXT, year INTEGER, timestamp INTEGER);
                     CREATE TABLE author_has_book (author_id INTEGER, book_id INTEGER);
                 ";
                 command.ExecuteNonQuery();
@@ -57,7 +57,7 @@ namespace BookLibrary.DataAccessLayer
                 connection.Open();
                 SqliteCommand command = connection.CreateCommand();
                 List<Tuple<string, string>> valueParameters = new List<Tuple<string, string>>();
-                valueParameters = PrepareSqlQuery(parameters, firstRow, rowsCount, ref totalRowsCount);
+                valueParameters = PrepareSqlQuery(parameters);
                 command.CommandText = valueParameters[valueParameters.Count - 1].Item2;
 
                 for (int i = 1; i < valueParameters.Count - 1; i++)
@@ -87,10 +87,9 @@ namespace BookLibrary.DataAccessLayer
             return books;
         }
 
-        private static List<Tuple<string, string>> PrepareSqlQuery(List<Tuple<string, string>> parameters, int firstRow, int rowsCount, ref int totalRowsCount)
+        private static List<Tuple<string, string>> PrepareSqlQuery(List<Tuple<string, string>> parameters)
         {
-            //string selectSyntax = "SELECT id, title, year, timestamp FROM book";
-            string selectSyntax = "FROM book";
+            string selectSyntax = "FROM books";
             if (parameters == null)
             {
                 parameters = new List<Tuple<string, string>>();
@@ -150,6 +149,7 @@ namespace BookLibrary.DataAccessLayer
                         case "DateFrom":
                             //if (andFlag) selectSyntax += " AND";
                             //selectSyntax += " year = $year";
+                            
                             //parameters[i] = new Tuple<string, string>("year", parameters[i].Item2);
                             //andFlag = true;
                             break;
@@ -165,7 +165,6 @@ namespace BookLibrary.DataAccessLayer
             }
             if (parameters[0].Item2 == "Reader") throw new NotImplementedException();
 
-            //selectSyntax = "SELECT id, title, year, timestamp " + selectSyntax;
             parameters.Add(new Tuple<string, string>("Query1", "SELECT COUNT(*) " + selectSyntax));
             parameters.Add(new Tuple<string, string>("Query2", "SELECT id, title, year, timestamp " + selectSyntax));
             return parameters;
@@ -177,7 +176,7 @@ namespace BookLibrary.DataAccessLayer
             {
                 connection.Open();
                 SqliteCommand command = connection.CreateCommand();
-                if (valueParameters == null) command.CommandText = @"SELECT COUNT(*) FROM book;";
+                if (valueParameters == null) command.CommandText = @"SELECT COUNT(*) FROM books;";
 
                 command.CommandText = valueParameters[valueParameters.Count - 2].Item2;
                 for (int i = 1; i < valueParameters.Count - 2; i++)

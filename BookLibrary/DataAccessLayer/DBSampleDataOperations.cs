@@ -13,11 +13,11 @@ namespace BookLibrary.DataAccessLayer
         public static void FillAuthorSampleData(int sleepTime)
         {
             List<string> insertsList = new List<string>();
-            insertsList.Add(@"INSERT INTO author(name, timestamp) VALUES('Jacek Matulewski', $timeStamp);");
-            insertsList.Add(@"INSERT INTO author(name, timestamp) VALUES('Peter Bell', $timeStamp);");
-            insertsList.Add(@"INSERT INTO author(name, timestamp) VALUES('Brent Beer', $timeStamp);");
-            insertsList.Add(@"INSERT INTO author(name, timestamp) VALUES('Michał Włodarczyk', $timeStamp);");
-            insertsList.Add(@"INSERT INTO author(name, timestamp) VALUES('Krzysztof Rychlicki-Kicior', $timeStamp);");
+            insertsList.Add(@"INSERT INTO authors(name, timestamp) VALUES('Jacek Matulewski', $timeStamp);");
+            insertsList.Add(@"INSERT INTO authors(name, timestamp) VALUES('Peter Bell', $timeStamp);");
+            insertsList.Add(@"INSERT INTO authors(name, timestamp) VALUES('Brent Beer', $timeStamp);");
+            insertsList.Add(@"INSERT INTO authors(name, timestamp) VALUES('Michał Włodarczyk', $timeStamp);");
+            insertsList.Add(@"INSERT INTO authors(name, timestamp) VALUES('Krzysztof Rychlicki-Kicior', $timeStamp);");
 
             using (var connection = new SqliteConnection("Data Source=" + dbName))
             {
@@ -36,14 +36,14 @@ namespace BookLibrary.DataAccessLayer
         public static void FillBookSampleData(int sleepTime)
         {
             List<string> insertsList = new List<string>();
-            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('XAML i MVVM w Visual Studio 2015', '2016', $timeStamp);");
-            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('GitHub. Przyjazny przewodnik', '2015', $timeStamp);");
-            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('Git. Rozproszony system kontroli wersji', '2016', $timeStamp);");
-            insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('Programowanie obiektowe ITA-105', '2009', $timeStamp);");
+            insertsList.Add(@"INSERT INTO books(title, year, timestamp) VALUES('XAML i MVVM w Visual Studio 2015', '2016', $timeStamp);");
+            insertsList.Add(@"INSERT INTO books(title, year, timestamp) VALUES('GitHub. Przyjazny przewodnik', '2015', $timeStamp);");
+            insertsList.Add(@"INSERT INTO books(title, year, timestamp) VALUES('Git. Rozproszony system kontroli wersji', '2016', $timeStamp);");
+            insertsList.Add(@"INSERT INTO books(title, year, timestamp) VALUES('Programowanie obiektowe ITA-105', '2009', $timeStamp);");
             
             for (int i = 0; i <= 100; i++)
             {
-                insertsList.Add(@"INSERT INTO book(title, year, timestamp) VALUES('Programowanie obiektowe ITA-105 tom" + i + "', '1" + (i + 1) % 10 + "1" + i % 10 + "', $timeStamp);");
+                insertsList.Add(@"INSERT INTO books(title, year, timestamp) VALUES('Programowanie obiektowe ITA-105 tom" + i + "', '1" + (i + 1) % 10 + "1" + i % 10 + "', $timeStamp);");
             }
 
             using (var connection = new SqliteConnection("Data Source=" + dbName))
