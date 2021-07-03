@@ -147,18 +147,17 @@ namespace BookLibrary.DataAccessLayer
                             break;
 
                         case "DateFrom":
-                            //if (andFlag) selectSyntax += " AND";
-                            //selectSyntax += " year = $year";
-                            
-                            //parameters[i] = new Tuple<string, string>("year", parameters[i].Item2);
-                            //andFlag = true;
+                            if (andFlag) selectSyntax += " AND";
+                            selectSyntax += " timestamp > $dateFrom";
+                            parameters[i] = new Tuple<string, string>("dateFrom", DateTimeToUnixTimestamp(DateTime.Parse(parameters[i].Item2)).ToString());
+                            andFlag = true;
                             break;
 
                         case "DateTo":
-                            //if (andFlag) selectSyntax += " AND";
-                            //selectSyntax += " year = $year";
-                            //parameters[i] = new Tuple<string, string>("year", parameters[i].Item2);
-                            //andFlag = true;
+                            if (andFlag) selectSyntax += " AND";
+                            selectSyntax += " timestamp < $dateTo";
+                            parameters[i] = new Tuple<string, string>("dateTo", DateTimeToUnixTimestamp(DateTime.Parse(parameters[i].Item2)).ToString());
+                            andFlag = true;
                             break;
                     }
                 }
