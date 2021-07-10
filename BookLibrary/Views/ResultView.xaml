@@ -66,6 +66,8 @@
         <Button Content="Next" Grid.Column="3" Grid.Row="1" Command="{Binding Path=ResultViewModell.NextPageCommand}" />
         <Button Content="Last" Grid.Column="4" Grid.Row="1" Command="{Binding Path=ResultViewModell.LastPageCommand}" />
         <TextBox Grid.Column="0" Grid.Row="2" Text="{Binding Path=ResultViewModell.RowsCount}" />
+        <!--
         <TextBox Grid.Column="0" Grid.Row="3" Background="Red" Text="{Binding Path=ResultViewModell.ObjectCounter}" />
+        -->
     </Grid>
 </UserControl>

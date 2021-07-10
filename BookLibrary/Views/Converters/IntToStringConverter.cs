@@ -7,7 +7,7 @@ namespace BookLibrary.Views.Converters
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             if ((int)value == 0) return String.Empty;
-            return value;
+            return value.ToString();
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

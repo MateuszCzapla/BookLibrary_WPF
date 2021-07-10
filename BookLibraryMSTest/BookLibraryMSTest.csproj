@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BookTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ConvertersTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
