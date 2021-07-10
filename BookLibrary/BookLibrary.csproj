@@ -96,13 +96,11 @@
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\ModifyAuthorViewModel.cs" />
     <Compile Include="ViewModels\ModifyBookViewModel.cs" />
-    <Compile Include="ViewModels\ModifyReaderViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
     <Compile Include="ViewModels\ProductsViewModel.cs" />
     <Compile Include="ViewModels\QueryAuthorViewModel.cs" />
     <Compile Include="ViewModels\QueryBookViewModel.cs" />
-    <Compile Include="ViewModels\QueryReaderViewModel.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
     <Compile Include="ViewModels\OldResultViewModel.cs" />
     <Compile Include="ViewModels\ObservedObject.cs" />
@@ -129,9 +127,6 @@
     <Compile Include="Views\ModifyBookView.xaml.cs">
       <DependentUpon>ModifyBookView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ModifyReaderView.xaml.cs">
-      <DependentUpon>ModifyReaderView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
     </Compile>
@@ -140,9 +135,6 @@
     </Compile>
     <Compile Include="Views\QueryBookView.xaml.cs">
       <DependentUpon>QueryBookView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\QueryReaderView.xaml.cs">
-      <DependentUpon>QueryReaderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ResultView.xaml.cs">
       <DependentUpon>ResultView.xaml</DependentUpon>
@@ -167,10 +159,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ModifyReaderView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,10 +168,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QueryBookView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QueryReaderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

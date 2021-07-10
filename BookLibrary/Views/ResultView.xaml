@@ -32,11 +32,33 @@
         <!--
         <DataGrid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" AlternatingRowBackground="LightGray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=ResultViewModell.LibraryGrid, StringFormat={}{0:dd.MM.yyyy}}">
         -->
-        <DataGrid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" AlternatingRowBackground="LightGray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=ResultViewModell.LibraryGrid}">
+        
+        <DataGrid Grid.Column="0"
+                  Grid.ColumnSpan="5"
+                  Grid.Row="0"
+                  AlternatingRowBackground="LightGray"
+                  VerticalAlignment="Stretch"
+                  CanUserAddRows="True"
+                  ItemsSource="{Binding Path=ResultViewModell.LibraryGrid}" 
+        />
+
+        <!--
+        <DataGrid Grid.Column="0" Grid.ColumnSpan="5" Grid.Row="0" AlternatingRowBackground="LightGray" VerticalAlignment="Stretch" ItemsSource="{Binding Path=(viewmodels:ResultViewModel.LibraryGrid)}" />
+        -->
+        
+        <!--
+        <DataGrid Grid.Column="0"
+                  Grid.ColumnSpan="5"
+                  Grid.Row="0"
+                  AlternatingRowBackground="LightGray"
+                  VerticalAlignment="Stretch"
+                  CanUserAddRows="True"
+                  ItemsSource="{Binding Path=(viewmodels:ResultViewModel.LibraryGrid)}"
+        >
             <DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Delete" IsThreeState="False" />
             </DataGrid.Columns>
         </DataGrid>
+        -->
 
         <Button Content="First" Grid.Column="0" Grid.Row="1" Command="{Binding Path=ResultViewModell.FirstPageCommand}" />
         <Button Content="Previous" Grid.Column="1" Grid.Row="1" Command="{Binding Path=ResultViewModell.PreviousPageCommand}" />
