@@ -91,22 +91,16 @@
     <Compile Include="ViewModels\Books\BookParameters.cs" />
     <Compile Include="DataAccessLayer\DatabaseOperations.cs" />
     <Compile Include="DataAccessLayer\DBSampleDataOperations.cs" />
-    <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\ModifyAuthorViewModel.cs" />
     <Compile Include="ViewModels\ModifyBookViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\ObservableObject.cs" />
-    <Compile Include="ViewModels\ProductsViewModel.cs" />
+    <Compile Include="ViewModels\AuthorViewModel.cs" />
     <Compile Include="ViewModels\QueryAuthorViewModel.cs" />
-    <Compile Include="ViewModels\QueryBookViewModel.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
-    <Compile Include="ViewModels\ObservedObject.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
-    <Compile Include="Views\AuthorView.xaml.cs">
-      <DependentUpon>AuthorView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\BookView.xaml.cs">
       <DependentUpon>BookView.xaml</DependentUpon>
     </Compile>
@@ -125,22 +119,15 @@
     <Compile Include="Views\ModifyBookView.xaml.cs">
       <DependentUpon>ModifyBookView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductView.xaml.cs">
-      <DependentUpon>ProductView.xaml</DependentUpon>
+    <Compile Include="Views\AuthorView.xaml.cs">
+      <DependentUpon>AuthorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\QueryAuthorView.xaml.cs">
       <DependentUpon>QueryAuthorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\QueryBookView.xaml.cs">
-      <DependentUpon>QueryBookView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ResultView.xaml.cs">
       <DependentUpon>ResultView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AuthorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\BookView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,15 +144,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductView.xaml">
+    <Page Include="Views\AuthorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\QueryAuthorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\QueryBookView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

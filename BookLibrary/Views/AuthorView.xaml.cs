@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace BookLibrary.Views
 {
     /// <summary>
-    /// Logika interakcji dla klasy AuthorView.xaml
+    /// Logika interakcji dla klasy ProductView.xaml
     /// </summary>
-    public partial class AuthorView : UserControl
+    public partial class ProductView : UserControl
     {
-        public AuthorView()
+        public ProductView()
         {
             InitializeComponent();
         }

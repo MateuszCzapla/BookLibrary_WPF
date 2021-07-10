@@ -17,7 +17,7 @@ namespace BookLibrary.ViewModels
         public NavigationViewModel()
         {
             PageViewModels.Add(new BookViewModel());
-            PageViewModels.Add(new ProductsViewModel());
+            PageViewModels.Add(new AuthorViewModel());
             CurrentPageViewModel = PageViewModels[0];
         }
 

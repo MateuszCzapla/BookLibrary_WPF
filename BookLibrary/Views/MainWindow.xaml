@@ -12,7 +12,7 @@
         <DataTemplate DataType="{x:Type viewmodels:BookViewModel}">
             <views:BookView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewmodels:ProductsViewModel}">
+        <DataTemplate DataType="{x:Type viewmodels:AuthorViewModel}">
             <views:ProductView />
         </DataTemplate>
 
