@@ -52,10 +52,7 @@ namespace BookLibrary.ViewModels
 
         public IPageViewModel CurrentPageViewModel
         {
-            get
-            {
-                return currentPageViewModel;
-            }
+            get { return currentPageViewModel; }
             set
             {
                 if (currentPageViewModel != value)

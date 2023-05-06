@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace BookLibrary.ViewModels
 {
-    public class ModifyAuthorViewModel
-    {
-    }
+    public class ModifyAuthorViewModel { }
 }

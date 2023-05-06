@@ -9,10 +9,7 @@ namespace BookLibrary.Models
         private readonly int pesel;
         public int PESEL
         {
-            get
-            {
-                return pesel;
-            }
+            get { return pesel; }
         }
         public bool Debt { get; set; }
 

@@ -10,19 +10,13 @@ namespace BookLibrary.Models
         private readonly string name;
         public string Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
         }
 
         private readonly DateTime timestamp;
         public DateTime Timestamp
         {
-            get
-            {
-                return timestamp;
-            }
+            get { return timestamp; }
         }
 
         /// <summary>

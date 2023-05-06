@@ -10,41 +10,27 @@ namespace BookLibrary.Models
         private int id;
         public int ID
         {
-            get
-            {
-                return id;
-            }
+            get { return id; }
         }
 
         private string title;
         public string Title
         {
-            get
-            {
-                return title;
-            }
+            get { return title; }
         }
 
         private short year;
         public short Year
         {
-            get
-            {
-                return year;
-            }
+            get { return year; }
         }
         private readonly DateTime timestamp;
         public DateTime Timestamp
         {
-            get
-            {
-                return timestamp;
-            }
+            get { return timestamp; }
         }
 
-        public Book(int id, string title, short year) : this(id, title, year, DateTime.Now)
-        {
-        }
+        public Book(int id, string title, short year) : this(id, title, year, DateTime.Now) {}
 
         public Book(int id, string title, short year, DateTime timestamp)
         {

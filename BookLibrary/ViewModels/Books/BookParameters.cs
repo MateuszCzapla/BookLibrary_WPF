@@ -10,42 +10,27 @@
 
         public int ID
         {
-            get
-            {
-                return id;
-            }
+            get { return id; }
         }
 
         public string Title
         {
-            get
-            {
-                return title;
-            }
+            get { return title; }
         }
 
         public short Year
         {
-            get
-            {
-                return year;
-            }
+            get { return year; }
         }
 
         public string DateFrom
         {
-            get
-            {
-                return dateFrom;
-            }
+            get { return dateFrom; }
         }
 
         public string DateTo
         {
-            get
-            {
-                return dateTo;
-            }
+            get { return dateTo; }
         }
 
         public BookParameters(int id, string title, short year, string dateFrom, string dateTo)

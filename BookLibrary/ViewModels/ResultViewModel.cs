@@ -14,10 +14,7 @@ namespace BookLibrary.ViewModels
         private int firstRow;
         public int FirstRow
         {
-            get
-            {
-                return firstRow;
-            }
+            get { return firstRow; }
             set
             {
                 firstRow = value;
@@ -28,10 +25,7 @@ namespace BookLibrary.ViewModels
         private int rowsCount;
         public int RowsCount
         {
-            get
-            {
-                return rowsCount;
-            }
+            get { return rowsCount; }
             set
             {
                 rowsCount = value;
@@ -46,10 +40,7 @@ namespace BookLibrary.ViewModels
         private int totalRowsCount;
         public string TotalRowsCount
         {
-            get
-            {
-                return totalRowsCount.ToString();
-            }
+            get { return totalRowsCount.ToString(); }
             set
             {
                 totalRowsCount = int.Parse(value);
@@ -60,10 +51,7 @@ namespace BookLibrary.ViewModels
         private string pageDisplay;
         public string PageDisplay
         {
-            get
-            {
-                return pageDisplay;
-            }
+            get { return pageDisplay; }
             set
             {
                 pageDisplay = value;
@@ -75,10 +63,7 @@ namespace BookLibrary.ViewModels
         private static int objectCounter = 0;
         public int ObjectCounter
         {
-            get
-            {
-                return objectNr;
-            }
+            get { return objectNr; }
             set
             {
                 objectNr = value;

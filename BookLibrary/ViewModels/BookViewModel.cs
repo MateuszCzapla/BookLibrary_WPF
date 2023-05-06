@@ -11,19 +11,13 @@ namespace BookLibrary.ViewModels
 
         public string Name
         {
-            get
-            {
-                return "Books";
-            }
+            get { return "Books"; }
         }
 
         private int id;
         public int ID
         {
-            get
-            {
-                return id;
-            }
+            get { return id; }
             set
             {
                 id = value;
@@ -35,10 +29,7 @@ namespace BookLibrary.ViewModels
         private string title;
         public string Title
         {
-            get
-            {
-                return title;
-            }
+            get { return title; }
             set
             {
                 title = value;
@@ -50,10 +41,7 @@ namespace BookLibrary.ViewModels
         private short year;
         public short Year
         {
-            get
-            {
-                return year;
-            }
+            get { return year; }
             set
             {
                 year = value;
@@ -65,10 +53,7 @@ namespace BookLibrary.ViewModels
         private DateTime dateFrom;
         public DateTime DateFrom
         {
-            get
-            {
-                return dateFrom;
-            }
+            get { return dateFrom; }
             set
             {
                 dateFrom = value;
@@ -81,10 +66,7 @@ namespace BookLibrary.ViewModels
         private DateTime dateTo;
         public DateTime DateTo
         {
-            get
-            {
-                return dateTo;
-            }
+            get { return dateTo; }
             set
             {
                 dateTo = value;
@@ -97,10 +79,7 @@ namespace BookLibrary.ViewModels
         private ResultViewModel resultViewModel;
         public ResultViewModel ResultViewModell
         {
-            get
-            {
-                return resultViewModel;
-            }
+            get { return resultViewModel; }
             set
             {
                 resultViewModel = value;
@@ -111,10 +90,7 @@ namespace BookLibrary.ViewModels
         private bool clearEnable;
         public bool ClearEnable
         {
-            get
-            {
-                return clearEnable;
-            }
+            get { return clearEnable; }
             set
             {
                 clearEnable = value;
@@ -125,10 +101,7 @@ namespace BookLibrary.ViewModels
         private bool dateFromChecked;
         public bool DateFromChecked
         {
-            get
-            {
-                return dateFromChecked;
-            }
+            get { return dateFromChecked; }
             set
             {
                 dateFromChecked = value;
@@ -139,10 +112,7 @@ namespace BookLibrary.ViewModels
         private bool dateToChecked;
         public bool DateToChecked
         {
-            get
-            {
-                return dateToChecked;
-            }
+            get { return dateToChecked; }
             set
             {
                 dateToChecked = value;
@@ -154,10 +124,7 @@ namespace BookLibrary.ViewModels
 
         string IDataErrorInfo.Error
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
@@ -192,10 +159,7 @@ namespace BookLibrary.ViewModels
         private string toolTipTitle;
         public string ToolTipTitle
         {
-            get
-            {
-                return "test";
-            }
+            get { return "test"; }
         }
 
         #endregion

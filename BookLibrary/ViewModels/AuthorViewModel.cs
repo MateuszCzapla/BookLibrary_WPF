@@ -7,9 +7,6 @@
             get { return "Authors"; }
         }
 
-        public AuthorViewModel()
-        {
-
-        }
+        public AuthorViewModel() { }
     }
 }
